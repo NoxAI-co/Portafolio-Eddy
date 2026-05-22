@@ -125,12 +125,12 @@ export const DATA = {
   ],
   projects: [
     {
-      title: "ColombiaVentura",
+      title: "ColombiAventura",
       href: "https://colombiaventura.com/co",
       dates: "Feb 2026",
       active: true,
       description:
-        "Un widget SVG dedicado a mostrar tu música de Spotify en tu archivo README o en un sitio web",
+        "Colombia Aventura es una agencia de turismo con sede en Itaguí. Enfocada en experecnas de viaje por Colombia para turistas y viajeros, ofrece tours personalizados, paquetes turísticos y servicios de transporte.",
       technologies: ["Next.js"],
       links: [
         {
