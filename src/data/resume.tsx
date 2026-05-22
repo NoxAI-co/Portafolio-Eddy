@@ -118,7 +118,7 @@ export const DATA = {
       technologies: ["Jinja", "JavaScript", "Python", "HTML"],
       links: [
         {
-          type: "Web",
+          type: "We",
           href: "spotify-dynamic-readme.vercel.app",
           icon: <Icons.globe className="size-3" />,
         },
