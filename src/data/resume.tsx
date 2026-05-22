@@ -2,12 +2,12 @@ import { Icons } from "@/components/icons";
 import { HomeIcon, NotebookIcon } from "lucide-react";
 
 export const DATA = {
-  name: "Eddy Santiago - Desarrollador de Software",
+  name: "Eddy Santiago",
   initials: "ES",
   url: "https://eddys.dev/",
   location: "San Francisco, CA",
   locationLink: "https://www.google.com/maps/place/medellin",
-  description: "Sitio web personal. Me enfoco en construir productos web escalables con tecnologías modernas y enfoque en UX y performance.",
+  description: "Desarrollador de software",
   summary:
     "Me enfoco en construir productos web escalables con tecnologías modernas y enfoque en UX y performance.",
   avatarUrl: "/me.png",

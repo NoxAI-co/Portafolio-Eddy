@@ -16,13 +16,13 @@ const fontSans = FontSans({
 export const metadata: Metadata = {
   metadataBase: new URL(DATA.url),
   title: {
-    default: DATA.name,
-    template: `%s | ${DATA.name}`,
+    default: "Eddy Santiago | Sitio web personal",
+    template: `%s | Eddy Santiago`,
   },
   alternates: {
     canonical: DATA.url,
   },
-  description: DATA.description,
+  description: "Me enfoco en construir productos web escalables con tecnologías modernas y enfoque en UX y performance.",
   icons: {
     icon: [
       { url: "/icons/favicon-16x16.png", sizes: "16x16", type: "image/png" },
@@ -46,16 +46,16 @@ export const metadata: Metadata = {
     ],
   },
   openGraph: {
-    title: `${DATA.name}`,
-    description: DATA.description,
+    title: `Eddy Santiago`,
+    description: "Me enfoco en construir productos web escalables con tecnologías modernas y enfoque en UX y performance.",
     url: DATA.url,
-    siteName: `${DATA.name}`,
+    siteName: `Eddy Santiago`,
     locale: "es_ES",
     type: "website",
     images: [
       {
         url: "/open-graph.jpg",
-        alt: `${DATA.name}`,
+        alt: `Eddy Santiago`,
       },
     ],
   },
