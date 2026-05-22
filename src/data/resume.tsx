@@ -4,7 +4,7 @@ import { HomeIcon, NotebookIcon } from "lucide-react";
 export const DATA = {
   name: "Eddy Santiago",
   initials: "ES",
-  url: "https://eddyy.dev/",
+  url: "https://eddys.dev/",
   location: "San Francisco, CA",
   locationLink: "https://www.google.com/maps/place/medellin",
   description: "Desarrollador de Software",
@@ -153,7 +153,7 @@ export const DATA = {
       links: [
         {
           type: "Web",
-          href: "https://rendi.eddyy.dev/",
+          href: "https://rendi.eddys.dev/",
           icon: <Icons.globe className="size-3" />,
         },
       ],
