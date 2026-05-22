@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     ],
   },
   openGraph: {
-    title: `Eddy Santiago`,
+    title: `Eddy Santiago | Inicio`,
     description: "Me enfoco en construir productos web escalables con tecnologías modernas y enfoque en UX y performance.",
     url: DATA.url,
     siteName: `Eddy Santiago`,
