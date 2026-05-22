@@ -7,7 +7,7 @@ export const DATA = {
   url: "https://eddys.dev/",
   location: "San Francisco, CA",
   locationLink: "https://www.google.com/maps/place/medellin",
-  description: "Sitio web personal. Desarrollador especializado en desarollo frontend y diseño UI/UX",
+  description: "Sitio web personal. Me enfoco en construir productos web escalables con tecnologías modernas y enfoque en UX y performance.",
   summary:
     "Me enfoco en construir productos web escalables con tecnologías modernas y enfoque en UX y performance.",
   avatarUrl: "/me.png",
