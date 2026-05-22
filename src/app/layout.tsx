@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/open-graph.webp",
+        url: "/open-graph.jpg",
         alt: `${DATA.name}`,
       },
     ],
@@ -74,7 +74,7 @@ export const metadata: Metadata = {
   twitter: {
     title: `${DATA.name}`,
     card: "summary_large_image",
-    images: ["/open-graph.webp"],
+    images: ["/open-graph.jpg"],
   },
   verification: {
     google: "",
