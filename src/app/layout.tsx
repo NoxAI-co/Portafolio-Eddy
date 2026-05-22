@@ -23,6 +23,28 @@ export const metadata: Metadata = {
     canonical: DATA.url,
   },
   description: DATA.description,
+  icons: {
+    icon: [
+      { url: "/icons/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/icons/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/icons/favicon.ico" },
+    ],
+    apple: [{ url: "/icons/apple-touch-icon.png" }],
+    other: [
+      {
+        rel: "android-chrome",
+        url: "/icons/android-chrome-192x192.png",
+        sizes: "192x192",
+        type: "image/png",
+      },
+      {
+        rel: "android-chrome",
+        url: "/icons/android-chrome-512x512.png",
+        sizes: "512x512",
+        type: "image/png",
+      },
+    ],
+  },
   openGraph: {
     title: `${DATA.name}`,
     description: DATA.description,
@@ -30,6 +52,12 @@ export const metadata: Metadata = {
     siteName: `${DATA.name}`,
     locale: "es_ES",
     type: "website",
+    images: [
+      {
+        url: "/open-graph.webp",
+        alt: `${DATA.name}`,
+      },
+    ],
   },
 
   robots: {
@@ -46,6 +74,7 @@ export const metadata: Metadata = {
   twitter: {
     title: `${DATA.name}`,
     card: "summary_large_image",
+    images: ["/open-graph.webp"],
   },
   verification: {
     google: "",
