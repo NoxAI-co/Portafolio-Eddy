@@ -8,16 +8,20 @@ export const DATA = {
   location: "San Francisco, CA",
   locationLink: "https://www.google.com/maps/place/medellin",
   description: "Desarrollador de Software",
-  summary: "Me enfoco en construir productos web escalables con tecnologías modernas y enfoque en UX y performance.",
-  avatarUrl: "/me.jpg",
+  summary:
+    "Me enfoco en construir productos web escalables con tecnologías modernas y enfoque en UX y performance.",
+  avatarUrl: "/me.png",
   skills: [
-    "Laravel",
-    "Next.js",
-    "Typescript",
-    "React",
-    "WordPress",
-    "Figma",
-    "Elementor",
+    { name: "Laravel", icon: <Icons.laravel className="size-4" /> },
+    { name: "Next.js", icon: <Icons.nextjs className="size-4" /> },
+    { name: "TypeScript", icon: <Icons.typescript className="size-4" /> },
+    { name: "React", icon: <Icons.react className="size-4" /> },
+    { name: "WordPress", icon: <Icons.wordpress className="size-4" /> },
+    { name: "Figma", icon: <Icons.figma className="size-4" /> },
+    { name: "Elementor", icon: <Icons.elementor className="size-4" /> },
+    { name: "Vue.js", icon: <Icons.vuejs className="size-4" /> },
+    { name: "MySQL", icon: <Icons.mysql className="size-4" /> },
+    { name: "PostgreSQL", icon: <Icons.postgresql className="size-4" /> },
   ],
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
@@ -73,6 +77,30 @@ export const DATA = {
 
   work: [
     {
+      company: "NoxAI",
+      href: "https://principal.gestoru.com/",
+      badges: [],
+      location: "Medellin, Colombia",
+      title: "Desarrollador Frontend",
+      logoUrl: "/nox.png",
+      start: "May 2025",
+      end: "Mar 2026",
+      description:
+        "Desarrollé soluciones fullstack para clientes privados, incluyendo un e-commerce B2B integrado con SAP, una plataforma de reservas de hoteles y tours con APIs en tiempo real, y herramientas de IA con MCPs, plugins y orquestación de modelos (Claude, Gemini, Kimi K2.6, Qwen 3.5) para automatizar flujos de desarrollo empresarial.",
+    },
+    {
+      company: "Vibio Labs",
+      href: "https://principal.gestoru.com/",
+      badges: [],
+      location: "Medellin, Colombia",
+      title: "Co-fundador y Arquitecto Principal de Frontend",
+      logoUrl: "/vibio.png",
+      start: "Ene 2025",
+      end: "Ene 2026",
+      description:
+        "Diseñé y lideré la arquitectura de frontend en Next.js 15 para un CRM conversacional en tiempo real, estableciendo estándares de componentización y patrones de diseño que optimizaron la escalabilidad, el rendimiento y la colaboración con el backend, mientras contribuía a la visión del producto e integraba APIs internas y de terceros para automatizar embudos de ventas, campañas de mensajería masiva y flujos avanzados de interacción con clientes.",
+    },
+    {
       company: "Gestoru Software",
       href: "https://principal.gestoru.com/",
       badges: [],
@@ -83,18 +111,6 @@ export const DATA = {
       end: "Presente",
       description:
         "Diseñé e implementé soluciones web escalables y centradas en el usuario, creando componentes reutilizables, liderando el desarrollo de un catálogo de repuestos en línea para el mercado colombiano, integrando el frontend con backend en Laravel y APIs internas, optimizando el rendimiento en un 29% mediante lazy loading y code splitting, co-desarrollando herramientas de seguimiento de soporte, aplicando Design Thinking, realizando auditorías de accesibilidad, validando interfaces con wireframes y prototipos, y desarrollando sitios en WordPress con Elementor, WooCommerce y Jetpack para mejorar la experiencia del cliente.",
-    },
-    {
-      company: "Vibio Labs",
-      href: "https://principal.gestoru.com/",
-      badges: [],
-      location: "Medellin, Colombia",
-      title: "Co-fundador y Arquitecto Principal de Frontend",
-      logoUrl: "/vibio.png",
-      start: "Ene 2025",
-      end: "Dec 2025",
-      description:
-        "Diseñé y lideré la arquitectura de frontend en Next.js 15 para un CRM conversacional en tiempo real, estableciendo estándares de componentización y patrones de diseño que optimizaron la escalabilidad, el rendimiento y la colaboración con el backend, mientras contribuía a la visión del producto e integraba APIs internas y de terceros para automatizar embudos de ventas, campañas de mensajería masiva y flujos avanzados de interacción con clientes.",
     },
   ],
   education: [
@@ -109,21 +125,21 @@ export const DATA = {
   ],
   projects: [
     {
-      title: "Widget Spotify",
-      href: "https://spotify-dynamic-readme.vercel.app/",
-      dates: "Abr 2023 - May 2023",
+      title: "ColombiaVentura",
+      href: "https://colombiaventura.com/co",
+      dates: "Feb 2026",
       active: true,
       description:
         "Un widget SVG dedicado a mostrar tu música de Spotify en tu archivo README o en un sitio web",
-      technologies: ["Jinja", "JavaScript", "Python", "HTML"],
+      technologies: ["Next.js"],
       links: [
         {
-          type: "We",
-          href: "spotify-dynamic-readme.vercel.app",
+          type: "Web",
+          href: "https://colombiaventura.com/co",
           icon: <Icons.globe className="size-3" />,
         },
       ],
-      image: "/Spotify-Widget.jpg",
+      image: "/colombiaventura.png",
       video: "",
     },
     {

@@ -40,7 +40,7 @@ export default function Page() {
             </div>
             <BlurFade delay={BLUR_FADE_DELAY}>
               <Avatar className="size-28 border absolute right-0">
-                <AvatarImage alt={DATA.name} src={DATA.avatarUrl} />
+                <AvatarImage alt={DATA.name} src={DATA.avatarUrl} className="object-cover" />
                 <AvatarFallback>{DATA.initials}</AvatarFallback>
               </Avatar>
               <BlurFade delay={0.7}>
@@ -128,8 +128,11 @@ export default function Page() {
           </BlurFade>
           <div className="flex flex-wrap gap-1">
             {DATA.skills.map((skill, id) => (
-              <BlurFade key={skill} delay={BLUR_FADE_DELAY * 10 + id * 0.05}>
-                <Badge key={skill}>{skill}</Badge>
+              <BlurFade key={skill.name} delay={BLUR_FADE_DELAY * 10 + id * 0.05}>
+                <Badge key={skill.name} className="flex items-center gap-1.5 px-2 py-1">
+                  {skill.icon}
+                  {skill.name}
+                </Badge>
               </BlurFade>
             ))}
           </div>
