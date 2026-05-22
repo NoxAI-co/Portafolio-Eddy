@@ -70,7 +70,7 @@ export function DesignCard() {
           <CardFooter className="px-2 pb-2">
             <Link href={design.html_url} target="_blank">
               <Badge className="flex gap-2 px-2 py-1 text-[10px]">
-                <Icons.globe className="size-3" />
+                <Icons.dribble className="size-3 text-muted-foreground shrink-0" />
                 Dribbble
               </Badge>
             </Link>

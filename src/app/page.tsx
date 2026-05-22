@@ -7,12 +7,16 @@ import { ResumeCard } from "@/components/resume-card";
 import { ResumeCardSchool } from "@/components/resume-card-school";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { DATA } from "@/data/resume";
+import { Icons } from "@/components/icons";
+import Image from "next/image";
+import Link from "next/link";
 import Markdown from "react-markdown";
 
 const BLUR_FADE_DELAY = 0.04;
@@ -40,7 +44,11 @@ export default function Page() {
             </div>
             <BlurFade delay={BLUR_FADE_DELAY}>
               <Avatar className="size-28 border absolute right-0">
-                <AvatarImage alt={DATA.name} src={DATA.avatarUrl} className="object-cover" />
+                <AvatarImage
+                  alt={DATA.name}
+                  src={DATA.avatarUrl}
+                  className="object-cover"
+                />
                 <AvatarFallback>{DATA.initials}</AvatarFallback>
               </Avatar>
               <BlurFade delay={0.7}>
@@ -128,8 +136,14 @@ export default function Page() {
           </BlurFade>
           <div className="flex flex-wrap gap-1">
             {DATA.skills.map((skill, id) => (
-              <BlurFade key={skill.name} delay={BLUR_FADE_DELAY * 10 + id * 0.05}>
-                <Badge key={skill.name} className="flex items-center gap-1.5 px-2 py-1">
+              <BlurFade
+                key={skill.name}
+                delay={BLUR_FADE_DELAY * 10 + id * 0.05}
+              >
+                <Badge
+                  key={skill.name}
+                  className="flex items-center gap-1.5 px-2 py-1"
+                >
                   {skill.icon}
                   {skill.name}
                 </Badge>
@@ -197,6 +211,49 @@ export default function Page() {
                   brought to life by a group of motivated and passionate
                   individuals.
                 </p> */}
+              </div>
+            </div>
+          </BlurFade>
+          <BlurFade delay={BLUR_FADE_DELAY * 13.5}>
+            <div className="flex flex-col gap-3">
+              <div className="group relative overflow-hidden rounded-2xl border border-white/10 hover:border-white/25 bg-white/[0.03] backdrop-blur-xl transition-all duration-500 hover:shadow-[0_0_24px_rgba(255,255,255,0.04)]">
+                <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent transition-opacity duration-500 group-hover:via-white/70" />
+                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out bg-gradient-to-r from-transparent via-white/[0.07] to-transparent skew-x-12 pointer-events-none" />
+                <div className="relative flex items-center gap-3 px-4 py-3">
+                  <Avatar className="size-8 shrink-0">
+                    <AvatarImage alt={DATA.name} src={DATA.avatarUrl} className="object-cover" />
+                    <AvatarFallback>{DATA.initials}</AvatarFallback>
+                  </Avatar>
+                  <div className="flex items-center gap-1.5 flex-1 min-w-0">
+                    <span className="text-sm font-medium text-foreground truncate">{DATA.name}</span>
+                    <Icons.dribble className="size-3.5 text-muted-foreground shrink-0" />
+                  </div>
+                  <Link href="https://dribbble.com/eddysantiago" target="_blank" className="shrink-0">
+                    <Button size="sm" className="h-7 text-xs px-3">Follow +</Button>
+                  </Link>
+                </div>
+              </div>
+
+              <div>
+                <div className="flex items-center gap-1">
+                  {[
+                    { label: "Work", active: true },
+                    { label: "Collections", active: false },
+                    { label: "About", active: false },
+                  ].map((tab) => (
+                    <button
+                      key={tab.label}
+                      className={`px-4 py-2 text-sm rounded-full transition-colors duration-200 ${
+                        tab.active
+                          ? "bg-foreground/10 text-foreground font-medium"
+                          : "text-muted-foreground hover:text-foreground"
+                      }`}
+                    >
+                      {tab.label}
+                    </button>
+                  ))}
+                </div>
+                <div className="mt-2 h-px bg-border" />
               </div>
             </div>
           </BlurFade>
