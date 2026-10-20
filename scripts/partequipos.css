@@ -1,0 +1,137 @@
+/* Fuente de public/partequipos/partequipos.css (Tailwind v4). Solo escanea
+   los componentes del lab de Partequipos. Ver scripts/build-partequipos-css.md */
+@import "tailwindcss" source(none);
+@source "../src/components/partequipos";
+@source "../src/app/(lab)/lab/partequipos";
+
+/* ---------------------------------------------------------------------- */
+/* Partequipos — identidad de marketing (independiente del design system  */
+/* interno de panel). Paleta industrial: acero cálido + óxido + ámbar de  */
+/* seguridad, nunca azul-carbón ni gradiente violeta.                     */
+/* ---------------------------------------------------------------------- */
+
+:root {
+  /* Color de marca Partequipos y su escala tonal: un solo tono en pasos de
+     luminancia. El hex de marca manda en los rellenos; los pasos claros
+     existen porque el rojo de marca en texto pequeño no alcanza contraste AA. */
+  --brand: #dc2626;             /* COLOR DE MARCA — rellenos de CTA */
+  --brand-deep: #b91c1c;        /* estado presionado */
+  --brand-lift: #ef4444;        /* hover */
+  --brand-pale: #f87171;        /* acentos de texto pequeño sobre oscuro */
+  --on-brand: #ffffff;          /* texto sobre el relleno de marca (AA 4.85:1) */
+
+  /* Superficie clara — es la del sitio. Blanco cálido en vez de blanco puro
+     para que no deslumbre junto a un hero tan oscuro. */
+  --bar: #ffffff;               /* lienzo del encabezado */
+  --surface: #faf9f7;           /* lienzo de la página */
+  --card: #f0ede8;              /* tarjeta, tono alto */
+  --card-2: #e3dfd8;            /* tarjeta, tono bajo del degradado */
+  --on-bar: #14110f;            /* texto principal sobre claro */
+  --on-bar-dim: #6f6a66;        /* texto secundario sobre claro */
+  --bar-line: #e4e1de;          /* filetes y separadores sobre claro */
+
+  /* Superficies oscuras: solo las usa el hero. Negro cálido casi neutro, ni
+     carbón azulado (el default de todo dark SaaS) ni un café que enturbie
+     el rojo. */
+  --ink: #121010;               /* lienzo */
+  --ink-2: #1a1717;             /* paneles ligeramente elevados */
+  --ink-3: #241f1f;             /* bordes / superficies tonales */
+  --paper: #ededea;             /* texto principal */
+  --paper-dim: #9b9491;         /* texto secundario */
+  --steel: #665f5d;             /* neutro medio, líneas y detalles */
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-paper: var(--paper);
+  --color-paper-dim: var(--paper-dim);
+  --color-steel: var(--steel);
+  /* Lenguaje de formas: rectangular. Esquinas apenas suavizadas, nunca
+     pastillas — un solo token gobierna botones, campos y bloques. */
+  --radius-edge: 4px;
+
+  --color-bar: var(--bar);
+  --color-surface: var(--surface);
+  --color-card: var(--card);
+  --color-card-2: var(--card-2);
+  --color-on-bar: var(--on-bar);
+  --color-on-bar-dim: var(--on-bar-dim);
+  --color-bar-line: var(--bar-line);
+
+  --color-brand: var(--brand);
+  --color-brand-deep: var(--brand-deep);
+  --color-brand-lift: var(--brand-lift);
+  --color-brand-pale: var(--brand-pale);
+  --color-on-brand: var(--on-brand);
+
+  /* Plus Jakarta Sans es la fuente del sitio: cuerpo, UI y títulos.
+     Unbounded queda RESERVADA para destacados puntuales (una palabra de
+     acento, un rótulo de sección), nunca para texto corrido. */
+  --font-body: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: "Unbounded", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-data: "Space Mono", "Courier New", monospace;
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  background: var(--surface);
+  color: var(--on-bar);
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* scroller sin barra visible: el carrusel se maneja solo y con flechas */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Grano fino sobre la superficie clara: rompe el relleno plano y le da textura
+   física a la sección. Va DETRÁS del contenido (z-0 y el contenido en z-10);
+   encima del texto solo lo ensuciaría. */
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.4;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.18'/%3E%3C/svg%3E");
+}
+
+
+/* Carrusel de marcas: la pista lleva la lista dos veces y se desplaza la
+   mitad, así el bucle no tiene salto. Se pausa con el mouse encima; con
+   movimiento reducido no se mueve y se puede desplazar a mano. */
+@keyframes marcas-bucle {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marcas-pista {
+  animation: marcas-bucle 32s linear infinite;
+}
+
+.marcas-carrusel:hover .marcas-pista {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marcas-pista {
+    animation: none;
+  }
+
+  .marcas-carrusel {
+    overflow-x: auto;
+  }
+}

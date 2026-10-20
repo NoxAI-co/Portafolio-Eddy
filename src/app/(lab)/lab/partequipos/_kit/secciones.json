@@ -1,0 +1,50 @@
+{
+  "estilos": "scripts/partequipos.css",
+  "secciones": [
+    {
+      "id": "maquinaria-usada",
+      "nombre": "Maquinaria pesada usada",
+      "descripcion": "Hero, filtro de 3 categorías y slider de equipos.",
+      "uso": "<CatalogoUsados hero={<UsedHero />} />",
+      "dependencias": ["next/image", "next/link", "motion"],
+      "archivos": [
+        "maquinaria/UsedHero.tsx",
+        "maquinaria/CatalogoUsados.tsx",
+        "maquinaria/categorias.ts",
+        "equipos.ts"
+      ]
+    },
+    {
+      "id": "marcas",
+      "nombre": "Marcas",
+      "descripcion": "Banda de logos en bucle con la retroexcavadora Case y su reflejo.",
+      "uso": "<MarcasSlider />",
+      "dependencias": ["next/image"],
+      "archivos": ["maquinaria/MarcasSlider.tsx", "brands.ts"]
+    },
+    {
+      "id": "repuestos",
+      "nombre": "Venta de repuestos",
+      "descripcion": "10 categorías con «Ver todos» y la Yanmar sobre piso cenital.",
+      "uso": "<CatalogoRepuestos />",
+      "dependencias": ["next/image"],
+      "archivos": ["maquinaria/CatalogoRepuestos.tsx", "maquinaria/UsedHero.tsx"]
+    },
+    {
+      "id": "cta",
+      "nombre": "CTA de cotizar",
+      "descripcion": "Banner oscuro con montañas, franjas rojas y el compactador Dynapac.",
+      "uso": "<BannerCotizar />",
+      "dependencias": ["next/image"],
+      "archivos": ["maquinaria/BannerCotizar.tsx", "brand/PartequiposWordmark.tsx"]
+    },
+    {
+      "id": "ficha",
+      "nombre": "Ficha de equipo",
+      "descripcion": "Página de detalle de cada máquina, con galería y datos técnicos.",
+      "uso": "<ProductSheet equipo={getEquipo(slug)} />",
+      "dependencias": ["next/image", "next/link"],
+      "archivos": ["ProductSheet.tsx", "ProductGallery.tsx", "contacto.ts", "equipos.ts"]
+    }
+  ]
+}

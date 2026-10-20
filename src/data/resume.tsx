@@ -77,6 +77,18 @@ export const DATA = {
 
   work: [
     {
+      company: "Partequipos S.A.S",
+      href: "https://partequipos.com/",
+      badges: [],
+      location: "Medellin, Colombia",
+      title: "Ingeniero de Software",
+      logoUrl: "/partequipos.png",
+      start: "Jun 2026",
+      end: "Presente",
+      description:
+        "Let him cook",
+    },
+    {
       company: "NoxAI",
       href: "https://principal.gestoru.com/",
       badges: [],
@@ -107,8 +119,8 @@ export const DATA = {
       location: "Medellin, Colombia",
       title: "Desarrollador Frontend y Diseñador UI UX",
       logoUrl: "/gestoru.webp",
-      start: "Jun 2023",
-      end: "Presente",
+      start: "Jul 2023",
+      end: "Jun 2026",
       description:
         "Diseñé e implementé soluciones web escalables y centradas en el usuario, creando componentes reutilizables, liderando el desarrollo de un catálogo de repuestos en línea para el mercado colombiano, integrando el frontend con backend en Laravel y APIs internas, optimizando el rendimiento en un 29% mediante lazy loading y code splitting, co-desarrollando herramientas de seguimiento de soporte, aplicando Design Thinking, realizando auditorías de accesibilidad, validando interfaces con wireframes y prototipos, y desarrollando sitios en WordPress con Elementor, WooCommerce y Jetpack para mejorar la experiencia del cliente.",
     },

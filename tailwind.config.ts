@@ -8,6 +8,9 @@ const config = {
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
+    // el lab de Partequipos trae su propio CSS (Tailwind v4)
+    "!./src/components/partequipos/**",
+    "!./src/app/(lab)/**",
   ],
   prefix: "",
   theme: {
