@@ -3,6 +3,7 @@
 @import "tailwindcss" source(none);
 @source "../src/components/partequipos";
 @source "../src/app/(lab)/lab/partequipos";
+@source "../src/app/(lab)/layout.tsx";
 
 /* ---------------------------------------------------------------------- */
 /* Partequipos — identidad de marketing (independiente del design system  */
@@ -133,5 +134,42 @@ body {
 
   .marcas-carrusel {
     overflow-x: auto;
+  }
+}
+
+/* Cinta de tipos de máquina de la landing de marca: el mismo bucle, más
+   lento porque las tarjetas son anchas. Se pausa con el mouse o el foco
+   dentro; con movimiento reducido queda quieta y se desplaza a mano. */
+.linea-pista {
+  animation: marcas-bucle 45s linear infinite;
+}
+
+.linea-carrusel:hover .linea-pista,
+.linea-carrusel:focus-within .linea-pista {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .linea-pista {
+    animation: none;
+  }
+
+  .linea-carrusel {
+    overflow-x: auto;
+  }
+}
+
+/* Rueda del indicador de scroll del hero de marca: baja y se desvanece. */
+@keyframes raton-rueda {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(15px);
   }
 }

@@ -30,7 +30,7 @@ export function CatalogoUsados({ hero }: { hero: React.ReactNode }) {
   };
 
   return (
-    <div className="bg-bar px-3 py-3 sm:px-5 sm:py-5 lg:px-6 lg:py-6">
+    <div id="maquinaria-usada" className="bg-bar px-3 py-3 sm:px-5 sm:py-5 lg:px-6 lg:py-6">
       <div className="relative isolate overflow-hidden rounded-[1.75rem] bg-[#f1f0ee] lg:rounded-[2rem]">
         {hero}
 

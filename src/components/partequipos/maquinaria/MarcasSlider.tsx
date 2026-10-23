@@ -15,6 +15,7 @@ const MARCAS = ORDEN.map((n) => BRANDS.find((b) => b.name === n)).filter((b): b 
 export function MarcasSlider() {
   return (
     <section
+      id="marcas"
       aria-labelledby="marcas-titulo"
       className="bg-bar px-3 pb-3 sm:px-5 sm:pb-5 lg:px-6 lg:pb-6"
     >

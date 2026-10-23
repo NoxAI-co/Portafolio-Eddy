@@ -8,13 +8,6 @@ import type { SeccionKit } from "./leer";
 // sección (para copiar tal cual), sus imágenes y los .zip listos para
 // descargar. No toca el diseño de la página: vive encima, en su propia capa.
 
-const DESTINO: Record<string, string> = {
-  "maquinaria-usada": "#listado",
-  marcas: "#marcas-titulo",
-  repuestos: "#repuestos",
-  cta: "#banner-cotizar-titulo",
-};
-
 const peso = (b: number) =>
   b >= 1024 * 1024 ? `${(b / 1024 / 1024).toFixed(1)} MB` : `${Math.max(1, Math.round(b / 1024))} KB`;
 
@@ -41,10 +34,15 @@ export function KitDev({
   secciones,
   estilos,
   zipCompleto,
+  carpeta = "/partequipos/kit",
+  subtitulo = "Partequipos",
 }: {
   secciones: SeccionKit[];
   estilos: string;
   zipCompleto: number;
+  /** Carpeta pública con los .zip de este kit (uno por sección y todo.zip). */
+  carpeta?: string;
+  subtitulo?: string;
 }) {
   const [abierto, setAbierto] = useState(false);
   const [actual, setActual] = useState(secciones[0].id);
@@ -116,7 +114,7 @@ export function KitDev({
           >
             <header className="flex items-start justify-between gap-4 border-b border-bar-line px-5 pt-5 pb-4 sm:px-7">
               <div>
-                <p className="text-xs font-semibold text-brand-deep">Partequipos</p>
+                <p className="text-xs font-semibold text-brand-deep">{subtitulo}</p>
                 <h2 id="kit-titulo" className="mt-1 text-xl font-semibold tracking-[-0.01em]">
                   Kit para desarrollo
                 </h2>
@@ -135,7 +133,7 @@ export function KitDev({
 
             <div className="flex flex-wrap items-center gap-2 border-b border-bar-line px-5 py-3 sm:px-7">
               <a
-                href="/partequipos/kit/todo.zip"
+                href={`${carpeta}/todo.zip`}
                 download
                 className="inline-flex items-center gap-2 rounded-full bg-brand px-4 py-2 text-sm font-semibold text-on-brand transition-colors hover:bg-brand-lift active:bg-brand-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
               >
@@ -180,7 +178,7 @@ export function KitDev({
 
                 <div className="mt-3 flex flex-wrap gap-2">
                   <a
-                    href={`/partequipos/kit/${seccion.id}.zip`}
+                    href={`${carpeta}/${seccion.id}.zip`}
                     download
                     className="inline-flex items-center gap-2 rounded-full bg-on-bar px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-on-bar/85 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
                   >
@@ -194,12 +192,12 @@ export function KitDev({
                   >
                     Copiar todo el código
                   </button>
-                  {DESTINO[seccion.id] && (
+                  {seccion.destino && (
                     <button
                       type="button"
                       onClick={() => {
                         setAbierto(false);
-                        document.querySelector(DESTINO[seccion.id])?.scrollIntoView({ behavior: "smooth", block: "center" });
+                        document.querySelector(seccion.destino!)?.scrollIntoView({ behavior: "smooth", block: "center" });
                       }}
                       className="rounded-full px-4 py-2 text-sm font-semibold text-brand-deep transition-colors hover:bg-card focus-visible:outline-2 focus-visible:outline-brand"
                     >

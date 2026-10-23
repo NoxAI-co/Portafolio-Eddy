@@ -6,45 +6,220 @@
       "nombre": "Maquinaria pesada usada",
       "descripcion": "Hero, filtro de 3 categorías y slider de equipos.",
       "uso": "<CatalogoUsados hero={<UsedHero />} />",
-      "dependencias": ["next/image", "next/link", "motion"],
+      "dependencias": [
+        "next/image",
+        "next/link",
+        "motion"
+      ],
       "archivos": [
         "maquinaria/UsedHero.tsx",
         "maquinaria/CatalogoUsados.tsx",
         "maquinaria/categorias.ts",
         "equipos.ts"
-      ]
+      ],
+      "destino": "#listado"
     },
     {
       "id": "marcas",
       "nombre": "Marcas",
       "descripcion": "Banda de logos en bucle con la retroexcavadora Case y su reflejo.",
       "uso": "<MarcasSlider />",
-      "dependencias": ["next/image"],
-      "archivos": ["maquinaria/MarcasSlider.tsx", "brands.ts"]
+      "dependencias": [
+        "next/image"
+      ],
+      "archivos": [
+        "maquinaria/MarcasSlider.tsx",
+        "brands.ts"
+      ],
+      "destino": "#marcas-titulo"
     },
     {
       "id": "repuestos",
       "nombre": "Venta de repuestos",
       "descripcion": "10 categorías con «Ver todos» y la Yanmar sobre piso cenital.",
       "uso": "<CatalogoRepuestos />",
-      "dependencias": ["next/image"],
-      "archivos": ["maquinaria/CatalogoRepuestos.tsx", "maquinaria/UsedHero.tsx"]
+      "dependencias": [
+        "next/image"
+      ],
+      "archivos": [
+        "maquinaria/CatalogoRepuestos.tsx",
+        "maquinaria/UsedHero.tsx"
+      ],
+      "destino": "#repuestos"
     },
     {
       "id": "cta",
       "nombre": "CTA de cotizar",
       "descripcion": "Banner oscuro con montañas, franjas rojas y el compactador Dynapac.",
       "uso": "<BannerCotizar />",
-      "dependencias": ["next/image"],
-      "archivos": ["maquinaria/BannerCotizar.tsx", "brand/PartequiposWordmark.tsx"]
+      "dependencias": [
+        "next/image"
+      ],
+      "archivos": [
+        "maquinaria/BannerCotizar.tsx",
+        "brand/PartequiposWordmark.tsx"
+      ],
+      "destino": "#banner-cotizar-titulo"
     },
     {
       "id": "ficha",
       "nombre": "Ficha de equipo",
       "descripcion": "Página de detalle de cada máquina, con galería y datos técnicos.",
       "uso": "<ProductSheet equipo={getEquipo(slug)} />",
-      "dependencias": ["next/image", "next/link"],
-      "archivos": ["ProductSheet.tsx", "ProductGallery.tsx", "contacto.ts", "equipos.ts"]
+      "dependencias": [
+        "next/image",
+        "next/link"
+      ],
+      "archivos": [
+        "ProductSheet.tsx",
+        "ProductGallery.tsx",
+        "contacto.ts",
+        "equipos.ts"
+      ]
     }
-  ]
+  ],
+  "marca": {
+    "secciones": [
+      {
+        "id": "hero",
+        "nombre": "Hero",
+        "descripcion": "Banda partida con el color de la marca, foto, placa del logo, título e indicador de scroll.",
+        "uso": "<MarcaHero marca={marca} />",
+        "dependencias": [
+          "next/image"
+        ],
+        "archivos": [
+          "marca/MarcaHero.tsx",
+          "marca/marcas.ts",
+          "marca/modelos-case.ts",
+          "marca/modelos-hitachi.ts",
+          "marca/modelos-yanmar.ts",
+          "marca/modelos-dynapac.ts"
+        ],
+        "destino": "#marca-hero-titulo",
+        "imagenes": [
+          "fondo",
+          "logo"
+        ]
+      },
+      {
+        "id": "pildora",
+        "nombre": "Píldora de categorías",
+        "descripcion": "Navegación de vidrio que aparece al bajar: logo y categorías, con la activa resaltada.",
+        "uso": "<PildoraMarca marca={marca} />",
+        "dependencias": [
+          "next/image",
+          "motion"
+        ],
+        "archivos": [
+          "marca/PildoraMarca.tsx",
+          "marca/marcas.ts",
+          "marca/modelos-case.ts",
+          "marca/modelos-hitachi.ts",
+          "marca/modelos-yanmar.ts",
+          "marca/modelos-dynapac.ts"
+        ],
+        "imagenes": [
+          "logo"
+        ]
+      },
+      {
+        "id": "linea",
+        "nombre": "Línea de equipos",
+        "descripcion": "Texto de entrada y cinta continua con una tarjeta por tipo de máquina.",
+        "uso": "<LineaEquipos marca={marca} />",
+        "dependencias": [
+          "next/image",
+          "motion"
+        ],
+        "archivos": [
+          "marca/LineaEquipos.tsx",
+          "maquinaria/UsedHero.tsx",
+          "marca/marcas.ts",
+          "marca/modelos-case.ts",
+          "marca/modelos-hitachi.ts",
+          "marca/modelos-yanmar.ts",
+          "marca/modelos-dynapac.ts"
+        ],
+        "destino": "#linea-de-equipos",
+        "imagenes": [
+          "tipos"
+        ]
+      },
+      {
+        "id": "modelos",
+        "nombre": "Modelos por tipo",
+        "descripcion": "Una sección por tipo: número, título, franja con la máquina, «Ver toda la categoría» y las tarjetas de cada modelo.",
+        "uso": "<ModelosMarca marca={marca} detalle />",
+        "dependencias": [
+          "next/image"
+        ],
+        "archivos": [
+          "marca/ModelosMarca.tsx",
+          "maquinaria/UsedHero.tsx",
+          "marca/marcas.ts",
+          "marca/modelos-case.ts",
+          "marca/modelos-hitachi.ts",
+          "marca/modelos-yanmar.ts",
+          "marca/modelos-dynapac.ts"
+        ],
+        "destino": "section[id^='tipo-']",
+        "imagenes": [
+          "tipos",
+          "modelos"
+        ]
+      },
+      {
+        "id": "mascota",
+        "nombre": "Mascota de fondo",
+        "descripcion": "El sello de la marca grande y gris detrás de la página, que acompaña el scroll.",
+        "uso": "<AguilaFondo mascota={marca.mascota}>{contenido}</AguilaFondo>",
+        "dependencias": [
+          "motion"
+        ],
+        "archivos": [
+          "marca/mascota/Mascota.tsx",
+          "marca/marcas.ts",
+          "marca/modelos-case.ts",
+          "marca/modelos-hitachi.ts",
+          "marca/modelos-yanmar.ts",
+          "marca/modelos-dynapac.ts"
+        ],
+        "imagenes": [
+          "mascota"
+        ]
+      },
+      {
+        "id": "todo",
+        "nombre": "Landing completa",
+        "descripcion": "La página entera de la marca armada con todas las secciones. Es el mismo zip que «Kit completo».",
+        "uso": "<LandingMarca marca={getMarca(\"<slug>\")!} />",
+        "dependencias": [
+          "next/image",
+          "motion"
+        ],
+        "archivos": [
+          "marca/LandingMarca.tsx",
+          "marca/MarcaHero.tsx",
+          "marca/PildoraMarca.tsx",
+          "marca/LineaEquipos.tsx",
+          "marca/ModelosMarca.tsx",
+          "marca/mascota/Mascota.tsx",
+          "maquinaria/UsedHero.tsx",
+          "marca/marcas.ts",
+          "marca/modelos-case.ts",
+          "marca/modelos-hitachi.ts",
+          "marca/modelos-yanmar.ts",
+          "marca/modelos-dynapac.ts"
+        ],
+        "imagenes": [
+          "fondo",
+          "logo",
+          "tipos",
+          "modelos",
+          "mascota"
+        ]
+      }
+    ]
+  }
 }

@@ -1,9 +1,12 @@
-// Arma los .zip que descarga el panel «Kit para desarrollo» de /lab/partequipos:
-// uno por sección (su código, sus imágenes y los estilos) y uno con todo.
-// Cada zip respeta las rutas del proyecto (src/components/partequipos/...,
-// public/partequipos/...) para copiarlo tal cual. Uso:
-//   node scripts/build-partequipos-kit.mjs
+// Arma los .zip que descarga el panel «Kit para desarrollo» de /lab/partequipos
+// y de cada landing de marca: uno por sección (su código, sus imágenes y los
+// estilos) y uno con todo. Cada zip respeta las rutas del proyecto
+// (src/components/partequipos/..., public/partequipos/...) para copiarlo tal
+// cual. Los de marca van en public/partequipos/kit/marcas/<slug>/. Uso:
+//   node --no-warnings scripts/build-partequipos-kit.mjs
 import { execFileSync } from "node:child_process";
+import { registerHooks } from "node:module";
+import { pathToFileURL } from "node:url";
 import { cpSync, mkdirSync, readFileSync, rmSync, writeFileSync, existsSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { tmpdir } from "node:os";
@@ -52,14 +55,43 @@ Componentes de Partequipos para Next.js (App Router) + React + Tailwind CSS v4.
 ${secciones.map((s) => `- **${s.nombre}**: ${s.descripcion}\n  Uso: \`${s.uso}\``).join("\n")}
 `;
 
-const armar = (nombre, secciones) => {
+// Los datos de las marcas están en TypeScript con imports sin extensión: se
+// importan tal cual (Node quita los tipos) resolviendo "./x" como "./x.ts".
+registerHooks({
+  resolve(spec, ctx, next) {
+    try {
+      return next(spec, ctx);
+    } catch (e) {
+      if (spec.startsWith(".")) return next(`${spec}.ts`, ctx);
+      throw e;
+    }
+  },
+});
+const { MARCAS } = await import(pathToFileURL(join(raiz, comp, "marca/marcas.ts")).href);
+
+// mismo reparto que imagenesMarca en _kit/leer.ts
+const imagenesMarca = (marca, tipos) => {
+  const de = {
+    fondo: [marca.fondo],
+    logo: [marca.logo.src],
+    tipos: marca.tipos.map((t) => t.imagen),
+    modelos: marca.tipos.flatMap((t) => t.modelos.map((m) => m.imagen)),
+    mascota: marca.mascota ? [marca.mascota.tinta, marca.mascota.papel].filter(Boolean) : [],
+  };
+  return [...new Set(tipos.flatMap((t) => de[t] ?? []))].sort();
+};
+
+// nombre del zip, secciones, carpeta de salida, título del LEEME y, para las
+// marcas, cómo elegir las imágenes de cada sección
+const armar = (nombre, secciones, destino = salida, titulo, imagenes) => {
   const tmp = join(tmpdir(), `kit-${nombre}-${Date.now()}`);
   const archivos = [...new Set(secciones.flatMap((s) => s.archivos))];
   for (const a of archivos) {
     mkdirSync(dirname(join(tmp, comp, a)), { recursive: true });
     cpSync(join(comp, a), join(tmp, comp, a));
   }
-  for (const p of assetsDe(archivos)) {
+  const rutas = imagenes ? [...new Set(secciones.flatMap(imagenes))].sort() : assetsDe(archivos);
+  for (const p of rutas) {
     const src = join("public", p);
     if (!existsSync(src)) { console.warn("falta", src); continue; }
     mkdirSync(dirname(join(tmp, "public", p)), { recursive: true });
@@ -67,8 +99,12 @@ const armar = (nombre, secciones) => {
   }
   mkdirSync(join(tmp, "estilos"), { recursive: true });
   writeFileSync(join(tmp, "estilos/partequipos.css"), estilosKit());
-  writeFileSync(join(tmp, "LEEME.md"), leeme(nombre === "todo" ? "Partequipos: kit completo" : `Partequipos: ${secciones[0].nombre}`, secciones));
-  const zip = join(salida, `${nombre}.zip`);
+  writeFileSync(
+    join(tmp, "LEEME.md"),
+    leeme(titulo ?? (nombre === "todo" ? "Partequipos: kit completo" : `Partequipos: ${secciones[0].nombre}`), secciones),
+  );
+  mkdirSync(destino, { recursive: true });
+  const zip = join(destino, `${nombre}.zip`);
   rmSync(zip, { force: true });
   execFileSync("zip", ["-qr", zip, "."], { cwd: tmp });
   rmSync(tmp, { recursive: true, force: true });
@@ -78,3 +114,12 @@ const armar = (nombre, secciones) => {
 mkdirSync(salida, { recursive: true });
 for (const s of cfg.secciones) armar(s.id, [s]);
 armar("todo", cfg.secciones);
+
+for (const marca of MARCAS) {
+  const destino = join(salida, "marcas", marca.slug);
+  const secciones = cfg.marca.secciones.map((s) => ({ ...s, uso: s.uso.replace("<slug>", marca.slug) }));
+  const imagenes = (s) => imagenesMarca(marca, s.imagenes ?? []);
+  // la sección «Landing completa» se llama todo: su zip es el kit completo
+  for (const s of secciones)
+    armar(s.id, s.id === "todo" ? secciones : [s], destino, `Partequipos · ${marca.nombre}: ${s.id === "todo" ? "kit completo" : s.nombre}`, imagenes);
+}
