@@ -107,19 +107,24 @@ function DetalleTipo({ tipo }: { tipo: TipoMaquina }) {
   const cantidad = tipo.modelos.length;
   const enFila = cantidad === 4 ? 2 : Math.min(cantidad, 3);
   const minimo = (33 * tipo.nombre.length + 160 + 620) / 0.9;
-  // la franja tiene que caer sobre una tarjeta: con la fila centrada (1 o 2)
-  // debajo del borde derecho no hay ninguna, así que ahí va solo el enlace
-  const desde = enFila === 3 ? (DESDE.find(([px]) => minimo <= px)?.[1] ?? "") : "";
+  const desde = DESDE.find(([px]) => minimo <= px)?.[1] ?? "";
+  // con 3 tarjetas la franja se mete detrás de la última; con la fila
+  // centrada (1 o 2) debajo del borde derecho no hay tarjeta, así que
+  // termina en la línea donde empiezan
+  const fondo = enFila === 3 ? "bottom-[-60px]" : "bottom-[-30px]";
+  // con la fila centrada el enlace queda sobre la última tarjeta, más
+  // adentro: la franja se acerca al borde para no pasar por debajo de él
+  const franja = enFila === 3 ? "right-[160px]" : "right-[80px]";
   const bordeMd = cantidad === 1 ? "min-[768px]:right-[calc((100%-60px)/4+20px)]" : "min-[768px]:right-0";
   return (
     <>
-      {/* del filete de la sección (40 px por encima del bloque) a 30 px
-          dentro de las tarjetas: debajo del título van sus 30 px de margen */}
+      {/* del filete de la sección (40 px por encima del bloque) hasta las
+          tarjetas: debajo del título van sus 30 px de margen */}
       <span
         aria-hidden
-        className={`pointer-events-none absolute top-[-40px] right-0 bottom-[-60px] -z-10 hidden w-[300px] ${desde}`}
+        className={`pointer-events-none absolute top-[-40px] right-0 ${fondo} -z-10 hidden w-[300px] ${desde}`}
       >
-        <span className="absolute top-0 right-[160px] bottom-0 w-[44px] -skew-x-[30deg] bg-[var(--marca-acento)] opacity-80" />
+        <span className={`absolute top-0 bottom-0 w-[44px] -skew-x-[30deg] bg-[var(--marca-acento)] opacity-80 ${franja}`} />
         <span className="absolute right-0 bottom-[22px] h-[150px] w-[210px]">
           <Image src={tipo.imagen} alt="" fill sizes="210px" className="object-contain object-bottom opacity-30 grayscale" />
         </span>
