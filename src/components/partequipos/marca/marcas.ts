@@ -195,3 +195,24 @@ export const MARCAS: Marca[] = [
 ];
 
 export const getMarca = (slug: string) => MARCAS.find((m) => m.slug === slug);
+
+// Ruta de la ficha de un modelo dentro de la landing de su marca.
+export const slugModelo = (m: Modelo) =>
+  m.nombre
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+
+export const rutaModelo = (marca: Marca, m: Modelo) => `/lab/partequipos/${marca.slug}/${slugModelo(m)}`;
+
+export function getModelo(marcaSlug: string, slug: string) {
+  const marca = getMarca(marcaSlug);
+  if (!marca) return undefined;
+  for (const tipo of marca.tipos) {
+    const modelo = tipo.modelos.find((m) => slugModelo(m) === slug);
+    if (modelo) return { marca, tipo, modelo };
+  }
+  return undefined;
+}

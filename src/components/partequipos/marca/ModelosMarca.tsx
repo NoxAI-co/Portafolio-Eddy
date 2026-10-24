@@ -1,7 +1,8 @@
 import Image from "next/image";
 import type { CSSProperties } from "react";
 import { Flecha } from "../maquinaria/UsedHero";
-import type { Marca, Modelo, TipoMaquina } from "./marcas";
+import { rutaModelo, slugModelo, type Marca, type Modelo, type TipoMaquina } from "./marcas";
+import { EnlaceTransicion } from "./transicion";
 
 const WHATSAPP = "https://wa.me/573176707071";
 
@@ -44,7 +45,7 @@ export function ModelosMarca({
           ) : (
             <EncabezadoNumerado tipo={t} n={n} />
           )}
-          <GrillaModelos tipo={t} />
+          <GrillaModelos marca={marca} tipo={t} />
         </section>
       ))}
     </div>
@@ -136,7 +137,7 @@ function DetalleTipo({ tipo }: { tipo: TipoMaquina }) {
 
 // La rejilla de tarjetas de un tipo, sin encabezado. Necesita --marca-acento
 // en un ancestro.
-export function GrillaModelos({ tipo }: { tipo: TipoMaquina }) {
+export function GrillaModelos({ marca, tipo }: { marca: Marca; tipo: TipoMaquina }) {
   return (
     <ul className="m-0 grid list-none grid-cols-1 gap-x-8 p-0 min-[768px]:grid-cols-4 min-[1025px]:grid-cols-6 [@media(max-width:1024px)]:gap-x-5">
       {tipo.modelos.map((m, i) => (
@@ -144,7 +145,7 @@ export function GrillaModelos({ tipo }: { tipo: TipoMaquina }) {
           key={m.nombre}
           className={`row-span-4 mb-8 grid grid-rows-subgrid gap-y-0 overflow-hidden rounded-[14px] bg-white shadow-[0_1px_2px_rgb(16_15_15/0.06),0_6px_16px_-10px_rgb(16_15_15/0.18)] min-[768px]:col-span-2 ${columna(i, tipo.modelos.length)}`}
         >
-          <TarjetaModelo modelo={m} />
+          <TarjetaModelo modelo={m} href={rutaModelo(marca, m)} />
         </li>
       ))}
     </ul>
@@ -165,15 +166,26 @@ function columna(i: number, n: number) {
   return `${md} ${lg}`;
 }
 
-function TarjetaModelo({ modelo }: { modelo: Modelo }) {
+function TarjetaModelo({ modelo, href }: { modelo: Modelo; href: string }) {
   const cotizar = `${WHATSAPP}?text=${encodeURIComponent(`Hola, quiero cotizar ${modelo.nombre}.`)}`;
   const id = `modelo-${modelo.nombre.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
+  // la foto de la tarjeta es la que se transforma en la de la ficha
+  const foto = `[data-foto="${slugModelo(modelo)}"]`;
 
   return (
     <>
       {/* la foto va pegada arriba y a los lados: la tarjeta la recorta con su
-          radio; solo el contenido de abajo lleva relleno */}
-      <div className="relative h-60 bg-[#f0f0f0] [@media(max-width:767px)]:h-[210px]">
+          radio; solo el contenido de abajo lleva relleno. También abre la
+          ficha, y es la que se transforma en la foto grande de la ficha */}
+      <EnlaceTransicion
+        href={href}
+        origen={foto}
+        destino="[data-foto-ficha]"
+        tabIndex={-1}
+        aria-hidden
+        data-foto={slugModelo(modelo)}
+        className="relative block h-60 bg-[#f0f0f0] [@media(max-width:767px)]:h-[210px]"
+      >
         <Image
           src={modelo.imagen}
           alt=""
@@ -181,7 +193,7 @@ function TarjetaModelo({ modelo }: { modelo: Modelo }) {
           sizes="(max-width: 767px) 90vw, (max-width: 1024px) 45vw, 560px"
           className="object-cover"
         />
-      </div>
+      </EnlaceTransicion>
 
       <h3 id={id} className="m-0 px-6 pt-6 text-lg leading-[1.25] font-semibold text-[#100f0f] uppercase">
         {modelo.nombre}
@@ -203,14 +215,16 @@ function TarjetaModelo({ modelo }: { modelo: Modelo }) {
       </ul>
 
       <div className="flex flex-wrap gap-3 self-start px-6 pt-5 pb-6">
-        <a
-          href={modelo.ficha}
+        <EnlaceTransicion
+          href={href}
+          origen={foto}
+          destino="[data-foto-ficha]"
           aria-describedby={id}
           className={`${BOTON} border-[var(--marca-acento)] bg-[var(--marca-acento)] text-[var(--marca-tinta)]`}
         >
           Ver ficha
           <Flecha className="transition-transform duration-300 group-hover/boton:translate-x-1" />
-        </a>
+        </EnlaceTransicion>
         <a
           href={cotizar}
           target="_blank"
@@ -232,7 +246,8 @@ const BOTON =
   "group/boton inline-flex min-h-11 items-center justify-center gap-3.5 rounded-full border px-6 text-base leading-none font-semibold transition-colors hover:border-[#100f0f] hover:bg-[#100f0f] hover:text-white focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-[#100f0f]";
 
 // Íconos de los datos (peso, potencia, motor), los mismos trazos del sitio.
-function Icono({ tipo }: { tipo: Modelo["datos"][number]["icono"] }) {
+// También los usa la ficha del modelo.
+export function Icono({ tipo }: { tipo: Modelo["datos"][number]["icono"] }) {
   return (
     <svg
       viewBox="0 0 24 24"

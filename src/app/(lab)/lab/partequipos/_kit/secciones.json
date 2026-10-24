@@ -156,6 +156,7 @@
         ],
         "archivos": [
           "marca/ModelosMarca.tsx",
+          "marca/transicion.tsx",
           "maquinaria/UsedHero.tsx",
           "marca/marcas.ts",
           "marca/modelos-case.ts",
@@ -166,6 +167,32 @@
         "destino": "section[id^='tipo-']",
         "imagenes": [
           "tipos",
+          "modelos"
+        ]
+      },
+      {
+        "id": "ficha",
+        "nombre": "Ficha del modelo",
+        "descripcion": "Página de cada modelo: foto grande, datos, cotizar y otros modelos del tipo. La foto de la tarjeta se transforma en la de la ficha con una transición de vista.",
+        "uso": "<FichaModelo marcaSlug=\"<slug>\" slug={params.modelo} />",
+        "dependencias": [
+          "next/image",
+          "next/link",
+          "motion"
+        ],
+        "archivos": [
+          "marca/FichaModelo.tsx",
+          "marca/transicion.tsx",
+          "marca/ModelosMarca.tsx",
+          "marca/mascota/Mascota.tsx",
+          "maquinaria/UsedHero.tsx",
+          "marca/marcas.ts",
+          "marca/modelos-case.ts",
+          "marca/modelos-hitachi.ts",
+          "marca/modelos-yanmar.ts",
+          "marca/modelos-dynapac.ts"
+        ],
+        "imagenes": [
           "modelos"
         ]
       },
@@ -200,6 +227,8 @@
         ],
         "archivos": [
           "marca/LandingMarca.tsx",
+          "marca/FichaModelo.tsx",
+          "marca/transicion.tsx",
           "marca/MarcaHero.tsx",
           "marca/PildoraMarca.tsx",
           "marca/LineaEquipos.tsx",
