@@ -143,7 +143,10 @@ export function GrillaModelos({ marca, tipo }: { marca: Marca; tipo: TipoMaquina
       {tipo.modelos.map((m, i) => (
         <li
           key={m.nombre}
-          className={`row-span-4 mb-8 grid grid-rows-subgrid gap-y-0 overflow-hidden rounded-[14px] bg-white shadow-[0_1px_2px_rgb(16_15_15/0.06),0_6px_16px_-10px_rgb(16_15_15/0.18)] min-[768px]:col-span-2 ${columna(i, tipo.modelos.length)}`}
+          // ancla del «Volver» de la ficha: deja la tarjeta a la vista, bajo
+          // la píldora, para que la foto regrese a ella
+          id={slugModelo(m)}
+          className={`row-span-4 mb-8 scroll-mt-28 grid grid-rows-subgrid gap-y-0 overflow-hidden rounded-[14px] bg-white shadow-[0_1px_2px_rgb(16_15_15/0.06),0_6px_16px_-10px_rgb(16_15_15/0.18)] min-[768px]:col-span-2 ${columna(i, tipo.modelos.length)}`}
         >
           <TarjetaModelo modelo={m} href={rutaModelo(marca, m)} />
         </li>

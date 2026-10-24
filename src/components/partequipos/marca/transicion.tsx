@@ -62,6 +62,10 @@ export function EnlaceTransicion({
             new Promise<void>((listo) => {
               const fin = async () => {
                 pendiente = null;
+                // Next baja al ancla después de esta captura: se baja antes,
+                // para que el destino (la tarjeta) ya esté a la vista
+                const ancla = new URL(href, location.href).hash.slice(1);
+                if (ancla) document.getElementById(decodeURIComponent(ancla))?.scrollIntoView({ block: "start" });
                 hasta = destino ? document.querySelector<HTMLElement>(destino) : null;
                 nombrar(hasta, NOMBRE);
                 // la captura de destino se toma al resolver: si su foto aún no

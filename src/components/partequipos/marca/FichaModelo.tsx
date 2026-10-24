@@ -31,7 +31,7 @@ export function FichaModelo({ marcaSlug, slug }: { marcaSlug: string; slug: stri
 
           <div className="flex flex-col justify-center px-[8%] py-12 min-[1025px]:py-16">
             <EnlaceTransicion
-              href={`/lab/partequipos/${marca.slug}#tipo-${tipo.id}`}
+              href={`/lab/partequipos/${marca.slug}#${slug}`}
               origen="[data-foto-ficha]"
               destino={`[data-foto="${slug}"]`}
               className="group/volver inline-flex w-fit items-center gap-2 text-sm font-semibold text-[#56545a] transition-colors hover:text-[#100f0f] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--marca-acento)]"
