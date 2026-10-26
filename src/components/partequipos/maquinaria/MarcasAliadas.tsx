@@ -1,5 +1,7 @@
+"use client";
+
 import Image from "next/image";
-import type { CSSProperties } from "react";
+import { useEffect, useState, useSyncExternalStore, type CSSProperties } from "react";
 
 // Marcas aliadas del grupo: una tarjeta por marca con su logo sobre blanco y,
 // debajo, una foto de su negocio teñida con el color de la marca. El tinte va
@@ -7,6 +9,9 @@ import type { CSSProperties } from "react";
 // un oscurecido al pie, que es el que sostiene el texto blanco (así se lee
 // igual sobre el amarillo de ENI que sobre el azul de Express). La foto entra
 // con un corte en diagonal arriba. Cada tarjeta abre el sitio de la marca.
+// El contenedor lleva de fondo las fotos de la franja de «Marcas aliadas» de
+// /nosotros, tenues, que se relevan con un fundido lento; un velo oscuro
+// sostiene el título en blanco y las tarjetas van encima.
 type Aliada = {
   id: string;
   nombre: string;
@@ -65,6 +70,21 @@ const ALIADAS: Aliada[] = [
   },
 ];
 
+// fotos de la franja de /nosotros, en su orden
+const FOTOS = [
+  { src: "/partequipos/marcas-aliadas/web/franja-nosotros.webp", posicion: "50% 60%" },
+  { src: "/partequipos/marcas-aliadas/web/franja-case.webp", posicion: "50% 58%" },
+  { src: "/partequipos/marcas-aliadas/web/franja-yanmar.webp", posicion: "50% 45%" },
+];
+const INTERVALO = 6000;
+const MOVIMIENTO = "(prefers-reduced-motion: reduce)";
+
+function suscribirMovimiento(avisar: () => void) {
+  const mq = window.matchMedia(MOVIMIENTO);
+  mq.addEventListener("change", avisar);
+  return () => mq.removeEventListener("change", avisar);
+}
+
 export function MarcasAliadas() {
   return (
     <section
@@ -72,10 +92,11 @@ export function MarcasAliadas() {
       aria-labelledby="aliadas-titulo"
       className="bg-bar px-3 pb-3 sm:px-5 sm:pb-5 lg:px-6 lg:pb-6"
     >
-      <div className="rounded-[1.75rem] bg-[#f1f0ee] px-5 py-10 sm:px-10 lg:rounded-[2rem] lg:px-[5%] lg:py-14">
+      <div className="relative isolate overflow-hidden rounded-[1.75rem] bg-[#141210] px-5 py-10 sm:px-10 lg:rounded-[2rem] lg:px-[5%] lg:py-14">
+        <FondoFotos />
         <h2
           id="aliadas-titulo"
-          className="text-center text-[clamp(1.6rem,6vw,2.2rem)] leading-tight font-semibold tracking-[-0.025em] text-on-bar lg:text-[clamp(2rem,2.4vw,2.6rem)]"
+          className="text-center text-[clamp(1.6rem,6vw,2.2rem)] leading-tight font-semibold tracking-[-0.025em] text-white [text-shadow:0_1px_3px_rgb(0_0_0/0.35)] lg:text-[clamp(2rem,2.4vw,2.6rem)]"
         >
           Marcas aliadas
         </h2>
@@ -95,6 +116,68 @@ export function MarcasAliadas() {
         </ul>
       </div>
     </section>
+  );
+}
+
+// Fondo del contenedor: las fotos apiladas, la de turno visible y las demás
+// transparentes (la primera se ve desde el primer render, sin esperar a
+// JavaScript). Cada foto se acerca muy despacio mientras está al frente. Con
+// movimiento reducido arranca en pausa y sin acercamiento; el botón pausa o
+// reanuda el relevo.
+function FondoFotos() {
+  const [actual, setActual] = useState(0);
+  const reducido = useSyncExternalStore(suscribirMovimiento, () => window.matchMedia(MOVIMIENTO).matches, () => false);
+  const [eleccion, setEleccion] = useState<boolean | null>(null);
+  const pausado = eleccion ?? reducido;
+
+  useEffect(() => {
+    if (pausado) return;
+    const t = window.setTimeout(() => setActual((i) => (i + 1) % FOTOS.length), INTERVALO);
+    return () => window.clearTimeout(t);
+  }, [actual, pausado]);
+
+  return (
+    <>
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute inset-0 opacity-35">
+          {FOTOS.map((f, i) => (
+            <Image
+              key={f.src}
+              src={f.src}
+              alt=""
+              fill
+              sizes="100vw"
+              priority={i === 0}
+              style={{ objectPosition: f.posicion }}
+              className={`object-cover transition-[opacity,scale] ease-out motion-reduce:transition-none ${
+                i === actual
+                  ? "scale-[1.06] opacity-100 duration-[1200ms,7000ms] motion-reduce:scale-100"
+                  : "scale-100 opacity-0 duration-[1200ms,0ms]"
+              }`}
+            />
+          ))}
+        </div>
+        {/* velo: más denso arriba, donde va el título */}
+        <span className="absolute inset-0 bg-[linear-gradient(180deg,rgb(16_14_13/0.6)_0%,rgb(16_14_13/0.35)_35%,rgb(16_14_13/0.3)_75%,rgb(16_14_13/0.5)_100%)]" />
+      </div>
+      <button
+        type="button"
+        onClick={() => setEleccion(!pausado)}
+        aria-label={pausado ? "Reanudar las fotos de fondo" : "Pausar las fotos de fondo"}
+        className="absolute top-4 right-4 z-10 flex size-9 items-center justify-center rounded-full bg-white/90 text-[#100f0f] transition-colors hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white lg:top-5 lg:right-5"
+      >
+        <svg viewBox="0 0 16 16" className="size-3.5" fill="currentColor" aria-hidden>
+          {pausado ? (
+            <path d="M5 3.2v9.6a.6.6 0 0 0 .9.5l7.6-4.8a.6.6 0 0 0 0-1L5.9 2.7a.6.6 0 0 0-.9.5Z" />
+          ) : (
+            <>
+              <rect x="4" y="3" width="2.6" height="10" rx="1" />
+              <rect x="9.4" y="3" width="2.6" height="10" rx="1" />
+            </>
+          )}
+        </svg>
+      </button>
+    </>
   );
 }
 
