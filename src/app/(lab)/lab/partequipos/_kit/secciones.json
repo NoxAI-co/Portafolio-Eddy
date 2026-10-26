@@ -2,25 +2,6 @@
   "estilos": "scripts/partequipos.css",
   "secciones": [
     {
-      "id": "nueva",
-      "nombre": "Maquinaria pesada nueva",
-      "descripcion": "Carrusel de marcas con foto, logo y presentación, y el compactador Dynapac sobre las montañas con la franja roja.",
-      "uso": "<MaquinariaNueva />",
-      "dependencias": [
-        "next/image",
-        "next/link"
-      ],
-      "archivos": [
-        "maquinaria/MaquinariaNueva.tsx",
-        "marca/marcas.ts",
-        "marca/modelos-case.ts",
-        "marca/modelos-hitachi.ts",
-        "marca/modelos-yanmar.ts",
-        "marca/modelos-dynapac.ts"
-      ],
-      "destino": "#nueva-titulo"
-    },
-    {
       "id": "maquinaria-usada",
       "nombre": "Maquinaria pesada usada",
       "descripcion": "Hero, filtro de 3 categorías y slider de equipos.",
@@ -267,6 +248,29 @@
           "modelos",
           "mascota"
         ]
+      }
+    ]
+  },
+  "nueva": {
+    "secciones": [
+      {
+        "id": "nueva",
+        "nombre": "Maquinaria pesada nueva",
+        "descripcion": "Carrusel de marcas con foto, logo y presentación, y el compactador Dynapac sobre las montañas con la franja roja.",
+        "uso": "<MaquinariaNueva />",
+        "dependencias": [
+          "next/image",
+          "next/link"
+        ],
+        "archivos": [
+          "maquinaria/MaquinariaNueva.tsx",
+          "marca/marcas.ts",
+          "marca/modelos-case.ts",
+          "marca/modelos-hitachi.ts",
+          "marca/modelos-yanmar.ts",
+          "marca/modelos-dynapac.ts"
+        ],
+        "destino": "#nueva-titulo"
       }
     ]
   },

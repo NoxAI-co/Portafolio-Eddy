@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { UsedHero } from "@/components/partequipos/maquinaria/UsedHero";
 import { CatalogoUsados } from "@/components/partequipos/maquinaria/CatalogoUsados";
-import { MaquinariaNueva } from "@/components/partequipos/maquinaria/MaquinariaNueva";
 import { MarcasSlider } from "@/components/partequipos/maquinaria/MarcasSlider";
 import { CatalogoRepuestos } from "@/components/partequipos/maquinaria/CatalogoRepuestos";
 import { BannerCotizar } from "@/components/partequipos/maquinaria/BannerCotizar";
@@ -18,7 +17,6 @@ export default function PartequiposPage() {
   return (
     <>
       <main>
-        <MaquinariaNueva />
         <CatalogoUsados hero={<UsedHero />} />
         <MarcasSlider />
         <CatalogoRepuestos />
