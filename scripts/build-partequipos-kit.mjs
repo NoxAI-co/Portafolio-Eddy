@@ -115,6 +115,13 @@ mkdirSync(salida, { recursive: true });
 for (const s of cfg.secciones) armar(s.id, [s]);
 armar("todo", cfg.secciones);
 
+// páginas sueltas: cada una con su kit en kit/<grupo>/
+for (const grupo of ["aliadas", "excavadoras"]) {
+  const destino = join(salida, grupo);
+  for (const s of cfg[grupo].secciones) armar(s.id, [s], destino);
+  armar("todo", cfg[grupo].secciones, destino, `Partequipos: ${cfg[grupo].secciones[0].nombre}`);
+}
+
 for (const marca of MARCAS) {
   const destino = join(salida, "marcas", marca.slug);
   const secciones = cfg.marca.secciones.map((s) => ({ ...s, uso: s.uso.replace("<slug>", marca.slug) }));

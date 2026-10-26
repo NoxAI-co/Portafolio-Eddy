@@ -63,5 +63,45 @@ export const MODELOS_HITACHI: Record<string, Modelo[]> = {
       ],
       ficha: `${SITIO}/maquinaria-pesada/maquinaria-pesada-nueva/marcas/hitachi/excavadoras-hitachi/excavadora-hitachi-zx490-7g/`,
     },
+    {
+      nombre: "Excavadora Hitachi ZX690LC-7H",
+      imagen: "/partequipos/marcas/hitachi/modelos/excavadora-hitachi-zx690lc-7h.webp",
+      datos: [
+        { icono: "peso", etiqueta: "Peso operativo", valor: "69 t" },
+        { icono: "potencia", etiqueta: "Potencia neta", valor: "465 hp" },
+        { icono: "motor", etiqueta: "Motor", valor: "Isuzu 6WG1" },
+      ],
+      ficha: `${SITIO}/maquinaria-pesada/maquinaria-pesada-nueva/marcas/hitachi/excavadoras-hitachi/excavadora-hitachi-zx690lc-7h/`,
+    },
+    {
+      nombre: "Excavadora Hitachi ZX75US-5N",
+      imagen: "/partequipos/marcas/hitachi/modelos/excavadora-hitachi-zx75us-5n.jpg",
+      datos: [
+        { icono: "peso", etiqueta: "Peso operativo", valor: "8,1 t" },
+        { icono: "potencia", etiqueta: "Potencia neta", valor: "53.7 hp" },
+        { icono: "motor", etiqueta: "Motor", valor: "YANMAR 4TNV98C" },
+      ],
+      ficha: `${SITIO}/maquinaria-pesada/maquinaria-pesada-nueva/marcas/hitachi/excavadoras-hitachi/excavadora-hitachi-zx75us-5n/`,
+    },
+    {
+      nombre: "Excavadora Hitachi ZX75US-7",
+      imagen: "/partequipos/marcas/hitachi/modelos/excavadora-hitachi-zx75us-7.jpg",
+      datos: [
+        { icono: "peso", etiqueta: "Peso operativo", valor: "8,1 t" },
+        { icono: "potencia", etiqueta: "Potencia neta", valor: "57,6 hp" },
+        { icono: "motor", etiqueta: "Motor", valor: "YANMAR 4TNV98CT" },
+      ],
+      ficha: `${SITIO}/maquinaria-pesada/maquinaria-pesada-nueva/marcas/hitachi/excavadoras-hitachi/excavadora-hitachi-zx75us-7/`,
+    },
+    {
+      nombre: "Excavadora Hitachi ZX890LC-7H",
+      imagen: "/partequipos/marcas/hitachi/modelos/excavadora-hitachi-zx890lc-7h.jpg",
+      datos: [
+        { icono: "peso", etiqueta: "Peso operativo", valor: "84,6 t" },
+        { icono: "potencia", etiqueta: "Potencia neta", valor: "512 hp" },
+        { icono: "motor", etiqueta: "Motor", valor: "Isuzu 6WG1" },
+      ],
+      ficha: `${SITIO}/maquinaria-pesada/maquinaria-pesada-nueva/marcas/hitachi/excavadoras-hitachi/excavadora-hitachi-zx890lc-7h/`,
+    },
   ],
 };

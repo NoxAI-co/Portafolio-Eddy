@@ -2,6 +2,25 @@
   "estilos": "scripts/partequipos.css",
   "secciones": [
     {
+      "id": "nueva",
+      "nombre": "Maquinaria pesada nueva",
+      "descripcion": "Carrusel de marcas con foto, logo y presentación, y el compactador Dynapac sobre las montañas con la franja roja.",
+      "uso": "<MaquinariaNueva />",
+      "dependencias": [
+        "next/image",
+        "next/link"
+      ],
+      "archivos": [
+        "maquinaria/MaquinariaNueva.tsx",
+        "marca/marcas.ts",
+        "marca/modelos-case.ts",
+        "marca/modelos-hitachi.ts",
+        "marca/modelos-yanmar.ts",
+        "marca/modelos-dynapac.ts"
+      ],
+      "destino": "#nueva-titulo"
+    },
+    {
       "id": "maquinaria-usada",
       "nombre": "Maquinaria pesada usada",
       "descripcion": "Hero, filtro de 3 categorías y slider de equipos.",
@@ -248,6 +267,49 @@
           "modelos",
           "mascota"
         ]
+      }
+    ]
+  },
+  "aliadas": {
+    "secciones": [
+      {
+        "id": "aliadas",
+        "nombre": "Marcas aliadas",
+        "descripcion": "Cinco tarjetas con el logo de cada marca del grupo, su foto teñida con su color y enlace a su sitio.",
+        "uso": "<MarcasAliadas />",
+        "dependencias": [
+          "next/image"
+        ],
+        "archivos": [
+          "maquinaria/MarcasAliadas.tsx"
+        ],
+        "destino": "#aliadas-titulo"
+      }
+    ]
+  },
+  "excavadoras": {
+    "secciones": [
+      {
+        "id": "excavadoras",
+        "nombre": "Excavadoras nuevas",
+        "descripcion": "Página de categoría: hero con foto y, por marca, un banner con su logo y el conteo de modelos, seguido de sus tarjetas.",
+        "uso": "<ExcavadorasNuevas />",
+        "dependencias": [
+          "next/image",
+          "next/link"
+        ],
+        "archivos": [
+          "categoria/ExcavadorasNuevas.tsx",
+          "marca/ModelosMarca.tsx",
+          "marca/transicion.tsx",
+          "maquinaria/UsedHero.tsx",
+          "marca/marcas.ts",
+          "marca/modelos-case.ts",
+          "marca/modelos-hitachi.ts",
+          "marca/modelos-yanmar.ts",
+          "marca/modelos-dynapac.ts"
+        ],
+        "destino": "#excavadoras-titulo"
       }
     ]
   }
