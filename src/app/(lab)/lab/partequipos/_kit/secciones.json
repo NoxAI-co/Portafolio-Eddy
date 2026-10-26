@@ -270,7 +270,19 @@
           "marca/modelos-yanmar.ts",
           "marca/modelos-dynapac.ts"
         ],
-        "destino": "#nueva-titulo"
+        "destino": "#nueva-titulo",
+        "assets": [
+          "/partequipos/texturas/fondo-obra.jpg",
+          "/partequipos/maq-dynapac-banner.png",
+          "/partequipos/marcas/yanmar/fondo.jpg",
+          "/partequipos/marcas/yanmar/logo.png",
+          "/partequipos/marcas/hitachi/fondo.jpg",
+          "/partequipos/marcas/hitachi/logo.png",
+          "/partequipos/marcas/case/fondo.jpg",
+          "/partequipos/marcas/case/logo.png",
+          "/partequipos/marcas/dynapac/fondo.jpg",
+          "/partequipos/marcas/dynapac/logo.png"
+        ]
       }
     ]
   },

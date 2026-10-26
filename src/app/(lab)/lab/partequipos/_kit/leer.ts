@@ -32,6 +32,9 @@ type Config = {
   destino?: string;
   archivos: string[];
   imagenes?: string[];
+  /** Imágenes que muestra la sección, cuando sus archivos de datos mencionan
+   * más de las que usa (marcas.ts nombra mascotas, modelos…). */
+  assets?: string[];
 };
 
 const tamano = (ruta: string) => {
@@ -75,7 +78,9 @@ function armar(s: Config, carpeta: string, imagenes?: (s: Config) => string[]): 
   }));
   const rutas = imagenes
     ? imagenes(s)
-    : Array.from(new Set(archivos.flatMap((a) => a.codigo.match(ASSET) ?? []))).sort();
+    : s.assets
+      ? [...s.assets].sort()
+      : Array.from(new Set(archivos.flatMap((a) => a.codigo.match(ASSET) ?? []))).sort();
   return {
     id: s.id,
     nombre: s.nombre,

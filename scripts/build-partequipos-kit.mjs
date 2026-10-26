@@ -118,8 +118,11 @@ armar("todo", cfg.secciones);
 // páginas sueltas: cada una con su kit en kit/<grupo>/
 for (const grupo of ["nueva", "aliadas", "excavadoras"]) {
   const destino = join(salida, grupo);
-  for (const s of cfg[grupo].secciones) armar(s.id, [s], destino);
-  armar("todo", cfg[grupo].secciones, destino, `Partequipos: ${cfg[grupo].secciones[0].nombre}`);
+  // si la sección lista sus imágenes (assets), van solo esas; si no, las que
+  // nombran sus archivos
+  const imagenes = (s) => s.assets ?? assetsDe(s.archivos);
+  for (const s of cfg[grupo].secciones) armar(s.id, [s], destino, undefined, imagenes);
+  armar("todo", cfg[grupo].secciones, destino, `Partequipos: ${cfg[grupo].secciones[0].nombre}`, imagenes);
 }
 
 for (const marca of MARCAS) {
