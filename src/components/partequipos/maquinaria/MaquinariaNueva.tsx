@@ -7,7 +7,7 @@ import { getMarca, type Marca } from "../marca/marcas";
 
 // Maquinaria pesada nueva: rótulo y título, una tarjeta por marca (foto de
 // la marca, su logo en una placa blanca y su presentación) y la retroexcavadora
-// Case 580N, todo sobre la foto de obra de fondo. Tarjetas en rejilla de 2 × 2
+// Case Utility Plus, todo sobre la foto de obra de fondo. Tarjetas en rejilla de 2 × 2
 // desde 1024 px y en carrusel más angosto. Cada
 // tarjeta abre la landing de la marca. Los textos, fotos y logos salen de los
 // datos de cada marca.
@@ -32,12 +32,11 @@ export function MaquinariaNueva() {
     <section
       id="nueva"
       aria-labelledby="nueva-titulo"
-      className="relative isolate overflow-hidden bg-bar px-5 pt-14 pb-14 sm:px-10 lg:px-[2.6%] lg:pt-20 min-[90rem]:min-h-[52rem] min-[90rem]:pt-24"
+      className="relative isolate overflow-hidden bg-bar px-5 pt-14 pb-14 sm:px-10 lg:px-[2.6%] lg:pt-20 2xl:pb-20 min-[90rem]:pt-24"
     >
       <Escena />
-      <MaquinaFrente />
 
-      <div className="relative z-10 lg:max-w-[45%]">
+      <div className="relative z-10 lg:max-w-[52%] 2xl:max-w-[67%]">
         {/* por debajo de 1024 px la retroexcavadora va en el encabezado: a la
             derecha del título desde md, debajo de él en teléfono */}
         <div className="grid items-end gap-x-8 md:grid-cols-[minmax(0,1fr)_minmax(0,48%)] lg:block">
@@ -54,7 +53,12 @@ export function MaquinariaNueva() {
           <EscenaCompacta />
         </div>
 
-        <Carrusel />
+        {/* desde lg la máquina va anclada a las tarjetas (MaquinaEmpuja). Las
+            4 en fila solo desde 2xl: más angosto quedarían muy altas */}
+        <div className="relative">
+          <Carrusel />
+          <MaquinaEmpuja />
+        </div>
 
         <div className="mt-8 flex justify-center">
           <a
@@ -72,27 +76,24 @@ export function MaquinariaNueva() {
 
 // Retroexcavadora Case por debajo de 1024 px, en el encabezado: a la derecha
 // del título desde md, debajo de él en teléfono. La caja recorta el aire de
-// arriba del render (la máquina va de y≈159 a 1253 de 1344, sombra incluida).
+// arriba del render (la máquina va de y≈134 a 864 de 1024, sombra incluida).
 // Detrás lleva la foto de la obra, que sale hasta los bordes de la pantalla y
 // se funde en el blanco por arriba y por abajo.
 function EscenaCompacta() {
   return (
-    <div aria-hidden className="pointer-events-none relative mt-6 aspect-[1920/1113] w-full md:mt-0 lg:hidden">
+    <div aria-hidden className="pointer-events-none relative mt-6 aspect-[1920/992] w-full md:mt-0 lg:hidden">
       <div className="absolute -inset-x-5 top-[-18%] bottom-[-16%] [mask-image:linear-gradient(180deg,transparent_0%,#000_22%,#000_80%,transparent_100%)] sm:-inset-x-10 md:left-[-12%]">
         <FondoObra sizes="(max-width: 768px) 180vw, 90vw" />
       </div>
-      <div className="absolute top-[-12.6%] left-0 aspect-[1920/1344] w-full">
-        <SombrasCase />
-        <Image
-          src="/partequipos/maq-case-580n.png"
-          alt=""
-          width={1920}
-          height={1344}
-          quality={90}
-          sizes="(max-width: 768px) 100vw, 48vw"
-          className="relative h-auto w-full max-w-none"
-        />
-      </div>
+      <Image
+        src="/partequipos/maq-case-utility-plus.webp"
+        alt=""
+        width={1920}
+        height={1344}
+        quality={90}
+        sizes="(max-width: 768px) 100vw, 48vw"
+        className="absolute top-[-17.7%] left-0 h-auto w-full max-w-none"
+      />
     </div>
   );
 }
@@ -131,28 +132,28 @@ function Escena() {
   );
 }
 
-// La retroexcavadora Case 580N desde 1024 px, a la derecha sobre el piso de
-// la foto. La máquina visible ocupa ~55 % del ancho de la sección (el render
-// trae aire: va de x≈12 % a 95 % de su caja, así que la caja mide 66 %), de
-// ~45 % a ~99 %, con ruedas y cucharones completos. Por delante (z-20) de la
-// rejilla de 2 × 2: el brazo trasero roza el borde de la columna derecha y da
-// profundidad sin tapar el texto. No recibe clics, así las tarjetas que tapa se siguen
-// pudiendo abrir.
-function MaquinaFrente() {
+// La retroexcavadora Case Utility Plus desde 1024 px, de perfil y anclada al
+// borde derecho de las tarjetas (rejilla de 2 × 2 hasta 1535 px, fila de 4
+// desde 2xl), con el cucharón pegado a la última, como si las empujara. Se
+// mide por la ALTURA de las tarjetas, no por el ancho de la pantalla: así
+// nunca queda pequeña a su lado. La parte que no cabe la corta la sección.
+// Medidas sobre el render (1920 × 1344): la punta del cucharón está en
+// x≈31 (1,6 %), la máquina va de y≈176 a 1134 (71 % del alto) y las ruedas
+// apoyan al 84,4 %: la caja se baja 15,6 % para dejarlas a ras del pie.
+function MaquinaEmpuja() {
   return (
     <div
       aria-hidden
-      className="pointer-events-none absolute right-[-3%] bottom-[5%] z-20 hidden w-[66%] lg:block"
+      className="pointer-events-none absolute bottom-0 left-[98.3%] z-20 hidden aspect-[1920/1344] translate-y-[15.6%] lg:block lg:h-[112%] 2xl:h-[150%]"
     >
-      <SombrasCase />
       <Image
-        src="/partequipos/maq-case-580n.png"
+        src="/partequipos/maq-case-utility-plus.webp"
         alt=""
         width={1920}
         height={1344}
         quality={90}
-        sizes="66vw"
-        className="relative h-auto w-full"
+        sizes="(max-width: 1280px) 80vw, 60vw"
+        className="h-full w-auto max-w-none"
       />
     </div>
   );
@@ -222,7 +223,7 @@ function Carrusel() {
         }}
         // el margen negativo con relleno deja aire para el contorno de foco,
         // que el overflow del carrusel recortaría
-        className="no-scrollbar -m-1 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-1 p-1 lg:grid lg:grid-cols-2 lg:overflow-visible"
+        className="no-scrollbar -m-1 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-px-1 p-1 lg:grid lg:grid-cols-2 lg:overflow-visible 2xl:grid-cols-4"
       >
         {MARCAS.map((m) => (
           <li
@@ -285,7 +286,7 @@ function TarjetaMarca({ marca: m }: { marca: Marca }) {
     <Link
       href={`/lab/partequipos/${m.slug}`}
       aria-label={`${m.nombre}: ver la marca`}
-      className="group relative isolate flex h-full min-h-[25rem] flex-col justify-start overflow-hidden rounded-[18px] bg-[#1f1d1b] p-4 pt-[52%] lg:min-h-0 focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-brand lg:p-6 lg:pt-[28%] min-[90rem]:p-7 min-[90rem]:pt-[26%]"
+      className="group relative isolate flex h-full min-h-[25rem] flex-col justify-start overflow-hidden rounded-[18px] bg-[#1f1d1b] p-4 pt-[52%] lg:min-h-0 focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-brand lg:p-6 lg:pt-[28%] 2xl:p-[6%] 2xl:pt-[42%]"
     >
       <Image
         src={m.fondo}
@@ -298,7 +299,7 @@ function TarjetaMarca({ marca: m }: { marca: Marca }) {
         aria-hidden
         className="absolute inset-0 -z-10 bg-[linear-gradient(to_top,rgb(16_14_13/0.94)_0%,rgb(16_14_13/0.88)_45%,rgb(16_14_13/0.55)_58%,rgb(16_14_13/0.1)_72%,transparent_82%)]"
       />
-      <span className="flex aspect-square w-[40%] max-w-[110px] min-w-[84px] items-center justify-center rounded-[14px] bg-white p-2.5 lg:w-[80px] lg:min-w-0 lg:rounded-[12px] lg:p-2 min-[90rem]:w-[92px] min-[90rem]:rounded-[14px] min-[90rem]:p-2.5 shadow-[0_2px_6px_-2px_rgb(0_0_0/0.35)]">
+      <span className="flex aspect-square w-[40%] max-w-[110px] min-w-[84px] items-center justify-center rounded-[14px] bg-white p-2.5 lg:w-[80px] lg:min-w-0 lg:rounded-[12px] lg:p-2 2xl:w-[40%] 2xl:min-w-[72px] 2xl:rounded-[14px] 2xl:p-2.5 shadow-[0_2px_6px_-2px_rgb(0_0_0/0.35)]">
         <Image
           src={m.logo.src}
           alt=""
@@ -308,7 +309,7 @@ function TarjetaMarca({ marca: m }: { marca: Marca }) {
           className="h-auto max-h-full w-full object-contain"
         />
       </span>
-      <span className="mt-4 text-[15px] leading-snug text-white/90 lg:mt-3 lg:text-[14.5px] min-[90rem]:mt-4 min-[90rem]:text-[15px]">{m.presentacion}</span>
+      <span className="mt-4 text-[15px] leading-snug text-white/90 lg:mt-3 lg:text-[14.5px] 2xl:mt-4 2xl:text-[14.5px]">{m.presentacion}</span>
     </Link>
   );
 }
@@ -327,32 +328,6 @@ function IconoEngranaje() {
     >
       <path d="M10.3 4.3c.4-1.7 3-1.7 3.4 0a1.7 1.7 0 0 0 2.6 1.1c1.5-.9 3.3.8 2.4 2.4a1.7 1.7 0 0 0 1 2.5c1.8.4 1.8 3 0 3.4a1.7 1.7 0 0 0-1 2.6c.9 1.5-.9 3.3-2.4 2.4a1.7 1.7 0 0 0-2.6 1c-.4 1.8-3 1.8-3.4 0a1.7 1.7 0 0 0-2.5-1c-1.6.9-3.3-.9-2.4-2.4a1.7 1.7 0 0 0-1.1-2.6c-1.7-.4-1.7-3 0-3.4a1.7 1.7 0 0 0 1.1-2.5c-.9-1.6.8-3.3 2.4-2.4a1.7 1.7 0 0 0 2.5-1.1Z" />
       <circle cx="12" cy="12" r="3" />
-    </svg>
-  );
-}
-
-// Sombras de contacto medidas sobre el render: el apoyo del brazo trasero, las
-// dos llantas y el borde del cucharón.
-function SombrasCase() {
-  return (
-    <svg
-      aria-hidden
-      viewBox="0 0 1920 1344"
-      className="pointer-events-none absolute inset-0 h-full w-full overflow-visible"
-    >
-      <defs>
-        <filter id="nueva-sombra-amplia" x="-30%" y="-200%" width="160%" height="500%">
-          <feGaussianBlur stdDeviation="40" />
-        </filter>
-        <filter id="nueva-sombra" x="-30%" y="-200%" width="160%" height="500%">
-          <feGaussianBlur stdDeviation="12" />
-        </filter>
-      </defs>
-      <ellipse cx="1050" cy="1110" rx="820" ry="55" fill="#14110f" opacity="0.14" filter="url(#nueva-sombra-amplia)" />
-      <ellipse cx="345" cy="1032" rx="90" ry="12" fill="#14110f" opacity="0.4" filter="url(#nueva-sombra)" />
-      <ellipse cx="650" cy="1044" rx="115" ry="14" fill="#14110f" opacity="0.45" filter="url(#nueva-sombra)" />
-      <ellipse cx="955" cy="1095" rx="85" ry="13" fill="#14110f" opacity="0.45" filter="url(#nueva-sombra)" />
-      <polygon points="1170,1112 1800,1100 1800,1116 1170,1134" fill="#14110f" opacity="0.32" filter="url(#nueva-sombra)" />
     </svg>
   );
 }
