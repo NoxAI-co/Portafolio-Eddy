@@ -97,7 +97,7 @@ function armar(s: Config, carpeta: string, imagenes?: (s: Config) => string[]): 
 export const leerSecciones = (): SeccionKit[] => cfg.secciones.map((s) => armar(s, "/partequipos/kit"));
 
 // Páginas sueltas (como /aliadas): su propio kit en kit/<grupo>/.
-type Grupo = "nueva" | "aliadas" | "excavadoras";
+type Grupo = "aliadas" | "excavadoras";
 export const carpetaKitGrupo = (grupo: Grupo) => `/partequipos/kit/${grupo}`;
 export const leerSeccionesGrupo = (grupo: Grupo): SeccionKit[] =>
   cfg[grupo].secciones.map((s) => armar(s, carpetaKitGrupo(grupo)));

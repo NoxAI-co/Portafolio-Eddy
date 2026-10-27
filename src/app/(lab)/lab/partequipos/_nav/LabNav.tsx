@@ -20,7 +20,7 @@ const ITEMS: Item[] = [
   { href: `${BASE}/hitachi`, etiqueta: "Hitachi", listo: true },
   { href: `${BASE}/yanmar`, etiqueta: "Yanmar", listo: true },
   { href: `${BASE}/dynapac`, etiqueta: "Dynapac", listo: true },
-  { href: `${BASE}/nueva`, etiqueta: "Nueva", listo: false },
+  { ancla: "nueva", etiqueta: "Nueva", listo: false },
   { href: `${BASE}/aliadas`, etiqueta: "Aliadas", listo: false },
   { href: `${BASE}/excavadoras`, etiqueta: "Excavadoras", listo: false },
 ];

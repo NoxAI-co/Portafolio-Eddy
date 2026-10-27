@@ -105,7 +105,7 @@ function EscenaCompacta() {
 function FondoObra({ sizes }: { sizes: string }) {
   return (
     <Image
-      src="/partequipos/texturas/fondo-nueva-montanas.jpg"
+      src="/partequipos/texturas/fondo-nueva-2.jpg"
       alt=""
       fill
       quality={90}
@@ -124,7 +124,11 @@ function Escena() {
       aria-hidden
       className="pointer-events-none absolute inset-0 -z-10 hidden [mask-image:linear-gradient(180deg,#000_0%,#000_88%,transparent_100%)] lg:block"
     >
-      <FondoObra sizes="100vw" />
+      {/* la foto se alarga hacia abajo y la sección corta ese 14 %: las piedras
+          del primer plano quedan fuera y las ruedas pisan tierra plana */}
+      <div className="absolute inset-x-0 top-0 bottom-[-14%]">
+        <FondoObra sizes="100vw" />
+      </div>
       {/* refuerza el blanco bajo título y tarjetas, que la foto deja a medias
           cuando la sección es más alta que ancha */}
       <span className="absolute inset-0 bg-[linear-gradient(90deg,#fff_0%,rgb(255_255_255/0.95)_28%,rgb(255_255_255/0.6)_40%,rgb(255_255_255/0)_50%)]" />

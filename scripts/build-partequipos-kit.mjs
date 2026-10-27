@@ -116,7 +116,7 @@ for (const s of cfg.secciones) armar(s.id, [s]);
 armar("todo", cfg.secciones);
 
 // páginas sueltas: cada una con su kit en kit/<grupo>/
-for (const grupo of ["nueva", "aliadas", "excavadoras"]) {
+for (const grupo of ["aliadas", "excavadoras"]) {
   const destino = join(salida, grupo);
   // si la sección lista sus imágenes (assets), van solo esas; si no, las que
   // nombran sus archivos
