@@ -82,7 +82,7 @@ export function MaquinariaNueva() {
 function EscenaCompacta() {
   return (
     <div aria-hidden className="pointer-events-none relative mt-6 aspect-[1920/992] w-full md:mt-0 lg:hidden">
-      <div className="absolute -inset-x-5 top-[-18%] bottom-[-16%] [mask-image:linear-gradient(180deg,transparent_0%,#000_22%,#000_80%,transparent_100%)] sm:-inset-x-10 md:left-[-12%]">
+      <div className="absolute -inset-x-5 top-[-18%] bottom-[-16%] [mask-image:linear-gradient(180deg,transparent_0%,rgb(0_0_0/0.15)_12%,rgb(0_0_0/0.45)_24%,rgb(0_0_0/0.8)_34%,#000_42%,#000_78%,rgb(0_0_0/0.5)_90%,transparent_100%)] sm:-inset-x-10 md:left-[-12%] md:[mask-image:linear-gradient(180deg,transparent_0%,rgb(0_0_0/0.15)_12%,rgb(0_0_0/0.45)_24%,rgb(0_0_0/0.8)_34%,#000_42%,#000_78%,rgb(0_0_0/0.5)_90%,transparent_100%),linear-gradient(90deg,transparent_0%,rgb(0_0_0/0.3)_10%,rgb(0_0_0/0.75)_22%,#000_32%)] md:[mask-composite:intersect]">
         <FondoObra sizes="(max-width: 768px) 180vw, 90vw" />
       </div>
       <Image
@@ -98,14 +98,14 @@ function EscenaCompacta() {
   );
 }
 
-// La foto de la obra con el cielo y las nubes en blanco, las montañas en gris
-// y el piso y las franjas rojas a color (generada desde la foto original). Ya trae el
-// fundido en blanco hacia la izquierda y las dos franjas rojas a la derecha,
-// así que va tal cual, anclada a la derecha y abajo.
+// La foto de la obra con el cielo y las nubes en blanco, las montañas y la
+// parte alta de los árboles en gris y el piso a color (generada desde la foto
+// original). Ya trae el fundido en blanco hacia la izquierda, así que va tal
+// cual, anclada a la derecha y abajo.
 function FondoObra({ sizes }: { sizes: string }) {
   return (
     <Image
-      src="/partequipos/texturas/fondo-nueva-2.jpg"
+      src="/partequipos/texturas/fondo-nueva-bn.jpg"
       alt=""
       fill
       quality={90}
@@ -140,7 +140,9 @@ function Escena() {
 // borde derecho de las tarjetas (rejilla de 2 × 2 hasta 1535 px, fila de 4
 // desde 2xl), con el cucharón pegado a la última, como si las empujara. Se
 // mide por la ALTURA de las tarjetas, no por el ancho de la pantalla: así
-// nunca queda pequeña a su lado. La parte que no cabe la corta la sección.
+// nunca queda pequeña a su lado. Con tope por el ANCHO de pantalla (45vw en
+// 2 × 2, 32vw en fila de 4) para que la rueda trasera, al ~72 % del ancho del
+// render, siempre quepa: solo el brazo de atrás puede salirse por la derecha.
 // Medidas sobre el render (1920 × 1344): la punta del cucharón está en
 // x≈31 (1,6 %), la máquina va de y≈176 a 1134 (71 % del alto) y las ruedas
 // apoyan al 84,4 %: la caja se baja 15,6 % para dejarlas a ras del pie.
@@ -148,7 +150,7 @@ function MaquinaEmpuja() {
   return (
     <div
       aria-hidden
-      className="pointer-events-none absolute bottom-0 left-[98.3%] z-20 hidden aspect-[1920/1344] translate-y-[15.6%] lg:block lg:h-[112%] 2xl:h-[150%]"
+      className="pointer-events-none absolute bottom-0 left-[98.3%] z-20 hidden aspect-[1920/1344] translate-y-[15.6%] lg:block lg:h-[min(112%,45vw)] 2xl:h-[min(150%,32vw)]"
     >
       <Image
         src="/partequipos/maq-case-utility-plus.webp"
