@@ -14,8 +14,8 @@ type Item = { etiqueta: string; listo: boolean } & ({ ancla: string } | { href: 
 
 const ITEMS: Item[] = [
   { ancla: "maquinaria-usada", etiqueta: "Usada", listo: true },
-  { ancla: "marcas", etiqueta: "Marcas", listo: true },
-  { ancla: "repuestos", etiqueta: "Repuestos", listo: true },
+  { ancla: "marcas", etiqueta: "Marcas", listo: false },
+  { ancla: "repuestos", etiqueta: "Repuestos", listo: false },
   { href: `${BASE}/case`, etiqueta: "Case", listo: true },
   { href: `${BASE}/hitachi`, etiqueta: "Hitachi", listo: true },
   { href: `${BASE}/yanmar`, etiqueta: "Yanmar", listo: true },

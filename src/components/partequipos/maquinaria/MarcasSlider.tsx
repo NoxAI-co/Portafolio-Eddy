@@ -33,32 +33,21 @@ export function MarcasSlider() {
           </h2>
         </div>
 
-        {/* Máquina, medida sobre el render (1920×1344): la retroexcavadora
-            ocupa x≈12–95 % e y≈21–86 %. Al 55 % del ancho del panel y subida
-            un 12 % de su alto, va del 52 % al 97 % del ancho y del 12 % al
-            87 % del alto, con las llantas sobre el piso. Va por delante de la
-            banda de logos, como en la referencia. */}
-        <div className="relative z-20 mx-auto mt-4 aspect-[1920/1344] w-[min(100%,40rem)] lg:absolute lg:top-[-12%] lg:right-0 lg:mt-0 lg:w-[55%]">
-          {/* reflejo en el piso: capa aparte (el render queda intacto), cada
-              columna reflejada sobre su propio punto de apoyo (ver
-              scripts/generar-reflejo.cjs). Mide 1920×1604: 260 px más alto
-              que el render, así que su caja es más alta y empieza arriba. */}
-          <div className="pointer-events-none absolute inset-x-0 top-0 aspect-[1920/1604]">
-            <Image
-              src="/partequipos/maq-case-580n-reflejo.webp"
-              alt=""
-              fill
-              sizes="(min-width: 1024px) 55vw, 90vw"
-              className="object-contain"
-            />
-          </div>
-          <Sombras />
+        {/* Máquina, medida sobre el render (1920×1344): el compactador
+            ocupa x≈10–91 % e y≈12–93 % (sombra incluida), así que su centro
+            visible cae al 52,5 % de la caja. Desde lg va centrada en vertical
+            en el panel (top 50 % y subida 49 %, un poco menos que 52,5 %): la
+            cabina alta hace que el centro geométrico se vea arriba, así que
+            baja unos píxeles para verse centrada en perspectiva. Va por
+            delante de la banda de logos, como en la referencia. */}
+        <div className="relative z-20 mx-auto mt-4 aspect-[1920/1344] w-[min(85%,34rem)] lg:absolute lg:top-1/2 lg:right-[3%] lg:mt-0 lg:w-[46%] lg:-translate-y-[49%]">
+          {/* el render de Dynapac trae su propia sombra de contacto */}
           <Image
-            src="/partequipos/maq-case-580n.png"
-            alt="Retroexcavadora Case 580N"
+            src="/partequipos/maq-dynapac-banner.png"
+            alt="Compactador Dynapac CA3500D"
             fill
             quality={90}
-            sizes="(min-width: 1024px) 55vw, 90vw"
+            sizes="(min-width: 1024px) 46vw, 85vw"
             className="object-contain"
           />
         </div>
@@ -152,32 +141,6 @@ function Fondo() {
           quedaba a media opacidad en la zona de fundido y dejaba ver el pie
           de las losas como un bloque claro */}
       <rect x="-1000" y="225" width="3000" height="120" fill="url(#marcas-piso)" />
-    </svg>
-  );
-}
-
-// Sombras de contacto medidas sobre el render: el apoyo del brazo trasero, las
-// dos llantas y el borde del cucharón.
-function Sombras() {
-  return (
-    <svg
-      aria-hidden
-      viewBox="0 0 1920 1344"
-      className="pointer-events-none absolute inset-0 h-full w-full overflow-visible"
-    >
-      <defs>
-        <filter id="marcas-sombra-amplia" x="-30%" y="-200%" width="160%" height="500%">
-          <feGaussianBlur stdDeviation="40" />
-        </filter>
-        <filter id="marcas-sombra" x="-30%" y="-200%" width="160%" height="500%">
-          <feGaussianBlur stdDeviation="12" />
-        </filter>
-      </defs>
-      <ellipse cx="1050" cy="1110" rx="820" ry="55" fill="#14110f" opacity="0.14" filter="url(#marcas-sombra-amplia)" />
-      <ellipse cx="345" cy="1032" rx="90" ry="12" fill="#14110f" opacity="0.4" filter="url(#marcas-sombra)" />
-      <ellipse cx="650" cy="1044" rx="115" ry="14" fill="#14110f" opacity="0.45" filter="url(#marcas-sombra)" />
-      <ellipse cx="955" cy="1095" rx="85" ry="13" fill="#14110f" opacity="0.45" filter="url(#marcas-sombra)" />
-      <polygon points="1170,1112 1800,1100 1800,1116 1170,1134" fill="#14110f" opacity="0.32" filter="url(#marcas-sombra)" />
     </svg>
   );
 }
