@@ -111,16 +111,17 @@ const armar = (nombre, secciones, destino = salida, titulo, imagenes) => {
   console.log("ok", zip.replace(raiz + "/", ""));
 };
 
+// si la sección lista sus imágenes (assets), van solo esas; si no, las que
+// nombran sus archivos (los datos de marca nombran las de todas las marcas)
+const imagenes = (s) => s.assets ?? assetsDe(s.archivos);
+
 mkdirSync(salida, { recursive: true });
-for (const s of cfg.secciones) armar(s.id, [s]);
-armar("todo", cfg.secciones);
+for (const s of cfg.secciones) armar(s.id, [s], salida, undefined, imagenes);
+armar("todo", cfg.secciones, salida, undefined, imagenes);
 
 // páginas sueltas: cada una con su kit en kit/<grupo>/
 for (const grupo of ["aliadas", "excavadoras"]) {
   const destino = join(salida, grupo);
-  // si la sección lista sus imágenes (assets), van solo esas; si no, las que
-  // nombran sus archivos
-  const imagenes = (s) => s.assets ?? assetsDe(s.archivos);
   for (const s of cfg[grupo].secciones) armar(s.id, [s], destino, undefined, imagenes);
   armar("todo", cfg[grupo].secciones, destino, `Partequipos: ${cfg[grupo].secciones[0].nombre}`, imagenes);
 }

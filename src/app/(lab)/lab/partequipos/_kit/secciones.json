@@ -4,7 +4,7 @@
     {
       "id": "nueva",
       "nombre": "Maquinaria pesada nueva",
-      "descripcion": "Carrusel de marcas con foto, logo y presentación, y el compactador Dynapac sobre las montañas con la franja roja.",
+      "descripcion": "Tarjetas de marca con foto, logo y presentación, y la retroexcavadora Case Utility Plus sobre la foto de obra.",
       "uso": "<MaquinariaNueva />",
       "dependencias": [
         "next/image",
@@ -20,8 +20,8 @@
       ],
       "destino": "#nueva-titulo",
       "assets": [
-        "/partequipos/texturas/fondo-obra.jpg",
-        "/partequipos/maq-dynapac-banner.png",
+        "/partequipos/texturas/fondo-nueva-bn.jpg",
+        "/partequipos/maq-case-utility-plus.webp",
         "/partequipos/marcas/yanmar/fondo.jpg",
         "/partequipos/marcas/yanmar/logo.png",
         "/partequipos/marcas/hitachi/fondo.jpg",
