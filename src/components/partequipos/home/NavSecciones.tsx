@@ -15,7 +15,7 @@ const SECCIONES = [
   { etiqueta: "Maquinaria pesada usada", ancla: "maquinaria-usada", imagen: "usada" },
   { etiqueta: "Marcas", ancla: "marcas", imagen: "marcas" },
   { etiqueta: "Repuestos para maquinaria pesada", ancla: "repuestos", imagen: "repuestos" },
-  { etiqueta: "Marcas de repuestos", ancla: "marcas-repuestos", imagen: "marcas-repuestos" },
+  { etiqueta: "Marcas de repuestos", ancla: "marcas-repuestos", imagen: "marcas-repuestos", alta: true },
 ];
 
 export function NavSecciones() {
@@ -43,7 +43,7 @@ export function NavSecciones() {
         {SECCIONES.map((s, i) => (
           <li
             key={s.ancla}
-            className="relative min-w-[9.75rem] flex-1 shrink-0 snap-start sm:min-w-[10rem] lg:min-w-0"
+            className="relative min-w-[11rem] flex-1 shrink-0 snap-start sm:min-w-[11.5rem] lg:min-w-0"
           >
             {/* separador: una raya corta y redonda entre botones; se apaga
                 al lado del que está en rojo */}
@@ -61,7 +61,7 @@ export function NavSecciones() {
               onFocus={() => setActivo(i)}
               onBlur={() => setActivo(0)}
               onClick={(e) => irA(e, s.ancla)}
-              className="group relative flex flex-col items-center gap-2 rounded-[1.25rem] px-3 pt-3 pb-3.5 focus-visible:outline-none sm:pt-3.5 sm:pb-4"
+              className="group relative flex flex-col items-center gap-2 rounded-[1.25rem] px-3 pt-3 lg:px-2 xl:px-3 pb-3.5 focus-visible:outline-none sm:pt-3.5 sm:pb-4"
             >
               {i === activo && (
                 <motion.span
@@ -71,20 +71,25 @@ export function NavSecciones() {
                   className="absolute inset-0 -z-0 rounded-[1.25rem] bg-brand group-focus-visible:outline-3 group-focus-visible:outline-offset-2 group-focus-visible:outline-on-bar"
                 />
               )}
+              {/* la caja de la imagen tiene el mismo alto en todos; la
+                  Yanmar, alta y angosta, sobresale hacia arriba para no verse
+                  chica, sin mover su texto */}
               <span className="relative block h-12 w-full sm:h-14 lg:h-[3.75rem]">
-                <Image
-                  src={`/partequipos/nav/${s.imagen}.webp`}
-                  alt=""
-                  fill
-                  sizes="160px"
-                  quality={90}
-                  className="object-contain transition-transform duration-300 ease-[cubic-bezier(0.33,1,0.68,1)] group-hover:translate-x-1 motion-reduce:transition-none"
-                />
+                <span className={`absolute inset-x-0 bottom-0 ${"alta" in s ? "h-[122%]" : "h-full"}`}>
+                  <Image
+                    src={`/partequipos/nav/${s.imagen}.webp`}
+                    alt=""
+                    fill
+                    sizes="160px"
+                    quality={90}
+                    className="object-contain transition-transform duration-300 ease-[cubic-bezier(0.33,1,0.68,1)] group-hover:translate-x-1 motion-reduce:transition-none"
+                  />
+                </span>
               </span>
               {/* hasta dos líneas, con el alto de dos en todos: los
                   nombres quedan alineados aunque unos sean más largos */}
               <span
-                className={`relative flex min-h-[2lh] items-center text-center text-[0.9rem] leading-tight font-bold text-balance transition-colors duration-200 sm:text-base lg:text-[1.05rem] ${
+                className={`relative flex min-h-[2lh] items-center text-center text-[0.875rem] leading-tight font-bold text-balance transition-colors duration-200 sm:text-base lg:text-[0.95rem] xl:text-[1.05rem] ${
                   i === activo ? "text-on-brand" : "text-on-bar"
                 }`}
               >
