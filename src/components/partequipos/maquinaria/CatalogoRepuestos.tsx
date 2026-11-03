@@ -62,21 +62,6 @@ export function CatalogoRepuestos() {
           <p className="mt-3 max-w-[44rem] text-[0.95rem] leading-relaxed text-on-bar-dim lg:text-base">
             {"Soluciones para marcas como Caterpillar, CASE Construction, Hitachi LANDCROS, Yanmar, LiuGong, Link\u2011Belt, Hyundai, Doosan, Develon y más."}
           </p>
-          <a
-            href={whatsapp("Hola, busco la referencia de un repuesto para mi máquina.")}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group mt-3 inline-block rounded-md text-[0.95rem] font-semibold text-brand-deep transition-colors hover:text-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand lg:text-base"
-          >
-            {/* la flecha va pegada a la última palabra, también si el
-                enlace se parte en dos líneas */}
-            Encuentra la referencia que tu máquina{" "}
-            <span className="whitespace-nowrap">
-              necesita
-              <Flecha className="ml-1.5 inline-block align-[-0.2em] transition-transform duration-300 group-hover:translate-x-1 motion-reduce:transition-none" />
-            </span>
-            <span className="sr-only">(abre WhatsApp)</span>
-          </a>
         </div>
 
         <ul className="relative mt-9 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:mt-11 lg:grid-cols-5 lg:gap-4 2xl:gap-5">
