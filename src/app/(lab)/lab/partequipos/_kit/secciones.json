@@ -4,7 +4,7 @@
     {
       "id": "slider",
       "nombre": "Slider del home",
-      "descripcion": "Cinco fotos a sangre con fundido y acercamiento lento, título en Anton con la excavadora cruzándolo, texto circular que gira, panel de vidrio, flechas, pausa y puntos con progreso. Necesita la fuente /partequipos/fuentes/Anton-Regular.woff2. Debajo, una barra con las 5 secciones de la página (máquinas reales recortadas) y un fondo rojo que sigue al cursor.",
+      "descripcion": "Cinco fotos a sangre con fundido y acercamiento lento, título en Anton con la excavadora cruzándolo, texto circular que gira, panel de vidrio, flechas, pausa y puntos con progreso. Necesita la fuente /partequipos/fuentes/Anton-Regular.woff2. Debajo, una barra con las 3 secciones principales (máquinas reales recortadas) y un fondo rojo que sigue al cursor.",
       "uso": "<HeroSlider />",
       "dependencias": [
         "next/image",
@@ -27,8 +27,6 @@
         "/partequipos/hero/liugong.webp",
         "/partequipos/hero/yanmar-movil.webp",
         "/partequipos/hero/yanmar.webp",
-        "/partequipos/nav/marcas-repuestos.webp",
-        "/partequipos/nav/marcas.webp",
         "/partequipos/nav/nueva.webp",
         "/partequipos/nav/repuestos.webp",
         "/partequipos/nav/usada.webp"
@@ -99,7 +97,7 @@
     {
       "id": "repuestos",
       "nombre": "Venta de repuestos",
-      "descripcion": "Título y 10 categorías en tarjetas blancas con esquina roja y «Explorar categoría».",
+      "descripcion": "Título, entrada con el enlace a WhatsApp y 10 categorías en tarjetas blancas con esquina roja, nombre y flecha.",
       "uso": "<CatalogoRepuestos />",
       "dependencias": [
         "next/image"

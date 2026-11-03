@@ -27,8 +27,8 @@ const CATEGORIAS: CategoriaRepuesto[] = [
   { id: "hidraulicos", nombre: "Hidráulicos", imagen: "/partequipos/repuestos/hidraulicos.png" },
 ];
 
-// Sección de repuestos: rótulo y título con «Repuestos» en rojo de marca, una
-// entrada corta y el enlace «Encuentra la referencia…» a WhatsApp; debajo,
+// Sección de repuestos: rótulo y título con «Repuestos» en rojo de marca, dos
+// párrafos de entrada y el enlace «Encuentra la referencia…» a WhatsApp; debajo,
 // las 10 categorías en tarjetas blancas (5 por fila desde
 // lg). Detrás, franjas diagonales grises y una roja arriba a la derecha, con
 // la misma inclinación de las del resto de la página.
@@ -50,12 +50,17 @@ export function CatalogoRepuestos() {
           >
             Encuentra Maquinaria y <span className="text-brand">Repuestos</span> Rápido y Fácil
           </h2>
-          {/* entrada corta bajo el título, en la columna del título para no
-              cruzar la franja roja de la derecha; el cierre es un enlace */}
+          {/* entrada bajo el título (qué repuestos y para qué marcas), en la
+              columna del título para no cruzar la franja roja de la derecha;
+              el cierre es un enlace */}
           <p className="mt-4 max-w-[44rem] text-[0.95rem] leading-relaxed text-on-bar-dim lg:text-base">
             Encuentra repuestos, filtros, tren de rodaje, componentes hidráulicos, herramientas de corte,
             lubricantes y más para excavadoras, retrocargadoras, cargadores, minicargadores, motoniveladoras y
             otros equipos.
+          </p>
+          {/* «Link-Belt» con guion que no se corta al final de una línea */}
+          <p className="mt-3 max-w-[44rem] text-[0.95rem] leading-relaxed text-on-bar-dim lg:text-base">
+            {"Soluciones para marcas como Caterpillar, CASE Construction, Hitachi LANDCROS, Yanmar, LiuGong, Link\u2011Belt, Hyundai, Doosan, Develon y más."}
           </p>
           <a
             href={whatsapp("Hola, busco la referencia de un repuesto para mi máquina.")}
@@ -104,9 +109,9 @@ function Franjas() {
 }
 
 // Tarjeta de categoría: blanca, con una esquina roja recortada arriba a la
-// izquierda, la foto grande arriba, el nombre y, al pie, «Explorar
-// categoría» con un botón redondo. Todo es un solo enlace; al pasar el
-// cursor la foto se acerca y el botón se rellena de rojo.
+// izquierda, la foto grande arriba y, al pie, el nombre con un botón redondo
+// con la flecha a su lado. Todo es un solo enlace; al pasar el cursor la foto
+// se acerca y el botón se rellena de rojo.
 function TarjetaCategoria({ categoria: c }: { categoria: CategoriaRepuesto }) {
   return (
     <a
@@ -125,18 +130,14 @@ function TarjetaCategoria({ categoria: c }: { categoria: CategoriaRepuesto }) {
           className="object-contain transition-transform duration-300 ease-[cubic-bezier(0.33,1,0.68,1)] group-hover:scale-[1.06]"
         />
       </span>
-      {/* alto de dos líneas: las tarjetas de una fila quedan alineadas aunque
-          un nombre sea más largo */}
-      <span className="mt-3 flex min-h-[2lh] items-end text-[0.95rem] leading-tight font-bold text-on-bar sm:text-[1.05rem] 2xl:text-[1.15rem]">
-        {c.nombre}
-      </span>
-      <span className="mt-3 flex items-center justify-between gap-2">
-        <span className="text-[0.8rem] font-semibold whitespace-nowrap text-brand-deep max-xl:sr-only 2xl:text-[0.85rem]">
-          Explorar categoría
-        </span>
+      {/* nombre y flecha en una fila, pegada al pie de la tarjeta y con la
+          flecha abajo: en una fila de tarjetas las flechas quedan a la misma
+          altura aunque un nombre ocupe más líneas */}
+      <span className="mt-auto flex min-h-[2lh] items-end justify-between gap-2 pt-3 text-[0.95rem] leading-tight sm:text-[1.05rem] 2xl:text-[1.15rem]">
+        <span className="font-bold text-on-bar">{c.nombre}</span>
         <span
           aria-hidden
-          className="flex size-9 shrink-0 items-center justify-center rounded-full bg-[#fdeeee] text-brand transition-colors group-hover:bg-brand group-hover:text-on-brand max-xl:ml-auto"
+          className="flex size-9 shrink-0 items-center justify-center rounded-full bg-[#fdeeee] text-brand transition-colors group-hover:bg-brand group-hover:text-on-brand"
         >
           <Flecha className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" />
         </span>
