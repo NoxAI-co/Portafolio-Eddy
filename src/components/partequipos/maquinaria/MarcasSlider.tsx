@@ -97,8 +97,10 @@ function Carrusel() {
 // la derecha, más un piso claro bajo la máquina. Anclado a la derecha
 // (`xMaxYMid slice`) y apagado hacia la izquierda para dejar limpio el texto.
 // Las losas bajan hasta el borde inferior y el piso las tapa: así no terminan
-// en seco a media altura.
-function Fondo() {
+// en seco a media altura. `espejo` lo voltea (losas y franja a la izquierda,
+// apagado hacia la derecha) para secciones con la máquina a la izquierda;
+// `id` evita ids repetidos cuando hay dos en la página.
+export function Fondo({ id = "marcas", espejo = false }: { id?: string; espejo?: boolean }) {
   return (
     <svg
       aria-hidden
@@ -106,23 +108,23 @@ function Fondo() {
       preserveAspectRatio="xMaxYMid slice"
       // en teléfono el panel es alto y angosto: el `slice` agrandaría la
       // franja hasta taparlo todo, así que el fondo empieza en lg
-      className="pointer-events-none absolute inset-0 -z-10 hidden h-full w-full lg:block"
+      className={`pointer-events-none absolute inset-0 -z-10 hidden h-full w-full lg:block ${espejo ? "-scale-x-100" : ""}`}
     >
       <defs>
-        <linearGradient id="marcas-izq" gradientUnits="userSpaceOnUse" x1="380" y1="0" x2="640" y2="0">
+        <linearGradient id={`${id}-izq`} gradientUnits="userSpaceOnUse" x1="380" y1="0" x2="640" y2="0">
           <stop offset="0" stopColor="#fff" stopOpacity="0" />
           <stop offset="1" stopColor="#fff" />
         </linearGradient>
-        <mask id="marcas-mask" maskUnits="userSpaceOnUse" x="0" y="-100" width="1000" height="500">
-          <rect x="0" y="-100" width="1000" height="500" fill="url(#marcas-izq)" />
+        <mask id={`${id}-mask`} maskUnits="userSpaceOnUse" x="0" y="-100" width="1000" height="500">
+          <rect x="0" y="-100" width="1000" height="500" fill={`url(#${id}-izq)`} />
         </mask>
-        <linearGradient id="marcas-roja" gradientUnits="userSpaceOnUse" x1="0" y1="-20" x2="0" y2="250">
+        <linearGradient id={`${id}-roja`} gradientUnits="userSpaceOnUse" x1="0" y1="-20" x2="0" y2="250">
           <stop offset="0" stopColor="var(--brand)" />
           <stop offset="0.45" stopColor="var(--brand)" stopOpacity="0.92" />
           <stop offset="0.75" stopColor="var(--brand)" stopOpacity="0.45" />
           <stop offset="1" stopColor="var(--brand)" stopOpacity="0" />
         </linearGradient>
-        <linearGradient id="marcas-piso" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id={`${id}-piso`} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stopColor="#ffffff" stopOpacity="0" />
           <stop offset="0.3" stopColor="#ffffff" stopOpacity="0.85" />
           <stop offset="0.55" stopColor="#ffffff" />
@@ -131,16 +133,16 @@ function Fondo() {
       </defs>
       {/* todas con la misma inclinación: bajan 1 y se corren 0,62 a la
           izquierda; arrancan por encima del borde superior, que las recorta */}
-      <g mask="url(#marcas-mask)">
+      <g mask={`url(#${id}-mask)`}>
         <polygon points="642,-20 772,-20 549,340 419,340" fill="#d8d6d3" opacity="0.45" />
         <polygon points="772,-20 862,-20 639,340 549,340" fill="#ebe9e6" opacity="0.5" />
         <polygon points="1020,-20 1120,-20 897,340 797,340" fill="#d8d6d3" opacity="0.4" />
-        <polygon points="862,-20 920,-20 763,233 705,233" fill="url(#marcas-roja)" opacity="0.85" />
+        <polygon points="862,-20 920,-20 763,233 705,233" fill={`url(#${id}-roja)`} opacity="0.85" />
       </g>
       {/* el piso va fuera de la máscara y a todo el ancho: dentro de ella
           quedaba a media opacidad en la zona de fundido y dejaba ver el pie
           de las losas como un bloque claro */}
-      <rect x="-1000" y="225" width="3000" height="120" fill="url(#marcas-piso)" />
+      <rect x="-1000" y="225" width="3000" height="120" fill={`url(#${id}-piso)`} />
     </svg>
   );
 }

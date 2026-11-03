@@ -4,7 +4,7 @@
     {
       "id": "nueva",
       "nombre": "Maquinaria pesada nueva",
-      "descripcion": "Tarjetas de marca con foto, logo y presentación, y la retroexcavadora Case Utility Plus sobre la foto de obra.",
+      "descripcion": "Tarjetas de marca con foto, logo y presentación, y la retroexcavadora Case Utility Plus en un estudio con franjas grises y rojas, piso y reflejo.",
       "uso": "<MaquinariaNueva />",
       "dependencias": [
         "next/image",
@@ -20,7 +20,6 @@
       ],
       "destino": "#nueva-titulo",
       "assets": [
-        "/partequipos/texturas/fondo-nueva-bn.jpg",
         "/partequipos/maq-case-utility-plus.webp",
         "/partequipos/marcas/yanmar/fondo.jpg",
         "/partequipos/marcas/yanmar/logo.png",
@@ -67,7 +66,7 @@
     {
       "id": "repuestos",
       "nombre": "Venta de repuestos",
-      "descripcion": "10 categorías con «Ver todos» y la Yanmar sobre piso cenital.",
+      "descripcion": "Título y 10 categorías en tarjetas blancas con esquina roja y «Explorar categoría».",
       "uso": "<CatalogoRepuestos />",
       "dependencias": [
         "next/image"
@@ -77,6 +76,21 @@
         "maquinaria/UsedHero.tsx"
       ],
       "destino": "#repuestos"
+    },
+    {
+      "id": "marcas-repuestos",
+      "nombre": "Marcas de repuestos",
+      "descripcion": "La Yanmar ViO80 a la izquierda y los logos de las marcas de repuestos corriendo detrás de ella.",
+      "uso": "<MarcasRepuestos />",
+      "dependencias": [
+        "next/image"
+      ],
+      "archivos": [
+        "maquinaria/MarcasRepuestos.tsx",
+        "maquinaria/MarcasSlider.tsx",
+        "brands.ts"
+      ],
+      "destino": "#marcas-repuestos-titulo"
     },
     {
       "id": "cta",
@@ -322,6 +336,36 @@
           "marca/modelos-dynapac.ts"
         ],
         "destino": "#excavadoras-titulo"
+      }
+    ]
+  },
+  "repuestos-marcas": {
+    "secciones": [
+      {
+        "id": "repuestos-marcas",
+        "nombre": "Repuestos por marca",
+        "descripcion": "Cabecera roja con el título y 13 baldosas del color de cada marca con su logo en blanco y «Ver más» sobre la línea de abajo.",
+        "uso": "<RepuestosMarcas />",
+        "dependencias": [],
+        "archivos": [
+          "repuestos/RepuestosMarcas.tsx"
+        ],
+        "destino": "#marcas-repuestos-titulo",
+        "assets": [
+          "/partequipos/repuestos/marcas/bobcat-blanco.webp",
+          "/partequipos/repuestos/marcas/case.webp",
+          "/partequipos/repuestos/marcas/caterpillar.webp",
+          "/partequipos/repuestos/marcas/doosan-blanco.webp",
+          "/partequipos/repuestos/marcas/hitachi-landcros-blanco.webp",
+          "/partequipos/repuestos/marcas/hyundai-blanco.webp",
+          "/partequipos/repuestos/marcas/kobelco-blanco.webp",
+          "/partequipos/repuestos/marcas/komatsu-blanco.webp",
+          "/partequipos/repuestos/marcas/link-belt-blanco.webp",
+          "/partequipos/repuestos/marcas/liugong-blanco.webp",
+          "/partequipos/repuestos/marcas/okada-blanco.webp",
+          "/partequipos/repuestos/marcas/volvo-blanco.webp",
+          "/partequipos/repuestos/marcas/yanmar-blanco.webp"
+        ]
       }
     ]
   }

@@ -7,7 +7,8 @@ import { getMarca, type Marca } from "../marca/marcas";
 
 // Maquinaria pesada nueva: rótulo y título, una tarjeta por marca (foto de
 // la marca, su logo en una placa blanca y su presentación) y la retroexcavadora
-// Case Utility Plus, todo sobre la foto de obra de fondo. Tarjetas en rejilla de 2 × 2
+// Case Utility Plus en un estudio: franjas grises y rojas en la pared, piso
+// claro con su reflejo y sombras de contacto. Tarjetas en rejilla de 2 × 2
 // desde 1024 px y en carrusel más angosto. Cada
 // tarjeta abre la landing de la marca. Los textos, fotos y logos salen de los
 // datos de cada marca.
@@ -34,8 +35,6 @@ export function MaquinariaNueva() {
       aria-labelledby="nueva-titulo"
       className="relative isolate overflow-hidden bg-bar px-5 pt-14 pb-14 sm:px-10 lg:px-[2.6%] lg:pt-20 2xl:pb-20 min-[90rem]:pt-24"
     >
-      <Escena />
-
       <div className="relative z-10 lg:max-w-[52%] 2xl:max-w-[67%]">
         {/* por debajo de 1024 px la retroexcavadora va en el encabezado: a la
             derecha del título desde md, debajo de él en teléfono */}
@@ -55,12 +54,16 @@ export function MaquinariaNueva() {
 
         {/* desde lg la máquina va anclada a las tarjetas (MaquinaEmpuja). Las
             4 en fila solo desde 2xl: más angosto quedarían muy altas */}
+        {/* las tarjetas tapan el estudio (franjas y piso entran por detrás de
+            ellas) y la máquina va encima de todo */}
         <div className="relative">
-          <Carrusel />
+          <div className="relative z-10">
+            <Carrusel />
+          </div>
           <MaquinaEmpuja />
         </div>
 
-        <div className="mt-8 flex justify-center">
+        <div className="relative z-10 mt-8 flex justify-center">
           <a
             href={VER_TODO}
             className="inline-flex min-h-12 items-center gap-3 rounded-full bg-brand px-8 text-base font-semibold text-on-brand transition-colors hover:bg-brand-lift focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-brand active:bg-brand-deep"
@@ -76,62 +79,27 @@ export function MaquinariaNueva() {
 
 // Retroexcavadora Case por debajo de 1024 px, en el encabezado: a la derecha
 // del título desde md, debajo de él en teléfono. La caja recorta el aire de
-// arriba del render (la máquina va de y≈134 a 864 de 1024, sombra incluida).
-// Detrás lleva la foto de la obra, que sale hasta los bordes de la pantalla y
-// se funde en el blanco por arriba y por abajo.
+// arriba del render (la máquina va de y≈134 a 864 de 1024, sombra incluida);
+// dentro, la caja del render completo lleva el estudio y la máquina.
 function EscenaCompacta() {
   return (
     <div aria-hidden className="pointer-events-none relative mt-6 aspect-[1920/992] w-full md:mt-0 lg:hidden">
-      <div className="absolute -inset-x-5 top-[-18%] bottom-[-16%] [mask-image:linear-gradient(180deg,transparent_0%,rgb(0_0_0/0.15)_12%,rgb(0_0_0/0.45)_24%,rgb(0_0_0/0.8)_34%,#000_42%,#000_78%,rgb(0_0_0/0.5)_90%,transparent_100%)] sm:-inset-x-10 md:left-[-12%] md:[mask-image:linear-gradient(180deg,transparent_0%,rgb(0_0_0/0.15)_12%,rgb(0_0_0/0.45)_24%,rgb(0_0_0/0.8)_34%,#000_42%,#000_78%,rgb(0_0_0/0.5)_90%,transparent_100%),linear-gradient(90deg,transparent_0%,rgb(0_0_0/0.3)_10%,rgb(0_0_0/0.75)_22%,#000_32%)] md:[mask-composite:intersect]">
-        <FondoObra sizes="(max-width: 768px) 180vw, 90vw" />
+      <div className="absolute top-[-17.7%] left-0 aspect-[1920/1344] w-full">
+        <Estudio
+          id="nueva-sm"
+          sizes="(max-width: 768px) 100vw, 48vw"
+          pisoClassName="left-[-40%] right-[-40%] [mask-image:linear-gradient(90deg,transparent_0,#000_25%,#000_75%,transparent)]"
+        />
+        <Image
+          src="/partequipos/maq-case-utility-plus.webp"
+          alt=""
+          width={1920}
+          height={1344}
+          quality={90}
+          sizes="(max-width: 768px) 100vw, 48vw"
+          className="relative h-auto w-full"
+        />
       </div>
-      <Image
-        src="/partequipos/maq-case-utility-plus.webp"
-        alt=""
-        width={1920}
-        height={1344}
-        quality={90}
-        sizes="(max-width: 768px) 100vw, 48vw"
-        className="absolute top-[-17.7%] left-0 h-auto w-full max-w-none"
-      />
-    </div>
-  );
-}
-
-// La foto de la obra con el cielo y las nubes en blanco, las montañas y la
-// parte alta de los árboles en gris y el piso a color (generada desde la foto
-// original). Ya trae el fundido en blanco hacia la izquierda, así que va tal
-// cual, anclada a la derecha y abajo.
-function FondoObra({ sizes }: { sizes: string }) {
-  return (
-    <Image
-      src="/partequipos/texturas/fondo-nueva-bn.jpg"
-      alt=""
-      fill
-      quality={90}
-      sizes={sizes}
-      className="object-cover object-[100%_100%]"
-    />
-  );
-}
-
-// Fondo desde 1024 px: la foto de la obra cubre toda la sección; su lado
-// izquierdo ya es blanco, así título y tarjetas quedan sobre fondo limpio. Se
-// disuelve abajo para que no haya un corte seco con la sección siguiente.
-function Escena() {
-  return (
-    <div
-      aria-hidden
-      className="pointer-events-none absolute inset-0 -z-10 hidden [mask-image:linear-gradient(180deg,#000_0%,#000_88%,transparent_100%)] lg:block"
-    >
-      {/* la foto se alarga hacia abajo y la sección corta ese 14 %: las piedras
-          del primer plano quedan fuera y las ruedas pisan tierra plana */}
-      <div className="absolute inset-x-0 top-0 bottom-[-14%]">
-        <FondoObra sizes="100vw" />
-      </div>
-      {/* refuerza el blanco bajo título y tarjetas, que la foto deja a medias
-          cuando la sección es más alta que ancha */}
-      <span className="absolute inset-0 bg-[linear-gradient(90deg,#fff_0%,rgb(255_255_255/0.95)_28%,rgb(255_255_255/0.6)_40%,rgb(255_255_255/0)_50%)]" />
     </div>
   );
 }
@@ -145,13 +113,20 @@ function Escena() {
 // render, siempre quepa: solo el brazo de atrás puede salirse por la derecha.
 // Medidas sobre el render (1920 × 1344): la punta del cucharón está en
 // x≈31 (1,6 %), la máquina va de y≈176 a 1134 (71 % del alto) y las ruedas
-// apoyan al 84,4 %: la caja se baja 15,6 % para dejarlas a ras del pie.
+// apoyan al 84,4 %: la caja baja 15,6 % de su alto para dejarlas a ras del
+// pie. Se baja con `bottom` y no con translate: un transform la volvería su
+// propio contexto de apilado y el estudio no podría quedar bajo las tarjetas.
 function MaquinaEmpuja() {
   return (
     <div
       aria-hidden
-      className="pointer-events-none absolute bottom-0 left-[98.3%] z-20 hidden aspect-[1920/1344] translate-y-[15.6%] lg:block lg:h-[min(112%,45vw)] 2xl:h-[min(150%,32vw)]"
+      className="pointer-events-none absolute left-[98.3%] hidden aspect-[1920/1344] lg:block lg:bottom-[calc(min(112%,45vw)*-0.156)] lg:h-[min(112%,45vw)] 2xl:bottom-[calc(min(150%,32vw)*-0.156)] 2xl:h-[min(150%,32vw)]"
     >
+      <Estudio
+        id="nueva-lg"
+        sizes="(max-width: 1280px) 80vw, 60vw"
+        pisoClassName="left-[-35%] right-[-120%] [mask-image:linear-gradient(90deg,transparent_0,#000_22%)]"
+      />
       <Image
         src="/partequipos/maq-case-utility-plus.webp"
         alt=""
@@ -159,9 +134,107 @@ function MaquinaEmpuja() {
         height={1344}
         quality={90}
         sizes="(max-width: 1280px) 80vw, 60vw"
-        className="h-full w-auto max-w-none"
+        className="relative z-20 h-full w-auto max-w-none"
       />
     </div>
+  );
+}
+
+// Estudio de la retroexcavadora, el mismo de maquinaria usada (UsedHero): vive
+// en la caja del render (1920 × 1344), así todo sigue a la máquina a cualquier
+// tamaño. La pared lleva una losa gris y una franja roja inclinadas que se apagan
+// hacia arriba y hacia el piso; el horizonte va a la altura de los ejes (72 %)
+// y debajo arranca un piso claro que se asienta en el blanco de la sección,
+// así no hay corte con la sección siguiente. Encima del piso, el reflejo de
+// las ruedas y las sombras de contacto. `id` separa los degradados de las dos
+// copias (teléfono y escritorio).
+function Estudio({ id, sizes, pisoClassName }: { id: string; sizes: string; pisoClassName: string }) {
+  return (
+    <>
+      <Pared id={id} />
+      <div
+        className={`absolute top-[72%] h-[80%] bg-[linear-gradient(180deg,rgb(20_17_15/0)_0%,rgb(20_17_15/0.04)_1.5%,rgb(243_242_240/0.6)_3.5%,#f1f0ee_7%,#f5f4f2_22%,#fff_45%)] ${pisoClassName}`}
+      />
+      {/* reflejo: la misma foto volteada sobre la línea donde apoyan las
+          ruedas (84 % de alto). La máscara va antes del volteo: deja ver solo
+          la parte baja de las ruedas y la apaga pronto, un piso satinado */}
+      <Image
+        src="/partequipos/maq-case-utility-plus.webp"
+        alt=""
+        width={1920}
+        height={1344}
+        sizes={sizes}
+        className="absolute inset-0 h-full w-full origin-[50%_84%] -scale-y-100 opacity-[0.16] blur-[1.5px] [mask-image:linear-gradient(180deg,transparent_72%,rgb(0_0_0/0.4)_79%,#000_84%,transparent_84.5%)]"
+      />
+      <SombrasCase id={id} />
+    </>
+  );
+}
+
+// Pared del estudio en coordenadas del render: una losa gris y una franja roja
+// con la inclinación de las de maquinaria usada, reflejada (bajan hacia la
+// izquierda, hacia el cucharón). Nacen a la altura de la cabina (fundido de y≈-100 a
+// 300, así nunca tocan el título ni el borde de la sección) y el piso las
+// tapa en el horizonte (y = 968).
+function Pared({ id }: { id: string }) {
+  return (
+    <svg aria-hidden viewBox="0 0 1920 1344" className="absolute inset-0 h-full w-full overflow-visible">
+      <defs>
+        {/* rojo que entra desde arriba y baja pleno hasta el piso, que lo
+            corta: ese corte es lo que hace leer el horizonte */}
+        <linearGradient id={`${id}-roja`} gradientUnits="userSpaceOnUse" x1="0" y1="-250" x2="0" y2="968">
+          <stop offset="0.12" stopColor="var(--brand)" stopOpacity="0" />
+          <stop offset="0.42" stopColor="var(--brand)" />
+          <stop offset="0.65" stopColor="var(--brand)" stopOpacity="0.9" />
+          <stop offset="1" stopColor="var(--brand)" stopOpacity="0.55" />
+        </linearGradient>
+        <linearGradient id={`${id}-gris`} gradientUnits="userSpaceOnUse" x1="0" y1="-250" x2="0" y2="968">
+          <stop offset="0.12" stopColor="#fff" stopOpacity="0" />
+          <stop offset="0.45" stopColor="#fff" />
+        </linearGradient>
+        <mask id={`${id}-pared`} maskUnits="userSpaceOnUse" x="-1000" y="-250" width="4000" height="1218">
+          <rect x="-1000" y="-250" width="4000" height="1218" fill={`url(#${id}-gris)`} />
+        </mask>
+      </defs>
+      <g mask={`url(#${id}-pared)`}>
+        <polygon points="1760,-250 2060,-250 1110,968 810,968" fill="#d3d1ce" opacity="0.45" />
+      </g>
+      <polygon points="1330,-250 1530,-250 580,968 380,968" fill={`url(#${id}-roja)`} opacity="0.78" />
+    </svg>
+  );
+}
+
+// Sombras medidas sobre el render: las ruedas apoyan en y≈1128 (delantera de
+// x≈560 a 700, trasera de 1080 a 1320) y el cucharón queda un poco en el aire
+// sobre x≈40 a 240. Tres capas como en UsedHero: piso amplio y difuso,
+// oclusión bajo cada rueda y un contacto oscuro y apretado donde tocan.
+function SombrasCase({ id }: { id: string }) {
+  return (
+    <svg aria-hidden viewBox="0 0 1920 1344" className="absolute inset-0 h-full w-full overflow-visible">
+      <defs>
+        <filter id={`${id}-amplia`} x="-50%" y="-300%" width="200%" height="700%">
+          <feGaussianBlur stdDeviation="30" />
+        </filter>
+        <filter id={`${id}-media`} x="-50%" y="-300%" width="200%" height="700%">
+          <feGaussianBlur stdDeviation="13" />
+        </filter>
+        <filter id={`${id}-contacto`} x="-50%" y="-300%" width="200%" height="700%">
+          <feGaussianBlur stdDeviation="5" />
+        </filter>
+      </defs>
+
+      {/* piso: bajo toda la máquina, más cargado hacia atrás */}
+      <ellipse cx="1000" cy="1140" rx="820" ry="46" fill="#14110f" opacity="0.26" filter={`url(#${id}-amplia)`} />
+      <ellipse cx="150" cy="1134" rx="150" ry="20" fill="#14110f" opacity="0.2" filter={`url(#${id}-media)`} />
+
+      {/* oclusión bajo cada rueda */}
+      <ellipse cx="630" cy="1132" rx="120" ry="15" fill="#14110f" opacity="0.4" filter={`url(#${id}-media)`} />
+      <ellipse cx="1200" cy="1132" rx="160" ry="17" fill="#14110f" opacity="0.4" filter={`url(#${id}-media)`} />
+
+      {/* contacto */}
+      <ellipse cx="630" cy="1128" rx="80" ry="8" fill="#14110f" opacity="0.7" filter={`url(#${id}-contacto)`} />
+      <ellipse cx="1200" cy="1128" rx="105" ry="9" fill="#14110f" opacity="0.72" filter={`url(#${id}-contacto)`} />
+    </svg>
   );
 }
 

@@ -123,6 +123,13 @@ body {
   animation: marcas-bucle 32s linear infinite;
 }
 
+/* la banda de marcas de repuestos lleva 14 logos (la de marcas, 6): con la
+   misma duración correría más del doble de rápido; 62 s la deja a la misma
+   velocidad */
+.marcas-pista-larga {
+  animation-duration: 62s;
+}
+
 .marcas-carrusel:hover .marcas-pista {
   animation-play-state: paused;
 }

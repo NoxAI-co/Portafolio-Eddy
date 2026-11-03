@@ -120,7 +120,7 @@ for (const s of cfg.secciones) armar(s.id, [s], salida, undefined, imagenes);
 armar("todo", cfg.secciones, salida, undefined, imagenes);
 
 // páginas sueltas: cada una con su kit en kit/<grupo>/
-for (const grupo of ["aliadas", "excavadoras"]) {
+for (const grupo of ["aliadas", "excavadoras", "repuestos-marcas"]) {
   const destino = join(salida, grupo);
   for (const s of cfg[grupo].secciones) armar(s.id, [s], destino, undefined, imagenes);
   armar("todo", cfg[grupo].secciones, destino, `Partequipos: ${cfg[grupo].secciones[0].nombre}`, imagenes);

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { UsedHero } from "@/components/partequipos/maquinaria/UsedHero";
 import { CatalogoUsados } from "@/components/partequipos/maquinaria/CatalogoUsados";
 import { MaquinariaNueva } from "@/components/partequipos/maquinaria/MaquinariaNueva";
+import { MarcasRepuestos } from "@/components/partequipos/maquinaria/MarcasRepuestos";
 import { MarcasSlider } from "@/components/partequipos/maquinaria/MarcasSlider";
 import { CatalogoRepuestos } from "@/components/partequipos/maquinaria/CatalogoRepuestos";
 import { BannerCotizar } from "@/components/partequipos/maquinaria/BannerCotizar";
@@ -22,6 +23,7 @@ export default function PartequiposPage() {
         <CatalogoUsados hero={<UsedHero />} />
         <MarcasSlider />
         <CatalogoRepuestos />
+        <MarcasRepuestos />
         <BannerCotizar />
       </main>
       {/* el código se lee en el build: lo que se copia es exactamente lo que
