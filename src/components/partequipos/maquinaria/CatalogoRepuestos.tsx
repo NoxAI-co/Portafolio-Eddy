@@ -118,7 +118,7 @@ function TarjetaCategoria({ categoria: c }: { categoria: CategoriaRepuesto }) {
       href={whatsapp(`Hola, busco repuestos de ${c.nombre.toLowerCase()}.`)}
       target="_blank"
       rel="noopener noreferrer"
-      className="group relative flex h-full flex-col overflow-hidden rounded-[1.25rem] bg-bar p-4 shadow-[0_1px_2px_rgb(20_17_15/0.05),0_6px_16px_-10px_rgb(20_17_15/0.18)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand sm:p-5"
+      className="group relative flex h-full flex-col overflow-hidden rounded-[1.25rem] bg-bar p-3.5 shadow-[0_1px_2px_rgb(20_17_15/0.05),0_6px_16px_-10px_rgb(20_17_15/0.18)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand sm:p-5"
     >
       <span aria-hidden className="absolute top-0 left-0 size-10 bg-brand [clip-path:polygon(0_0,100%_0,0_100%)] sm:size-12" />
       <span className="relative block aspect-[4/3] w-full">
@@ -132,12 +132,15 @@ function TarjetaCategoria({ categoria: c }: { categoria: CategoriaRepuesto }) {
       </span>
       {/* nombre y flecha en una fila, pegada al pie de la tarjeta y con la
           flecha abajo: en una fila de tarjetas las flechas quedan a la misma
-          altura aunque un nombre ocupe más líneas */}
-      <span className="mt-auto flex min-h-[2lh] items-end justify-between gap-2 pt-3 text-[0.95rem] leading-tight sm:text-[1.05rem] 2xl:text-[1.15rem]">
-        <span className="font-bold text-on-bar">{c.nombre}</span>
+          altura aunque un nombre ocupe más líneas. Donde la tarjeta es angosta
+          (teléfono, y de lg a xl con cinco columnas) la flecha sube a la
+          esquina de arriba a la derecha y el nombre usa todo el ancho, sin
+          partir palabras */}
+      <span className="mt-auto flex min-h-[2lh] items-end justify-between gap-1.5 pt-3 sm:gap-2 text-[0.95rem] leading-tight max-[359px]:text-[0.85rem] sm:text-[1.05rem] 2xl:text-[1.15rem]">
+        <span className="min-w-0 font-bold text-on-bar">{c.nombre}</span>
         <span
           aria-hidden
-          className="flex size-9 shrink-0 items-center justify-center rounded-full bg-[#fdeeee] text-brand transition-colors group-hover:bg-brand group-hover:text-on-brand"
+          className="flex size-8 shrink-0 items-center justify-center rounded-full bg-[#fdeeee] text-brand transition-colors group-hover:bg-brand group-hover:text-on-brand max-sm:absolute max-sm:top-3 max-sm:right-3 sm:size-9 lg:max-xl:absolute lg:max-xl:top-4 lg:max-xl:right-4"
         >
           <Flecha className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" />
         </span>
