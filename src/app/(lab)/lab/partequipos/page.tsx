@@ -6,6 +6,8 @@ import { MarcasRepuestos } from "@/components/partequipos/maquinaria/MarcasRepue
 import { MarcasSlider } from "@/components/partequipos/maquinaria/MarcasSlider";
 import { CatalogoRepuestos } from "@/components/partequipos/maquinaria/CatalogoRepuestos";
 import { BannerCotizar } from "@/components/partequipos/maquinaria/BannerCotizar";
+import { HeroSlider } from "@/components/partequipos/home/HeroSlider";
+import { EspacioNavbar } from "./_nav/EspacioNavbar";
 import { KitDev } from "./_kit/KitDev";
 import { leerEstilos, leerSecciones, zipCompletoBytes } from "./_kit/leer";
 
@@ -19,6 +21,10 @@ export default function PartequiposPage() {
   return (
     <>
       <main>
+        {/* arriba, el espacio que ocupa la barra del sitio, para validar cómo
+            se acomoda el slider debajo */}
+        <EspacioNavbar />
+        <HeroSlider />
         <MaquinariaNueva />
         <CatalogoUsados hero={<UsedHero />} />
         <MarcasSlider />

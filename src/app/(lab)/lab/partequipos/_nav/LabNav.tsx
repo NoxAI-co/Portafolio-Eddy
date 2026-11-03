@@ -13,6 +13,7 @@ const BASE = "/lab/partequipos";
 type Item = { etiqueta: string; listo: boolean } & ({ ancla: string } | { href: string });
 
 const ITEMS: Item[] = [
+  { ancla: "slider", etiqueta: "Slider", listo: false },
   { ancla: "nueva", etiqueta: "Nueva", listo: true },
   { ancla: "maquinaria-usada", etiqueta: "Usada", listo: true },
   { ancla: "marcas", etiqueta: "Marcas", listo: true },

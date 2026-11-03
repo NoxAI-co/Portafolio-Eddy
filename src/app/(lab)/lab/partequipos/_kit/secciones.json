@@ -2,6 +2,39 @@
   "estilos": "scripts/partequipos.css",
   "secciones": [
     {
+      "id": "slider",
+      "nombre": "Slider del home",
+      "descripcion": "Cinco fotos a sangre con fundido y acercamiento lento, título en Anton con la excavadora cruzándolo, texto circular que gira, panel de vidrio, flechas, pausa y puntos con progreso. Necesita la fuente /partequipos/fuentes/Anton-Regular.woff2. Debajo, una barra con las 5 secciones de la página (máquinas reales recortadas) y un fondo rojo que sigue al cursor.",
+      "uso": "<HeroSlider />",
+      "dependencias": [
+        "next/image",
+        "motion"
+      ],
+      "archivos": [
+        "home/HeroSlider.tsx",
+        "home/NavSecciones.tsx"
+      ],
+      "destino": "#slider",
+      "assets": [
+        "/partequipos/hero/case-movil.webp",
+        "/partequipos/hero/case.webp",
+        "/partequipos/hero/dynapac-movil.webp",
+        "/partequipos/hero/dynapac.webp",
+        "/partequipos/hero/hitachi-maquina.webp",
+        "/partequipos/hero/hitachi-movil.webp",
+        "/partequipos/hero/hitachi.webp",
+        "/partequipos/hero/liugong-movil.webp",
+        "/partequipos/hero/liugong.webp",
+        "/partequipos/hero/yanmar-movil.webp",
+        "/partequipos/hero/yanmar.webp",
+        "/partequipos/nav/marcas-repuestos.webp",
+        "/partequipos/nav/marcas.webp",
+        "/partequipos/nav/nueva.webp",
+        "/partequipos/nav/repuestos.webp",
+        "/partequipos/nav/usada.webp"
+      ]
+    },
+    {
       "id": "nueva",
       "nombre": "Maquinaria pesada nueva",
       "descripcion": "Tarjetas de marca con foto, logo y presentación, y la retroexcavadora Case Utility Plus en un estudio con franjas grises y rojas, piso y reflejo.",

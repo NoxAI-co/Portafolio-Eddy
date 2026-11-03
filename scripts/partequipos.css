@@ -234,3 +234,620 @@ body {
     transform: translateY(15px);
   }
 }
+
+/* ---------------------------------------------------------------------- */
+/* Slider del home (HeroSlider): la forma, las medidas y los tiempos del   */
+/* hero de partequipos.vercel.app, sin el parallax.                       */
+/* ---------------------------------------------------------------------- */
+
+@font-face {
+  font-family: "Anton";
+  src: url("/partequipos/fuentes/Anton-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+.hs {
+  --hs-rojo: var(--brand);
+  --hs-tinta: #100f0f;
+  --hs-radio: 30px;
+  --hs-alto-min: 86vh;
+  --hs-relleno: 10px;
+  --hs-titulo-tam: 300px;
+  --hs-maquina-ancho: 809px;
+  --hs-maquina-cruce: -52px;
+  --hs-maquina-lado: 20px;
+  --hs-circular-tam: 120px;
+  --hs-circular-izquierda: 94px;
+  --hs-circular-abajo: 110px;
+  --hs-flecha-tam: 42px;
+  --hs-flecha-icono: 21px;
+  --hs-flechas-margen-abajo: 31px;
+  --hs-pase: 7s;
+  --hs-fundido: 1.2s;
+  --hs-curva: cubic-bezier(0.4, 0, 0.2, 1);
+  --hs-texto-arriba: 47px;
+  --hs-texto-abajo: 98px;
+  --hs-vidrio-ancho: 500px;
+  --hs-vidrio-relleno: 30px;
+  --hs-vidrio-derecha: 41px;
+  --hs-vidrio-abajo: 91px;
+  --hs-parrafo-tam: 16px;
+  min-height: 88vh;
+  padding: 0 1.5% 1.5%;
+}
+
+.hs-tarjeta {
+  position: relative;
+  isolation: isolate;
+  container-type: inline-size;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  min-height: var(--hs-alto-min);
+  padding: var(--hs-relleno);
+  touch-action: pan-y;
+}
+
+.hs-marco {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: clip;
+  border-radius: var(--hs-radio);
+  background: var(--hs-tinta);
+}
+
+/* velo para el texto: más denso arriba, donde va el título */
+.hs-marco::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--hs-tinta) 45%, transparent) 0%,
+    color-mix(in srgb, var(--hs-tinta) 52%, transparent) 35%,
+    color-mix(in srgb, var(--hs-tinta) 48%, transparent) 55%,
+    color-mix(in srgb, var(--hs-tinta) 22%, transparent) 75%,
+    color-mix(in srgb, var(--hs-tinta) 40%, transparent) 100%
+  );
+}
+
+/* la nueva entra con un fundido encima de la anterior, que queda entera
+   debajo; ambas se acercan despacio mientras están a la vista */
+.hs-capa-fondo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity var(--hs-fundido) var(--hs-curva);
+}
+
+.hs-capa-fondo[data-estado="activa"] {
+  z-index: 2;
+  opacity: 1;
+}
+
+.hs-capa-fondo[data-estado="saliente"] {
+  z-index: 1;
+  opacity: 1;
+  transition: none;
+}
+
+.hs-fondo {
+  object-fit: cover;
+}
+
+.hs-capa-fondo[data-estado] .hs-fondo {
+  animation: hs-acercar calc(var(--hs-pase) + var(--hs-fundido)) linear forwards;
+}
+
+.hs[data-pausado] .hs-fondo {
+  animation-play-state: paused;
+}
+
+@keyframes hs-acercar {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.06);
+  }
+}
+
+/* texto y máquina de cada diapositiva */
+.hs-capa-texto {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--hs-texto-arriba) var(--hs-maquina-lado) var(--hs-texto-abajo);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--hs-fundido) var(--hs-curva);
+}
+
+.hs-capa-texto[data-activa] {
+  opacity: 1;
+}
+
+.hs-titulo {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  margin: 0;
+  color: #fff;
+  font-family: "Anton", var(--font-sans, system-ui), sans-serif;
+  font-weight: 400;
+  line-height: 1.4;
+  text-align: center;
+  text-transform: uppercase;
+  /* tan grande como quepa en una línea */
+  font-size: min(var(--hs-titulo-tam), calc((100cqi - 40px) / (var(--hs-letras, 16) * 0.62)));
+}
+
+.hs-titulo-linea {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.hs-titulo[data-oculto] .hs-titulo-linea {
+  visibility: hidden;
+}
+
+.hs-titulo-caja {
+  width: 100%;
+}
+
+.hs-reserva {
+  display: none;
+  visibility: hidden;
+}
+
+/* el título sube 12 px al entrar; nunca empieza invisible */
+.hs-entra {
+  animation: hs-subir 0.6s var(--hs-curva) 0.3s both;
+}
+
+@keyframes hs-subir {
+  from {
+    transform: translateY(12px);
+  }
+  to {
+    transform: none;
+  }
+}
+
+.hs-maquina {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  width: min(762px, 100%);
+  margin-top: 16px;
+}
+
+.hs-frontal {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center top;
+}
+
+/* texto circular que gira */
+.hs-circular {
+  position: absolute;
+  z-index: 2;
+  bottom: var(--hs-circular-abajo);
+  left: var(--hs-circular-izquierda);
+  width: var(--hs-circular-tam);
+  height: var(--hs-circular-tam);
+  pointer-events: none;
+}
+
+.hs-circular svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  animation: hs-girar 20s linear infinite;
+}
+
+.hs-circular text {
+  fill: #fff;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.hs[data-pausado] .hs-circular svg {
+  animation-play-state: paused;
+}
+
+@keyframes hs-girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* flechas, pausa y puntos */
+.hs-fila {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: 100%;
+  min-height: calc(var(--hs-flecha-tam) + var(--hs-flechas-margen-abajo) + 20px);
+  padding: 10px;
+}
+
+.hs-flechas {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  max-width: 100%;
+  margin: 0 0 var(--hs-flechas-margen-abajo) 10px;
+}
+
+.hs-flecha {
+  display: grid;
+  place-items: center;
+  width: var(--hs-flecha-tam);
+  height: var(--hs-flecha-tam);
+  border: 0;
+  border-radius: 50%;
+  background: #ffffff94;
+  color: var(--hs-rojo);
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.hs-flecha + .hs-flecha {
+  margin-left: 16px;
+}
+
+.hs-flecha + .hs-pausa {
+  margin-left: 8px;
+}
+
+.hs-flecha svg {
+  width: auto;
+  height: var(--hs-flecha-icono);
+}
+
+.hs-flecha:hover {
+  background: var(--hs-rojo);
+  color: #fff;
+}
+
+.hs-puntos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  min-width: 0;
+  margin: 0 0 0 12px;
+  padding: 0;
+  list-style: none;
+}
+
+.hs-punto {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.hs-punto::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  background: color-mix(in srgb, #fff 60%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--hs-tinta) 25%, transparent);
+  transition: width 0.3s;
+}
+
+.hs-punto[aria-current="true"]::before {
+  width: 28px;
+  background: color-mix(in srgb, #fff 35%, transparent);
+}
+
+/* el relleno del punto activo marca el tiempo del pase: se descubre con un
+   recorte, así sus puntas redondas no se deforman al crecer */
+.hs-progreso {
+  position: absolute;
+  top: calc(50% - 4px);
+  left: calc(50% - 14px);
+  width: 28px;
+  height: 8px;
+  border-radius: 4px;
+  background: #fff;
+  clip-path: inset(0 100% 0 0 round 4px);
+  animation: hs-progreso var(--hs-pase) linear forwards;
+}
+
+.hs[data-pausado] .hs-progreso {
+  animation-play-state: paused;
+}
+
+@keyframes hs-progreso {
+  to {
+    clip-path: inset(0 0 0 0 round 4px);
+  }
+}
+
+.hs-punto:focus-visible,
+.hs-flecha:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+}
+
+/* panel de vidrio con el párrafo */
+.hs-vidrio {
+  position: absolute;
+  z-index: 2;
+  right: var(--hs-vidrio-derecha);
+  bottom: var(--hs-vidrio-abajo);
+  width: var(--hs-vidrio-ancho);
+  max-width: calc(100% - 2 * var(--hs-vidrio-derecha));
+  padding: var(--hs-vidrio-relleno);
+  border: 1px solid #ffffff40;
+  border-radius: var(--hs-radio);
+  background: color-mix(in srgb, var(--hs-tinta) 28%, transparent);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--hs-fundido) var(--hs-curva), visibility 0s linear var(--hs-fundido);
+}
+
+.hs-vidrio[data-visible] {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity var(--hs-fundido) var(--hs-curva), visibility 0s;
+}
+
+.hs-textos-vidrio {
+  display: grid;
+}
+
+.hs-textos-vidrio > .hs-parrafo {
+  grid-area: 1 / 1;
+}
+
+.hs-textos-vidrio > .hs-parrafo[aria-hidden="true"] {
+  visibility: hidden;
+}
+
+.hs-parrafo {
+  margin: 0;
+  color: #fff;
+  font-size: var(--hs-parrafo-tam);
+  font-weight: 300;
+  line-height: 1.4;
+}
+
+/* escritorio: el título va arriba (al 10 %) y la copia invisible le guarda
+   el sitio; la máquina sube y lo cruza por delante */
+@media (min-width: 1025px) {
+  .hs-titulo-caja {
+    position: absolute;
+    z-index: 1;
+    top: 10%;
+    left: 50%;
+    width: max-content;
+    max-width: calc(100% - 2 * var(--hs-maquina-lado));
+    translate: -50% 0;
+  }
+
+  /* la copia reserva el alto de un título de 120 px (como en el sitio): así
+     la máquina sube hasta morder el borde de abajo del título */
+  .hs-reserva {
+    display: block;
+    font-size: min(120px, calc((100cqi - 40px) / (var(--hs-letras, 16) * 0.62)));
+  }
+}
+
+@media (min-width: 768px) {
+  .hs-capa-texto[data-maquina="sobre"] .hs-maquina {
+    z-index: 2;
+    width: min(var(--hs-maquina-ancho), 100%);
+    margin-top: var(--hs-maquina-cruce);
+  }
+}
+
+@media (max-width: 1024px) {
+  .hs {
+    --hs-titulo-tam: 70px;
+    --hs-relleno: 50px 30px 30px;
+    --hs-texto-arriba: 103px;
+    --hs-maquina-ancho: 631px;
+    --hs-maquina-cruce: -44px;
+    --hs-flechas-margen-abajo: 66px;
+    --hs-maquina-lado: 30px;
+    --hs-circular-tam: 100px;
+    --hs-circular-izquierda: 49px;
+    --hs-circular-abajo: 178px;
+    --hs-vidrio-ancho: 400px;
+    --hs-vidrio-derecha: 20px;
+    --hs-vidrio-abajo: 30px;
+  }
+
+  .hs-titulo {
+    font-size: min(
+      var(--hs-titulo-tam),
+      calc(190cqi / var(--hs-letras, 16)),
+      calc((100cqi - 40px) / (var(--hs-palabra, 10) * 0.62))
+    );
+  }
+
+  .hs-maquina {
+    width: min(631px, 100%);
+  }
+}
+
+@media (max-width: 767px) {
+  .hs {
+    --hs-titulo-tam: 12vw;
+    --hs-texto-arriba: 74px;
+    --hs-texto-abajo: 300px;
+    --hs-alto-min: 85vh;
+    --hs-parrafo-tam: 13px;
+    --hs-vidrio-relleno: 20px;
+    --hs-vidrio-abajo: 70px;
+    --hs-flecha-tam: 30px;
+    --hs-flecha-icono: 15px;
+    --hs-flechas-margen-abajo: 36px;
+    --hs-circular-tam: 70px;
+    --hs-circular-izquierda: calc(50% - 35px);
+    --hs-circular-abajo: 284px;
+  }
+
+  .hs-titulo {
+    font-size: min(
+      var(--hs-titulo-tam),
+      calc(350cqi / var(--hs-letras, 16)),
+      calc((100cqi - 40px) / (var(--hs-palabra, 10) * 0.62))
+    );
+  }
+
+  .hs-capa-texto[data-maquina="sobre"] .hs-maquina {
+    margin-top: -8px;
+  }
+
+  .hs-fila {
+    padding: 0;
+  }
+
+  .hs-flecha + .hs-pausa,
+  .hs-puntos {
+    margin-left: 4px;
+  }
+
+  .hs-punto {
+    width: 24px;
+  }
+
+  .hs-vidrio {
+    top: calc(100% - var(--hs-texto-abajo) + 16px);
+    bottom: auto;
+    width: min(280px, 100% - 2 * var(--hs-vidrio-derecha));
+  }
+}
+
+/* con la barra de secciones montada sobre el borde de abajo, los controles,
+   el vidrio y el texto circular suben lo que ella tapa */
+.hs {
+  --hs-nav-cruce: 0px;
+}
+
+.hs[data-con-nav] {
+  --hs-nav-cruce: 44px;
+}
+
+@media (max-width: 767px) {
+  .hs[data-con-nav] {
+    --hs-nav-cruce: 30px;
+  }
+}
+
+.hs-flechas {
+  margin-bottom: calc(var(--hs-flechas-margen-abajo) + var(--hs-nav-cruce));
+}
+
+.hs-circular {
+  bottom: calc(var(--hs-circular-abajo) + var(--hs-nav-cruce));
+}
+
+.hs-vidrio {
+  bottom: calc(var(--hs-vidrio-abajo) + var(--hs-nav-cruce));
+}
+
+@media (max-width: 767px) {
+  .hs-vidrio {
+    bottom: auto;
+    top: calc(100% - var(--hs-texto-abajo) + 16px - var(--hs-nav-cruce));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hs-capa-fondo,
+  .hs-capa-texto,
+  .hs-vidrio,
+  .hs-flecha,
+  .hs-punto::before {
+    transition: none;
+  }
+
+  .hs-fondo,
+  .hs-capa-fondo[data-estado] .hs-fondo,
+  .hs-entra,
+  .hs-circular svg {
+    animation: none;
+  }
+}
+
+/* Lab: espacio de la barra del sitio encima del slider, para validar cómo
+   se acomoda. Mismo alto que la cabecera de partequipos.vercel.app:
+   relleno vertical de 1 % del ancho arriba y abajo + 10 px por lado de
+   columna + el alto del contenido (el logo, o 48 px de los botones). */
+.espacio-navbar {
+  position: relative;
+  box-sizing: border-box;
+  height: calc(20px + min(46.5px, (100vw - 164.8px) * 0.2735));
+  margin: 0 1.5%;
+  border: 1.5px dashed color-mix(in srgb, var(--on-bar) 22%, transparent);
+  border-radius: 14px;
+}
+
+@media (min-width: 768px) {
+  .espacio-navbar {
+    height: 71.1px;
+  }
+}
+
+/* en escritorio el alto lo pone lo más alto de la fila: hasta 1210 px el
+   menú en dos líneas (48 px), luego el logo, que crece con el ancho y desde
+   1300 px tiene más sitio (hasta sus 51 px) */
+@media (min-width: 1025px) and (max-width: 1210px) {
+  .espacio-navbar {
+    height: calc(2vw + 68px);
+  }
+}
+
+@media (min-width: 1211px) and (max-width: 1299px) {
+  .espacio-navbar {
+    height: calc(7.185vw + 0.84px);
+  }
+}
+
+@media (min-width: 1300px) {
+  .espacio-navbar {
+    height: calc(2vw + 20px + min(51.1px, 4.373vw - 6.29px));
+  }
+}
+
+.espacio-navbar-rotulo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  color: var(--on-bar-dim);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
