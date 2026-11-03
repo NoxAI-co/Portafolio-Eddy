@@ -24,7 +24,8 @@ const MARCAS = [
 // Yanmar ViO80 a la izquierda, por delante de una banda blanca con los logos
 // corriendo en bucle, que entran y salen por detrás de ella; el título arriba a
 // la derecha. Desde lg el panel mantiene su proporción 3:1 y todo se mide en %
-// del panel o en `cqw`. En teléfono se apila: título, máquina y banda.
+// del panel o en `cqw`. Bajo la banda, a la derecha, un pie con las marcas.
+// En teléfono se apila: título, máquina, banda y pie.
 export function MarcasRepuestos() {
   return (
     <section
@@ -68,6 +69,14 @@ export function MarcasRepuestos() {
         <div className="relative z-10 mt-2 mb-6 bg-bar py-5 lg:absolute lg:top-[52%] lg:right-0 lg:my-0 lg:w-[86%] lg:py-[max(1.3rem,1.8cqw)] lg:[mask-image:linear-gradient(270deg,#000_70%,transparent_92%)]">
           <Carrusel />
         </div>
+
+        {/* pie de la banda: las marcas para las que hay soluciones. Desde lg
+            va abajo a la derecha, bajo los logos, en el hueco libre */}
+        <p className="relative z-10 px-6 pb-8 text-[0.95rem] leading-relaxed text-balance text-on-bar-dim sm:px-10 lg:absolute lg:right-[5%] lg:bottom-[9%] lg:max-w-[min(40%,34rem)] lg:p-0 lg:text-right lg:text-[clamp(0.9rem,0.95cqw,1.05rem)]">
+          {/* «Link-Belt» con guion que no se corta, para que no se parta al
+              final de una línea */}
+          {"Soluciones para marcas como Caterpillar, CASE Construction, Hitachi LANDCROS, Yanmar, LiuGong, Link\u2011Belt, Hyundai, Doosan, Develon y más."}
+        </p>
       </div>
     </section>
   );
