@@ -2,8 +2,10 @@
 // actualizarlo con cada versión nueva de la app.
 
 export const DESCARGA = {
-  /** Dónde está el APK. Cambia cuando se publique en otro lugar. */
-  url: "/sabaneta360/Sabaneta360.apk",
+  /** El APK vive en las releases del repo público eddysantiagoo/sabaneta360
+   *  (pesa más de lo que GitHub acepta dentro del repo del portafolio). Con
+   *  cada versión nueva: crear la release con su tag y cambiar este enlace. */
+  url: "https://github.com/eddysantiagoo/sabaneta360/releases/download/v0.1.0-beta/Sabaneta360.apk",
   /** El nombre con el que se guarda en el teléfono. */
   archivo: "Sabaneta360.apk",
   version: "0.1.0",
