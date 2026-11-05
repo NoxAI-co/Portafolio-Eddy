@@ -1,0 +1,842 @@
+/* Sabaneta 360 · landing de descarga.
+   La paleta es la de la app: el teal del arte de marca, el verde de la marca,
+   el crema del logotipo y las superficies claras de la app. */
+
+.pagina {
+  --teal: #00403c;
+  --teal-hondo: #01362f;
+  --verde: #2c4a3e;
+  --crema: #fff7c8;
+  --fondo: #f1f0eb;
+  --superficie: #f8f7f3;
+  --elevada: #ffffff;
+  --borde: #dedcd5;
+  --tinta: #2a2a2a;
+  --tinta-suave: #565650;
+  --tinta-tenue: #78786f;
+  --gutter: clamp(16px, 4vw, 40px);
+  /* El ancho del teléfono del centro, y cuánto de él baja sobre la sección
+     siguiente (un tercio de su alto). */
+  --telefono: clamp(250px, 26vw, 330px);
+  --solape: calc(var(--telefono) * 0.74);
+
+  color-scheme: light;
+  background: var(--fondo);
+  color: var(--tinta);
+  min-height: 100vh;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+}
+
+.pagina *,
+.pagina *::before,
+.pagina *::after {
+  box-sizing: border-box;
+}
+
+/* Sin peso propio (:where), para que no le gane a los estilos de cada pieza. */
+.pagina :where(h1, h2, h3, p, ul, ol, figure) {
+  margin: 0;
+  padding: 0;
+}
+
+.pagina :where(ul, ol) {
+  list-style: none;
+}
+
+/* ── Encabezado ──────────────────────────────────────────────────────────── */
+
+.encabezado {
+  position: relative;
+  color: var(--crema);
+  padding: clamp(56px, 10vh, 104px) var(--gutter) 0;
+  /* Las pantallas bajan sobre la sección siguiente: el teal termina a un tercio
+     de su alto desde abajo, y la sección siguiente reserva ese espacio. */
+  margin-bottom: calc(var(--solape) * -1);
+  isolation: isolate;
+  z-index: 1;
+}
+
+/* Las ondas del arte de la app, a sangre, detrás de todo. Son vectores
+   (ondas.svg, trazado del arte original), nítidos a cualquier tamaño. */
+.ondas {
+  position: absolute;
+  inset: 0 0 var(--solape) 0;
+  background: var(--teal) url("/sabaneta360/ondas.svg") center top / cover
+    no-repeat;
+  /* El borde de abajo es una curva amplia, como las ondas del arte, y no un
+     corte recto bajo los teléfonos. */
+  border-bottom-left-radius: 50% clamp(40px, 7vw, 110px);
+  border-bottom-right-radius: 50% clamp(40px, 7vw, 110px);
+  z-index: -2;
+}
+
+/* Grano fino sobre las ondas y bajo el contenido: quita el aspecto de plano. */
+.grano {
+  position: absolute;
+  inset: 0 0 var(--solape) 0;
+  border-bottom-left-radius: 50% clamp(40px, 7vw, 110px);
+  border-bottom-right-radius: 50% clamp(40px, 7vw, 110px);
+  z-index: -1;
+  opacity: 0.16;
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.encabezadoContenido {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.marca {
+  width: min(100%, 560px);
+}
+
+.logotipo {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.lema {
+  margin-top: clamp(20px, 3vh, 32px);
+  font-size: clamp(20px, 2.4vw, 26px);
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: 0;
+  color: var(--crema);
+  opacity: 0.92;
+  text-wrap: balance;
+}
+
+/* El botón: crema sobre el teal, del color del logotipo. Al pasar por encima
+   cambia de tono y la flecha baja, sin moverse ni brillar. */
+.descargar {
+  margin-top: clamp(28px, 4vh, 40px);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 56px;
+  padding: 0 22px 0 20px;
+  border-radius: 16px;
+  font-size: 17px;
+  font-weight: 600;
+  white-space: nowrap;
+  text-decoration: none;
+  background: var(--verde);
+  color: #fff;
+  transition: background-color 180ms ease;
+}
+
+.descargar:hover {
+  background: #23392f;
+}
+
+.descargarOscuro {
+  background: var(--crema);
+  color: var(--teal-hondo);
+}
+
+.descargarOscuro:hover {
+  background: #fffbe3;
+}
+
+.descargar:focus-visible {
+  outline: 3px solid var(--crema);
+  outline-offset: 3px;
+}
+
+.instalar .descargar:focus-visible {
+  outline-color: var(--verde);
+}
+
+.android {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+  flex: none;
+}
+
+.flecha {
+  width: 16px;
+  height: 16px;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 180ms ease;
+}
+
+.descargar:hover .flecha {
+  transform: translateY(2px);
+}
+
+.ficha {
+  margin-top: 14px;
+  font-size: 14px;
+  color: var(--crema);
+  opacity: 0.72;
+}
+
+/* ── Las pantallas de la app ─────────────────────────────────────────────── */
+
+.telefonos {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-top: clamp(48px, 7vh, 72px);
+}
+
+.telefono {
+  position: relative;
+  width: var(--telefono);
+  aspect-ratio: 390 / 844;
+  padding: 9px;
+  border-radius: calc(var(--telefono) * 0.155);
+  background: #161917;
+  /* Un borde del mismo grafito, un poco más claro arriba, como el canto del
+     teléfono. La sombra es corta y cae hacia abajo. */
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 18px 30px -18px rgba(1, 30, 26, 0.55);
+  flex: none;
+  /* Las medidas de la isla salen del ancho de la pantalla (cqw). */
+  container-type: inline-size;
+}
+
+/* La isla dinámica: una píldora negra centrada arriba de la pantalla, con el
+   lente apenas insinuado a la derecha. Gira con el teléfono. */
+.telefono::after {
+  content: "";
+  position: absolute;
+  top: calc(9px + 3.2cqw);
+  left: 50%;
+  width: 31cqw;
+  height: 9.2cqw;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background:
+    radial-gradient(
+      circle 1.5cqw at calc(100% - 4.6cqw) 50%,
+      #15191c 0 80%,
+      transparent 100%
+    ),
+    #000;
+  pointer-events: none;
+}
+
+.telefono img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: calc(var(--telefono) * 0.125);
+}
+
+.centro {
+  z-index: 2;
+}
+
+.izquierda,
+.derecha {
+  width: calc(var(--telefono) * 0.88);
+  z-index: 1;
+  margin-bottom: calc(var(--telefono) * -0.18);
+}
+
+.izquierda {
+  transform: rotate(-6deg);
+  margin-right: calc(var(--telefono) * -0.06);
+}
+
+.derecha {
+  transform: rotate(6deg);
+  margin-left: calc(var(--telefono) * -0.06);
+}
+
+/* Al bajar, los teléfonos de los lados se abren en abanico y el del centro
+   sube y se acerca: el movimiento sigue al scroll y, sin soporte, se quedan
+   quietos donde están. */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .izquierda,
+    .derecha,
+    .centro {
+      animation-timing-function: cubic-bezier(0.3, 0, 0.4, 1);
+      animation-fill-mode: both;
+      animation-timeline: scroll(root);
+      animation-range: 0 85vh;
+    }
+    .izquierda {
+      animation-name: abrir-izquierda;
+    }
+    .derecha {
+      animation-name: abrir-derecha;
+    }
+    .centro {
+      animation-name: acercar;
+    }
+  }
+}
+
+@keyframes abrir-izquierda {
+  to {
+    transform: rotate(-15deg) translate(-30%, 12%);
+  }
+}
+
+@keyframes abrir-derecha {
+  to {
+    transform: rotate(15deg) translate(30%, 12%);
+  }
+}
+
+@keyframes acercar {
+  to {
+    transform: translateY(-7%) scale(1.07);
+  }
+}
+
+/* ── Inventario ──────────────────────────────────────────────────────────── */
+
+.inventario {
+  padding: calc(var(--solape) + clamp(96px, 12vw, 160px)) 0
+    clamp(64px, 8vw, 96px);
+}
+
+.frase {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  text-align: center;
+  font-size: clamp(26px, 3.6vw, 40px);
+  font-weight: 650;
+  line-height: 1.2;
+  letter-spacing: -0.005em;
+  color: var(--tinta);
+  text-wrap: balance;
+}
+
+/* Los 49 íconos en dos filas que corren en sentidos opuestos. Visibles desde
+   el principio: el movimiento es solo un desplazamiento. */
+.cinta {
+  margin-top: clamp(40px, 5vw, 56px);
+  display: grid;
+  gap: 14px;
+  overflow: hidden;
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 8%,
+    #000 92%,
+    transparent
+  );
+}
+
+.fila {
+  display: flex;
+  gap: 14px;
+  width: max-content;
+  animation: correr 80s linear infinite;
+}
+
+.filaInversa {
+  animation-direction: reverse;
+  animation-duration: 90s;
+}
+
+.fila img {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  flex: none;
+}
+
+@keyframes correr {
+  to {
+    transform: translateX(calc(-50% - 7px));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fila {
+    animation: none;
+  }
+}
+
+/* Las ocho categorías: cuatro columnas que se leen por filas. Cada una ocupa
+   tres filas de la cuadrícula (subgrid), así los nombres y los textos quedan
+   alineados con los de al lado aunque uno ocupe dos líneas. */
+.categorias {
+  max-width: 1040px;
+  margin: clamp(56px, 7vw, 88px) auto 0;
+  padding: 0 var(--gutter);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: clamp(20px, 3vw, 40px);
+  /* El aire entre filas lo pone cada categoría abajo: un row-gap aquí se
+     metería también entre las filas internas de cada una. */
+  row-gap: 0;
+}
+
+.categorias li {
+  display: grid;
+  grid-row: span 3;
+  grid-template-rows: subgrid;
+  row-gap: 0;
+  align-content: start;
+}
+
+.categorias img {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  margin-bottom: 14px;
+}
+
+.categorias h2 {
+  font-size: 18px;
+  font-weight: 650;
+  line-height: 1.3;
+  color: var(--tinta);
+}
+
+.categorias p {
+  margin-top: 4px;
+  padding-bottom: clamp(32px, 4vw, 44px);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--tinta-suave);
+}
+
+@media (max-width: 900px) {
+  .categorias {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ── Mapa ────────────────────────────────────────────────────────────────── */
+
+/* Una sección alta con su contenido fijo en pantalla: lo que cambia al bajar
+   es el teléfono y qué paso está encendido. La línea de tiempo con nombre deja
+   que el contenido fijo siga el avance de la sección. */
+.mapa {
+  view-timeline-name: --mapa;
+  height: 300vh;
+  padding: 0 var(--gutter) clamp(48px, 6vw, 80px);
+}
+
+.mapaFijo {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  max-width: 1040px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  column-gap: clamp(56px, 9vw, 128px);
+}
+
+/* El teléfono se mide por el alto de la pantalla, para que quepa entero. */
+.mapaTelefonos {
+  --telefono-mapa: min(clamp(240px, 24vw, 310px), 36svh);
+  --telefono: var(--telefono-mapa);
+  position: relative;
+  /* Deja sitio a la derecha para la ficha que asoma. */
+  margin-right: calc(var(--telefono-mapa) * 0.36);
+}
+
+.mapaPrincipal {
+  z-index: 1;
+}
+
+/* La ficha, más pequeña, monta sobre la esquina del mapa como si se hubiera
+   abierto desde él. */
+.mapaFicha {
+  --telefono: calc(var(--telefono-mapa) * 0.78);
+  position: absolute;
+  right: calc(var(--telefono-mapa) * -0.36);
+  bottom: calc(var(--telefono-mapa) * -0.1);
+  z-index: 2;
+  transform: rotate(5deg);
+}
+
+.mapaTitulo {
+  font-size: clamp(30px, 3.6vw, 44px);
+  font-weight: 650;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  color: var(--tinta);
+  text-wrap: balance;
+}
+
+/* Cuánto está encendido cada paso, de 0 a 1. Registrada para que se pueda
+   animar y mezclar el color con ella. Sin animación vale 1: todo legible. */
+@property --encendido {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 1;
+}
+
+.mapaPasos {
+  margin-top: clamp(28px, 4vw, 44px);
+  display: grid;
+  gap: clamp(22px, 3vw, 32px);
+}
+
+.mapaPasos li {
+  --encendido: 1;
+}
+
+.mapaPasos h3 {
+  font-size: 20px;
+  font-weight: 650;
+  color: color-mix(
+    in srgb,
+    var(--tinta) calc(var(--encendido) * 100%),
+    #8f8e86
+  );
+}
+
+.mapaPasos p {
+  margin-top: 6px;
+  max-width: 38ch;
+  font-size: 17px;
+  line-height: 1.5;
+  color: color-mix(
+    in srgb,
+    var(--tinta-suave) calc(var(--encendido) * 100%),
+    #9a998f
+  );
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) and (min-width: 721px) {
+    .mapaPrincipal,
+    .mapaFicha,
+    .mapaPasos li {
+      animation-timing-function: cubic-bezier(0.3, 0, 0.4, 1);
+      animation-fill-mode: both;
+      animation-timeline: --mapa;
+    }
+
+    /* Primer tramo: el mapa llega inclinado y se endereza. */
+    .mapaPrincipal {
+      animation-name: enderezar;
+      animation-range: entry 40% contain 30%;
+    }
+
+    /* Último tramo: la ficha sube desde abajo y se posa sobre el mapa. */
+    .mapaFicha {
+      animation-name: subir-ficha;
+      animation-range: contain 55% contain 85%;
+    }
+
+    /* Cada paso se enciende en su tercio del recorrido. */
+    .mapaPasos li:nth-child(1) {
+      animation-name: apagar;
+      animation-range: contain 30% contain 42%;
+    }
+    .mapaPasos li:nth-child(2) {
+      animation-name: encender-y-apagar;
+      animation-range: contain 28% contain 70%;
+    }
+    .mapaPasos li:nth-child(3) {
+      animation-name: encender;
+      animation-range: contain 58% contain 70%;
+    }
+  }
+}
+
+@keyframes enderezar {
+  from {
+    transform: rotate(-8deg) translateY(10%) scale(0.92);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes subir-ficha {
+  from {
+    transform: translateY(70%) rotate(14deg);
+  }
+  to {
+    transform: rotate(5deg);
+  }
+}
+
+@keyframes apagar {
+  from {
+    --encendido: 1;
+  }
+  to {
+    --encendido: 0;
+  }
+}
+
+@keyframes encender {
+  from {
+    --encendido: 0;
+  }
+  to {
+    --encendido: 1;
+  }
+}
+
+@keyframes encender-y-apagar {
+  0% {
+    --encendido: 0;
+  }
+  30%,
+  70% {
+    --encendido: 1;
+  }
+  100% {
+    --encendido: 0;
+  }
+}
+
+/* ── Instalar ────────────────────────────────────────────────────────────── */
+
+.instalar {
+  padding: 0 var(--gutter) clamp(64px, 8vw, 104px);
+}
+
+.panel {
+  max-width: 1040px;
+  margin: 0 auto;
+  background: var(--elevada);
+  border: 1px solid var(--borde);
+  border-radius: 28px;
+  padding: clamp(28px, 4vw, 48px);
+}
+
+.titulo {
+  font-size: clamp(24px, 2.6vw, 30px);
+  font-weight: 650;
+  color: var(--tinta);
+}
+
+.pasos {
+  margin-top: clamp(24px, 3vw, 36px);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(20px, 3vw, 40px);
+}
+
+.numero {
+  display: block;
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: #b9cbbf;
+}
+
+.pasos h3 {
+  margin-top: 14px;
+  font-size: 18px;
+  font-weight: 650;
+  color: var(--tinta);
+}
+
+.pasos p {
+  margin-top: 6px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--tinta-suave);
+}
+
+.cierre {
+  margin-top: clamp(36px, 5vw, 56px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.cierre .descargar {
+  margin-top: 0;
+}
+
+.cierreDescarga {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.fichaCierre {
+  font-size: 14px;
+  color: var(--tinta-tenue);
+  font-variant-numeric: tabular-nums;
+}
+
+.qr {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  max-width: 340px;
+}
+
+.qr svg {
+  width: 104px;
+  height: 104px;
+  flex: none;
+  fill: var(--teal-hondo);
+  border-radius: 10px;
+  border: 1px solid var(--borde);
+}
+
+.qr p {
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--tinta-suave);
+}
+
+/* ── Pie ─────────────────────────────────────────────────────────────────── */
+
+/* El pie vuelve al verde del encabezado, con la misma curva al revés: la
+   página abre y cierra en el color de la marca. */
+.pie {
+  position: relative;
+  background: var(--teal);
+  color: var(--crema);
+  text-align: center;
+  padding: clamp(72px, 9vw, 120px) var(--gutter) clamp(48px, 6vw, 72px);
+  border-top-left-radius: 50% clamp(40px, 7vw, 110px);
+  border-top-right-radius: 50% clamp(40px, 7vw, 110px);
+  isolation: isolate;
+}
+
+.pie::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  opacity: 0.16;
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.aliados {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(28px, 5vw, 64px);
+}
+
+.aliados img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+}
+
+.creditos {
+  max-width: 560px;
+  margin: clamp(32px, 4vw, 48px) auto 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--crema);
+  opacity: 0.86;
+}
+
+.firma {
+  margin-top: 10px;
+  font-size: 14px;
+  color: var(--crema);
+  opacity: 0.7;
+}
+
+.firma a {
+  color: var(--crema);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.firma a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ── Teléfono ────────────────────────────────────────────────────────────── */
+
+@media (max-width: 720px) {
+  .pagina {
+    --telefono: clamp(190px, 56vw, 240px);
+  }
+
+  /* En pantalla angosta solo va el del centro: tres no caben sin achicarse
+     hasta no leerse. */
+  .izquierda,
+  .derecha {
+    display: none;
+  }
+
+  .pasos {
+    grid-template-columns: 1fr;
+  }
+
+  .categorias {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+
+  /* En el teléfono la sección del mapa es una más: sin fijar ni animar, los
+     teléfonos arriba y los pasos debajo. */
+  .mapa {
+    height: auto;
+  }
+
+  .mapaFijo {
+    position: static;
+    height: auto;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    row-gap: 72px;
+  }
+
+  .mapaTelefonos {
+    --telefono-mapa: clamp(170px, 46vw, 220px);
+  }
+
+  .mapaTexto {
+    justify-self: stretch;
+  }
+
+  .cierre {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cierreDescarga {
+    align-items: stretch;
+  }
+
+  .cierre .descargar {
+    justify-content: center;
+  }
+
+  .fichaCierre {
+    text-align: center;
+  }
+
+  /* En el teléfono el QR no sirve: ya estás en él. */
+  .qr {
+    display: none;
+  }
+}

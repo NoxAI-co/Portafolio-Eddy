@@ -11,6 +11,8 @@ const config = {
     // el lab de Partequipos trae su propio CSS (Tailwind v4)
     "!./src/components/partequipos/**",
     "!./src/app/(lab)/**",
+    // Sabaneta 360 trae su propio CSS module
+    "!./src/app/(sabaneta)/**",
   ],
   prefix: "",
   theme: {
