@@ -2,12 +2,13 @@ import Image from "next/image";
 import type { CSSProperties } from "react";
 import { Flecha } from "../maquinaria/UsedHero";
 import { rutaModelo, slugModelo, type Marca, type Modelo, type TipoMaquina } from "./marcas";
+import { PortadaModelo } from "./PortadaModelo";
 import { EnlaceTransicion } from "./transicion";
 
 const WHATSAPP = "https://wa.me/573176707071";
 
 // Una sección por tipo de máquina con sus modelos: título grande y filete
-// arriba como en la landing del sitio, y tarjetas blancas con la foto pegada
+// arriba como en la landing del sitio, y tarjetas blancas con la portada roja (logo y nombre) pegada
 // arriba, nombre, tres datos y dos botones con flecha. La rejilla tiene 6 columnas (4 en tablet) y cada
 // tarjeta ocupa 2: van de a 3 por fila y, cuando la última fila queda corta
 // (o son 4, como los minicargadores), se centran. Cada tarjeta es un subgrid
@@ -153,7 +154,7 @@ export function GrillaModelos({ marca, tipo }: { marca: Marca; tipo: TipoMaquina
           id={slugModelo(m)}
           className={`row-span-4 mb-8 scroll-mt-28 grid grid-rows-subgrid gap-y-0 overflow-hidden rounded-[14px] bg-white shadow-[0_1px_2px_rgb(16_15_15/0.06),0_6px_16px_-10px_rgb(16_15_15/0.18)] min-[768px]:col-span-2 ${columna(i, tipo.modelos.length)}`}
         >
-          <TarjetaModelo modelo={m} href={rutaModelo(marca, m)} />
+          <TarjetaModelo modelo={m} marca={marca} href={rutaModelo(marca, m)} />
         </li>
       ))}
     </ul>
@@ -174,7 +175,7 @@ function columna(i: number, n: number) {
   return `${md} ${lg}`;
 }
 
-function TarjetaModelo({ modelo, href }: { modelo: Modelo; href: string }) {
+function TarjetaModelo({ modelo, marca, href }: { modelo: Modelo; marca: Marca; href: string }) {
   const cotizar = `${WHATSAPP}?text=${encodeURIComponent(`Hola, quiero cotizar ${modelo.nombre}.`)}`;
   const id = `modelo-${modelo.nombre.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
   // la foto de la tarjeta es la que se transforma en la de la ficha
@@ -182,9 +183,9 @@ function TarjetaModelo({ modelo, href }: { modelo: Modelo; href: string }) {
 
   return (
     <>
-      {/* la foto va pegada arriba y a los lados: la tarjeta la recorta con su
+      {/* la portada va pegada arriba y a los lados: la tarjeta la recorta con su
           radio; solo el contenido de abajo lleva relleno. También abre la
-          ficha, y es la que se transforma en la foto grande de la ficha */}
+          ficha, y es la que se transforma en la portada grande de la ficha */}
       <EnlaceTransicion
         href={href}
         origen={foto}
@@ -192,15 +193,9 @@ function TarjetaModelo({ modelo, href }: { modelo: Modelo; href: string }) {
         tabIndex={-1}
         aria-hidden
         data-foto={slugModelo(modelo)}
-        className="relative block h-60 bg-[#f0f0f0] [@media(max-width:767px)]:h-[210px]"
+        className="relative block h-60 [@media(max-width:767px)]:h-[210px]"
       >
-        <Image
-          src={modelo.imagen}
-          alt=""
-          fill
-          sizes="(max-width: 767px) 90vw, (max-width: 1024px) 45vw, 560px"
-          className="object-cover"
-        />
+        <PortadaModelo nombre={modelo.nombre} marca={marca} />
       </EnlaceTransicion>
 
       <h3 id={id} className="m-0 px-6 pt-6 text-lg leading-[1.25] font-semibold text-[#100f0f] uppercase">

@@ -75,7 +75,9 @@ const imagenesMarca = (marca, tipos) => {
     fondo: [marca.fondo],
     logo: [marca.logo.src],
     tipos: marca.tipos.map((t) => t.imagen),
-    modelos: marca.tipos.flatMap((t) => t.modelos.map((m) => m.imagen)),
+    // las tarjetas y la ficha ya no usan la foto del modelo, sino la portada
+    // roja con el logo de la marca en blanco
+    modelos: [marca.logoBlanco.src],
     mascota: marca.mascota ? [marca.mascota.tinta, marca.mascota.papel].filter(Boolean) : [],
   };
   return [...new Set(tipos.flatMap((t) => de[t] ?? []))].sort();

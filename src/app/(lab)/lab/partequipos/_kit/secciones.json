@@ -229,6 +229,8 @@
         ],
         "archivos": [
           "marca/ModelosMarca.tsx",
+          "marca/PortadaModelo.tsx",
+          "brand/PartequiposWordmark.tsx",
           "marca/transicion.tsx",
           "maquinaria/UsedHero.tsx",
           "marca/marcas.ts",
@@ -246,7 +248,7 @@
       {
         "id": "ficha",
         "nombre": "Ficha del modelo",
-        "descripcion": "Página de cada modelo: foto grande, datos, cotizar y otros modelos del tipo. La foto de la tarjeta se transforma en la de la ficha con una transición de vista.",
+        "descripcion": "Página de cada modelo: portada roja con logo y nombre, datos, cotizar y otros modelos del tipo. La portada de la tarjeta se transforma en la de la ficha con una transición de vista.",
         "uso": "<FichaModelo marcaSlug=\"<slug>\" slug={params.modelo} />",
         "dependencias": [
           "next/image",
@@ -257,6 +259,8 @@
           "marca/FichaModelo.tsx",
           "marca/transicion.tsx",
           "marca/ModelosMarca.tsx",
+          "marca/PortadaModelo.tsx",
+          "brand/PartequiposWordmark.tsx",
           "marca/mascota/Mascota.tsx",
           "maquinaria/UsedHero.tsx",
           "marca/marcas.ts",
@@ -306,6 +310,8 @@
           "marca/PildoraMarca.tsx",
           "marca/LineaEquipos.tsx",
           "marca/ModelosMarca.tsx",
+          "marca/PortadaModelo.tsx",
+          "brand/PartequiposWordmark.tsx",
           "marca/mascota/Mascota.tsx",
           "maquinaria/UsedHero.tsx",
           "marca/marcas.ts",
@@ -355,6 +361,8 @@
         "archivos": [
           "categoria/ExcavadorasNuevas.tsx",
           "marca/ModelosMarca.tsx",
+          "marca/PortadaModelo.tsx",
+          "brand/PartequiposWordmark.tsx",
           "marca/transicion.tsx",
           "maquinaria/UsedHero.tsx",
           "marca/marcas.ts",

@@ -20,6 +20,9 @@ export type Marca = {
   /** Encuadre de la foto de fondo (object-position). */
   fondoPosicion?: string;
   logo: { src: string; ancho: number; alto: number };
+  /** El logo en un solo color blanco (lo blanco del original queda hueco),
+      recortado a su contenido, para la portada roja de los modelos. */
+  logoBlanco: { src: string; ancho: number; alto: number };
   /** Tipos de máquina de la línea, en el orden de la cinta. */
   tipos: TipoMaquina[];
   /** Líneas de texto debajo de la cinta de tipos. */
@@ -106,6 +109,7 @@ export const MARCAS: Marca[] = [
     fondo: "/partequipos/marcas/case/fondo.jpg",
     fondoPosicion: "50% 50%",
     logo: { src: "/partequipos/marcas/case/logo.png", ancho: 299, alto: 100 },
+    logoBlanco: { src: "/partequipos/marcas/case/logo-blanco.png", ancho: 228, alto: 69 },
     tipos: [
       tipoCase("bulldozers", "Bulldozer", "bulldozer", "bulldozer"),
       tipoCase("cargadores", "Cargador", "cargador", "cargadores"),
@@ -139,6 +143,7 @@ export const MARCAS: Marca[] = [
     acento: "#fc661c",
     fondo: "/partequipos/marcas/hitachi/fondo.jpg",
     logo: { src: "/partequipos/marcas/hitachi/logo.png", ancho: 587, alto: 330 },
+    logoBlanco: { src: "/partequipos/marcas/hitachi/logo-blanco.png", ancho: 355, alto: 211 },
     tipos: [
       tipo(MODELOS_HITACHI, "excavadoras", "Excavadora", "/partequipos/maq-hitachi-zx210.png", "hitachi/excavadoras-hitachi"),
     ],
@@ -158,6 +163,7 @@ export const MARCAS: Marca[] = [
     acento: "#ed1c24",
     fondo: "/partequipos/marcas/yanmar/fondo.jpg",
     logo: { src: "/partequipos/marcas/yanmar/logo.png", ancho: 299, alto: 100 },
+    logoBlanco: { src: "/partequipos/marcas/yanmar/logo-blanco.png", ancho: 275, alto: 34 },
     tipos: [
       tipo(MODELOS_YANMAR, "miniexcavadoras", "Miniexcavadora", "/partequipos/maq-yanmar.png", "yanmar/miniexcavadoras"),
     ],
@@ -178,6 +184,7 @@ export const MARCAS: Marca[] = [
     acentoTinta: "#ffffff",
     fondo: "/partequipos/marcas/dynapac/fondo.jpg",
     logo: { src: "/partequipos/marcas/dynapac/logo.png", ancho: 262, alto: 43 },
+    logoBlanco: { src: "/partequipos/marcas/dynapac/logo-blanco.png", ancho: 258, alto: 39 },
     tipos: [
       tipo(MODELOS_DYNAPAC, "doble-rodillo", "Compactador de doble rodillo", "/partequipos/marcas/dynapac/tipos/doble-rodillo.png", "dynapac/compactador-doble-rodillo-dynapac", "Rodillo"),
       tipo(MODELOS_DYNAPAC, "llantas", "Compactador de llantas", "/partequipos/marcas/dynapac/tipos/llantas.png", "dynapac/compactador-de-llantas-dynapac", "Neumático"),

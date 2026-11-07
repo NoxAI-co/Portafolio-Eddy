@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { CSSProperties } from "react";
 import { Flecha } from "../maquinaria/UsedHero";
 import { GrillaModelos, Icono } from "./ModelosMarca";
 import { getMarca, getModelo, slugModelo } from "./marcas";
 import { AguilaFondo } from "./mascota/Mascota";
+import { PortadaModelo } from "./PortadaModelo";
 import { EnlaceTransicion, FinTransicion } from "./transicion";
 
 const WHATSAPP = "https://wa.me/573176707071";
 
-// Ficha de un modelo dentro de la landing de su marca. Al abrirla, la foto de
-// la tarjeta crece hasta la foto grande de aquí (data-foto-ficha), y al volver
+// Ficha de un modelo dentro de la landing de su marca. Al abrirla, la portada de
+// la tarjeta crece hasta la portada grande de aquí (data-foto-ficha), y al volver
 // regresa a su tarjeta (ver transicion.tsx). Debajo van
 // los otros modelos del mismo tipo, que abren su ficha igual.
 export function FichaModelo({ marcaSlug, slug }: { marcaSlug: string; slug: string }) {
@@ -25,8 +25,8 @@ export function FichaModelo({ marcaSlug, slug }: { marcaSlug: string; slug: stri
     <>
       <section aria-labelledby="ficha-titulo" className="px-[1.5vw] pt-6">
         <div className="grid overflow-hidden rounded-[30px] bg-white min-[1025px]:min-h-[calc(100svh-48px)] min-[1025px]:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
-          <div data-foto-ficha className="relative h-[52vh] min-h-[280px] bg-[#f0f0f0] min-[1025px]:h-auto">
-            <Image src={modelo.imagen} alt={modelo.nombre} fill priority sizes="(max-width: 1024px) 100vw, 56vw" className="object-cover" />
+          <div data-foto-ficha aria-hidden className="relative h-[52vh] min-h-[280px] min-[1025px]:h-auto">
+            <PortadaModelo nombre={modelo.nombre} marca={marca} tamano="ficha" />
           </div>
 
           <div className="flex flex-col justify-center px-[8%] py-12 min-[1025px]:py-16">

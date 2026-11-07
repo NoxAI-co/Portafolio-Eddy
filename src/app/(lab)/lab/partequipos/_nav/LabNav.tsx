@@ -20,12 +20,12 @@ const ITEMS: Item[] = [
   { ancla: "repuestos", etiqueta: "Repuestos", listo: false },
   { ancla: "marcas-repuestos", etiqueta: "Marcas repuestos", listo: true },
   { href: `${BASE}/repuestos-marcas`, etiqueta: "Repuestos por marca", listo: true },
-  { href: `${BASE}/case`, etiqueta: "Case", listo: true },
-  { href: `${BASE}/hitachi`, etiqueta: "Hitachi", listo: true },
-  { href: `${BASE}/yanmar`, etiqueta: "Yanmar", listo: true },
-  { href: `${BASE}/dynapac`, etiqueta: "Dynapac", listo: true },
+  { href: `${BASE}/case`, etiqueta: "Case", listo: false },
+  { href: `${BASE}/hitachi`, etiqueta: "Hitachi", listo: false },
+  { href: `${BASE}/yanmar`, etiqueta: "Yanmar", listo: false },
+  { href: `${BASE}/dynapac`, etiqueta: "Dynapac", listo: false },
   { href: `${BASE}/aliadas`, etiqueta: "Aliadas", listo: true },
-  { href: `${BASE}/excavadoras`, etiqueta: "Excavadoras", listo: true },
+  { href: `${BASE}/excavadoras`, etiqueta: "Excavadoras", listo: false },
 ];
 
 const ANCLAS = ITEMS.flatMap((i) => ("ancla" in i ? [i.ancla] : []));
