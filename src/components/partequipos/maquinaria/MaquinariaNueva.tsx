@@ -144,7 +144,7 @@ export function MaquinariaNueva() {
         </p>
         <h2
           id="nueva-titulo"
-          className="m-0 mt-3 text-[clamp(2.1rem,7vw,2.8rem)] leading-[1.08] font-bold tracking-[-0.025em] text-balance text-on-bar lg:text-[clamp(2.3rem,3.5vw,4rem)]"
+          className="m-0 mt-3 text-[clamp(2.1rem,7vw,2.8rem)] leading-[1.08] font-semibold tracking-[-0.025em] text-balance text-on-bar lg:text-[clamp(2.3rem,3.5vw,4rem)]"
         >
           Maquinaria{" "}
           <span className="whitespace-nowrap">

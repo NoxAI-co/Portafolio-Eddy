@@ -65,20 +65,17 @@
     {
       "id": "maquinaria-usada",
       "nombre": "Maquinaria pesada usada",
-      "descripcion": "Hero, filtro de 3 categorías y slider de equipos.",
+      "descripcion": "Hero y 3 botones de categoría (Excavadoras, Otros, Aditamentos) que llevan a su página de maquinaria usada.",
       "uso": "<CatalogoUsados hero={<UsedHero />} />",
       "dependencias": [
-        "next/image",
-        "next/link",
-        "motion"
+        "next/image"
       ],
       "archivos": [
         "maquinaria/UsedHero.tsx",
         "maquinaria/CatalogoUsados.tsx",
-        "maquinaria/categorias.ts",
-        "equipos.ts"
+        "maquinaria/categorias.ts"
       ],
-      "destino": "#listado"
+      "destino": "#maquinaria-usada"
     },
     {
       "id": "marcas",

@@ -100,7 +100,7 @@ export function UsedHero() {
 
           <div className="mt-8">
             <a
-              href="#listado"
+              href="https://partequipos.vercel.app/maquinaria-pesada/maquinaria-pesada-usada/"
               className="group inline-flex items-center gap-3 rounded-full bg-brand py-3.5 pr-6 pl-5 text-[0.95rem] font-semibold text-on-brand shadow-[0_2px_6px_-2px_rgb(185_28_28/0.45)] transition-colors hover:bg-brand-lift focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-brand active:bg-brand-deep"
             >
              

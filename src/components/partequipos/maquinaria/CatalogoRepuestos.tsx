@@ -27,9 +27,8 @@ const CATEGORIAS: CategoriaRepuesto[] = [
   { id: "hidraulicos", nombre: "Hidráulicos", imagen: "/partequipos/repuestos/hidraulicos.png" },
 ];
 
-// Sección de repuestos: rótulo y título con «Repuestos» en rojo de marca, dos
-// párrafos de entrada y el enlace «Encuentra la referencia…» a WhatsApp; debajo,
-// las 10 categorías en tarjetas blancas (5 por fila desde
+// Sección de repuestos: rótulo y título centrados, con «Repuestos» en rojo de marca;
+// debajo, las 10 categorías en tarjetas blancas (5 por fila desde
 // lg). Detrás, franjas diagonales grises y una roja arriba a la derecha, con
 // la misma inclinación de las del resto de la página.
 export function CatalogoRepuestos() {
@@ -42,26 +41,16 @@ export function CatalogoRepuestos() {
       <div className="relative isolate overflow-hidden rounded-[1.75rem] bg-[#f1f0ee] px-5 py-9 sm:px-10 sm:py-11 lg:rounded-[2rem] lg:px-[4%] lg:py-14">
         <Franjas />
 
-        <div className="relative max-w-[52rem]">
+        <div className="relative mx-auto max-w-[52rem] text-center">
           <p className="text-xs font-semibold tracking-wide text-brand-deep">Venta de Repuestos</p>
           <h2
             id="repuestos-titulo"
             className="mt-3 text-[clamp(1.7rem,6vw,2.4rem)] leading-[1.1] font-bold tracking-[-0.025em] text-on-bar lg:text-[clamp(2.2rem,3vw,3.1rem)]"
           >
-            Encuentra Maquinaria y <span className="text-brand">Repuestos</span> Rápido y Fácil
+            Encuentra Maquinaria y <span className="text-brand">Repuestos</span>{" "}
+            <br className="max-sm:hidden" />
+            Rápido y Fácil
           </h2>
-          {/* entrada bajo el título (qué repuestos y para qué marcas), en la
-              columna del título para no cruzar la franja roja de la derecha;
-              el cierre es un enlace */}
-          <p className="mt-4 max-w-[44rem] text-[0.95rem] leading-relaxed text-on-bar-dim lg:text-base">
-            Encuentra repuestos, filtros, tren de rodaje, componentes hidráulicos, herramientas de corte,
-            lubricantes y más para excavadoras, retrocargadoras, cargadores, minicargadores, motoniveladoras y
-            otros equipos.
-          </p>
-          {/* «Link-Belt» con guion que no se corta al final de una línea */}
-          <p className="mt-3 max-w-[44rem] text-[0.95rem] leading-relaxed text-on-bar-dim lg:text-base">
-            {"Soluciones para marcas como Caterpillar, CASE Construction, Hitachi LANDCROS, Yanmar, LiuGong, Link\u2011Belt, Hyundai, Doosan, Develon y más."}
-          </p>
         </div>
 
         <ul className="relative mt-9 grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:mt-11 lg:grid-cols-5 lg:gap-4 2xl:gap-5">
@@ -77,7 +66,7 @@ export function CatalogoRepuestos() {
 }
 
 // Franjas del fondo: tres losas grises translúcidas y una roja que baja desde
-// arriba a la derecha y se apaga al bajar, detrás del texto y las tarjetas.
+// el borde derecho (lejos del título centrado) y se apaga al bajar, detrás del texto y las tarjetas.
 // Solo desde xl: más angosto cruzarían el texto.
 function Franjas() {
   const losa = "absolute top-0 h-[78%] origin-top -skew-x-[30deg]";
@@ -85,9 +74,9 @@ function Franjas() {
     <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 hidden xl:block">
       <span className={`${losa} left-[48%] w-[9%] bg-white/70`} />
       <span className={`${losa} left-[60%] w-[6%] bg-[#d9d6d2]/45`} />
-      <span className={`${losa} left-[90%] w-[8%] bg-white/70`} />
+      <span className={`${losa} left-[76%] w-[8%] bg-white/70`} />
       <span
-        className={`${losa} left-[76%] w-[9%] bg-[linear-gradient(180deg,var(--brand)_0%,rgb(220_38_38/0.85)_35%,rgb(220_38_38/0.25)_70%,transparent_100%)]`}
+        className={`${losa} left-[88%] w-[9%] bg-[linear-gradient(180deg,var(--brand)_0%,rgb(220_38_38/0.85)_35%,rgb(220_38_38/0.25)_70%,transparent_100%)]`}
       />
     </div>
   );
