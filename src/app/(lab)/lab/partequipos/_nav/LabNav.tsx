@@ -13,13 +13,13 @@ const BASE = "/lab/partequipos";
 type Item = { etiqueta: string; listo: boolean } & ({ ancla: string } | { href: string });
 
 const ITEMS: Item[] = [
-  { ancla: "slider", etiqueta: "Slider", listo: false },
-  { ancla: "nueva", etiqueta: "Nueva", listo: true },
-  { ancla: "maquinaria-usada", etiqueta: "Usada", listo: true },
+  { ancla: "slider", etiqueta: "Slider", listo: true },
+  { ancla: "nueva", etiqueta: "Nueva", listo: false },
+  { ancla: "maquinaria-usada", etiqueta: "Usada", listo: false },
   { ancla: "marcas", etiqueta: "Marcas", listo: true },
   { ancla: "repuestos", etiqueta: "Repuestos", listo: false },
-  { ancla: "marcas-repuestos", etiqueta: "Marcas repuestos", listo: false },
-  { href: `${BASE}/repuestos-marcas`, etiqueta: "Repuestos por marca", listo: false },
+  { ancla: "marcas-repuestos", etiqueta: "Marcas repuestos", listo: true },
+  { href: `${BASE}/repuestos-marcas`, etiqueta: "Repuestos por marca", listo: true },
   { href: `${BASE}/case`, etiqueta: "Case", listo: true },
   { href: `${BASE}/hitachi`, etiqueta: "Hitachi", listo: true },
   { href: `${BASE}/yanmar`, etiqueta: "Yanmar", listo: true },
