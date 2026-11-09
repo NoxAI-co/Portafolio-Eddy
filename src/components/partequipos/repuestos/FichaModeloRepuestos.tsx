@@ -108,7 +108,7 @@ export function FichaModeloRepuestos({ ficha: f }: { ficha: FichaModelo }) {
         <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap xl:mt-0 xl:flex-none">
           <a
             href={f.cotizar}
-            className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#100f0f] px-6 text-base font-semibold text-white transition-colors hover:bg-[#2e2e2e] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-[#100f0f]"
+            className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#e5242d] px-6 text-base font-semibold text-white transition-colors hover:bg-[#c81e26] focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-[#e5242d]"
           >
             <IconoMensaje />
             Pedir cotización
