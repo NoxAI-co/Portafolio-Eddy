@@ -404,5 +404,40 @@
         ]
       }
     ]
+  },
+  "ficha-repuestos": {
+    "secciones": [
+      {
+        "id": "ficha-repuestos",
+        "nombre": "Ficha de repuestos de un modelo",
+        "descripcion": "Migas; cabecera con logo, separación, modelo, línea y botones de cotización y WhatsApp; categorías de repuestos en tarjetas con panel del tinte de la marca, foto, nombre y «Ver productos»; otros modelos con la franja de la marca. Datos de ejemplo en fichas.ts: CASE CX350B, Yanmar ViO80-1 y Hitachi ZX210-5G.",
+        "uso": "<FichaModeloRepuestos ficha={FICHA_CX350B} />",
+        "dependencias": [
+          "next/image"
+        ],
+        "archivos": [
+          "repuestos/FichaModeloRepuestos.tsx",
+          "repuestos/fichas.ts"
+        ],
+        "destino": "#modelo-titulo",
+        "assets": [
+          "/partequipos/marcas/case/logo.png",
+          "/partequipos/marcas/yanmar/logo.png",
+          "/partequipos/repuestos/ficha/componentes.webp",
+          "/partequipos/repuestos/ficha/corte.webp",
+          "/partequipos/repuestos/ficha/filtracion.webp",
+          "/partequipos/repuestos/ficha/hidraulicos.webp",
+          "/partequipos/repuestos/ficha/llantas.webp",
+          "/partequipos/repuestos/ficha/lubricantes.webp",
+          "/partequipos/repuestos/ficha/miscelaneos.webp",
+          "/partequipos/repuestos/ficha/motor.webp",
+          "/partequipos/repuestos/ficha/transmision.webp",
+          "/partequipos/repuestos/ficha/tren-de-rodaje.webp",
+          "/partequipos/repuestos/marcas/case.webp",
+          "/partequipos/repuestos/marcas/hitachi-landcros.webp",
+          "/partequipos/repuestos/marcas/yanmar.webp"
+        ]
+      }
+    ]
   }
 }

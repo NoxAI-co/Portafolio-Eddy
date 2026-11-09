@@ -15,17 +15,20 @@ type Item = { etiqueta: string; listo: boolean } & ({ ancla: string } | { href: 
 const ITEMS: Item[] = [
   { ancla: "slider", etiqueta: "Slider", listo: true },
   { ancla: "nueva", etiqueta: "Nueva", listo: false },
-  { ancla: "maquinaria-usada", etiqueta: "Usada", listo: false },
+  { ancla: "maquinaria-usada", etiqueta: "Usada", listo: true },
   { ancla: "marcas", etiqueta: "Marcas", listo: true },
   { ancla: "repuestos", etiqueta: "Repuestos", listo: false },
   { ancla: "marcas-repuestos", etiqueta: "Marcas repuestos", listo: true },
   { href: `${BASE}/repuestos-marcas`, etiqueta: "Repuestos por marca", listo: true },
-  { href: `${BASE}/case`, etiqueta: "Case", listo: false },
-  { href: `${BASE}/hitachi`, etiqueta: "Hitachi", listo: false },
-  { href: `${BASE}/yanmar`, etiqueta: "Yanmar", listo: false },
-  { href: `${BASE}/dynapac`, etiqueta: "Dynapac", listo: false },
+  { href: `${BASE}/repuestos-cx350b`, etiqueta: "Ficha repuestos CX350B", listo: false },
+  { href: `${BASE}/repuestos-vio80`, etiqueta: "Ficha repuestos ViO80", listo: false },
+  { href: `${BASE}/repuestos-zx210`, etiqueta: "Ficha repuestos ZX210", listo: false },
+  { href: `${BASE}/case`, etiqueta: "Case", listo: true },
+  { href: `${BASE}/hitachi`, etiqueta: "Hitachi", listo: true },
+  { href: `${BASE}/yanmar`, etiqueta: "Yanmar", listo: true },
+  { href: `${BASE}/dynapac`, etiqueta: "Dynapac", listo: true },
   { href: `${BASE}/aliadas`, etiqueta: "Aliadas", listo: true },
-  { href: `${BASE}/excavadoras`, etiqueta: "Excavadoras", listo: false },
+  { href: `${BASE}/excavadoras`, etiqueta: "Excavadoras", listo: true },
 ];
 
 const ANCLAS = ITEMS.flatMap((i) => ("ancla" in i ? [i.ancla] : []));
